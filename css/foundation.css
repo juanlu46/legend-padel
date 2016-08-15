@@ -2438,8 +2438,6 @@ body {
     font-size: 0.75rem; }
     .tabs-title > a:hover {
       background: #fefefe; }
-    .tabs-title > a:focus, .tabs-title > a[aria-selected='true'] {
-      background: #e6e6e6; }
 
 .tabs-content {
   background: #fefefe;
