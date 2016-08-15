@@ -17,3 +17,47 @@ dd {
     width: 100px;
     height: 80px;
 }
+
+.colores{
+    height: 30px;
+    width: 30px;
+    border-style: solid;
+    border-color: #1b1b1b;
+    border-width: 1px;
+    margin: 2%;
+
+}
+
+.negro{
+    background-color: #0a0a0a;
+}
+.blanco{
+    background-color: white;
+}
+.divColor{
+    display: inherit;
+}
+
+
+.caja {
+    position: relative; /*Para poder ubicar la info dentro de la caja*/
+    margin: 15px ;
+}
+.info {
+    position: absolute; /*Info sobre la imagen*/
+    top: 5%;
+    left: 10%; /*Desplazamos a partir de la esquina superior izquierda*/
+    zoom: 1;
+    filter: alpha(opacity=0); /*Opacidad Para IE */
+    opacity: 0;
+    padding: 5px;
+    color: white;
+    background: black;
+    -moz-transition:all ease .8s;
+    -webkit-transition:all ease .8s ;
+    transition:all ease .8s;
+}
+.caja:hover .info {
+    filter: alpha(opacity=80);
+    opacity: .8;
+}
