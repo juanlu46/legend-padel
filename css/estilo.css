@@ -1,0 +1,14 @@
+@import url(https://fonts.googleapis.com/css?family=Bitter);
+
+p.textoDescripcion, dl.textoDescripcion{
+    font-family: 'Bitter', serif;
+    font-size: 15px;
+}
+h5.textoDescripcion, h3.textoDescripcion, h4.textoDescripcion {
+    font-family: 'Bitter', serif;
+}
+dd {
+    display: block;
+    margin-left: 1em;
+    margin-bottom: 1em;
+}
