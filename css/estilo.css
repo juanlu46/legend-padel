@@ -12,3 +12,8 @@ dd {
     margin-left: 1em;
     margin-bottom: 1em;
 }
+
+.miniatura{
+    width: 100px;
+    height: 100px;
+}
