@@ -12,6 +12,7 @@ $(function() {
         cambiarColor(color);
 
     });
+    //para la descripcion en las fotos
     var target = null;
     $('.img_thumb').hover(function(e){
         target = $(this);
@@ -46,4 +47,9 @@ function cambiarColor(color) {
         $('.min4').attr('src','imgProduct/targetwhite4.jpg');
         $('.min5').remove();
     }
+}
+
+function  redireccionar(producto) {
+    document.location.href="productos.html?"+producto;
+
 }
