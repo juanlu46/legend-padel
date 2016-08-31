@@ -215,3 +215,18 @@ dd {
 .img_thumb img{
     z-index: -1;
 }
+.login{
+     padding: 7%;
+
+    width: 19em;
+ }
+.login h5{
+    padding-top: 9%;
+}
+.login button{
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+.msjError{
+    display: none;
+}
