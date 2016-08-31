@@ -60,6 +60,8 @@ $(function() {
             if($('.masProductosSniper').length > 0 ){
                 $('.masProductosSniper').remove();
             }
+            if($('.min5').length > 0 )
+                $('.min5').remove();
             break;
 
         case 'target':
