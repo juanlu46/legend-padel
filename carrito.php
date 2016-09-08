@@ -1,4 +1,6 @@
 <?php
+$sProducto=$_REQUEST['datos'];
+$oProducto=json_decode($sProducto);
 ?>
 <html>
 <head>
@@ -11,18 +13,33 @@
 <body>
 <div class="column row">
     <a href="tienda.html">Continuar comprando</a>
-    <hr>
-    <div class="tabs-content" data-tabs-content="example-tabs">
-        <div class="tabs-panel is-active" id="panel1">
-            <h4></h4>
-            <div class="media-object stack-for-small">
-
-            </div>
-
-
-        </div>
+   
+    <div class="panel callout radius">
+        <table>
+            <thead>
+            <tr>
+                <td width="150">Producto</td>
+                <td width="150">Cantidad</td>
+                <td width="150">Precio</td>
+                <td width="150">Envío</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td class="producto"><?php
+                    if(isset($oProducto)){
+                     $oProducto->producto;
+                    }
+                    ?><p>Color:<span class="color"></span> </p></td>
+                <td class="cantidad">This is longer conteeget metus.</td>
+                <td class="precio">  Content Goes Here</td>
+                <td><a href=""> Eliminar</a></td>
+            </tr>
+            </tbody>
+        </table>
 
     </div>
+    <a href="#" class="button expand comprar">Comprar</a>
 </div>
 
 <script src="js/jquery-2.2.0.min.js"></script>

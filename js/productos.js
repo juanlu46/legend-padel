@@ -85,6 +85,23 @@ $(function() {
             break;
         
     }
+    $('.anadirCarrito').on('click',function(){
+        var cantidad=$('#cantidad').val();
+        if(cantidad==""){
+            alert('PRUEBA: no deje cantidad vacio');
+        }else {
+            localStorage.setItem('producto', producto);
 
+            var cad ='{'+
+                '"producto":"'+document.title+'",'+
+                '"cantidad":"'+cantidad+'",'+
+                '"precio":"'+$('h5.precio').text()+'"'+
+                '}';
+
+            var sParametro="datos="+cad;
+            $.ajax({url: 'carrito.php', data: sParametro,success:function(){alert('Producto añadido')}});
+       
+        }
+    });
 
 });

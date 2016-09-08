@@ -279,3 +279,16 @@ dd {
 .msjError{
     display: none;
 }
+.panel{
+    margin-top: 5%;
+    border: 1px solid #cacaca;
+    background: #FAFAFA;
+}
+
+table tbody, table tfoot, table thead {
+    border: hidden;
+    background: #FAFAFA;
+}
+.comprar{
+    display: block;
+}
