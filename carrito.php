@@ -26,7 +26,7 @@ $oProducto=json_decode($sProducto);
             </thead>
             <tbody>
             <tr>
-                <td class="producto"><?php
+                <td class="producto"><?php 
                     if(isset($oProducto)){
                      $oProducto->producto;
                     }
