@@ -119,16 +119,56 @@
     color: #333;
     transition: all .25s ease-in-out; }
 
+/** QUIENES SOMOS **/
+#cd-timeline {
+    position: relative;
+    padding: 2em 0;
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+#cd-timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 18px;
+    height: 100%;
+    width: 4px;
+    background: #d7e4ed;
+}
+.cssanimations .cd-timeline-img.is-hidden {
+    visibility: hidden;
+}
+.cssanimations .cd-timeline-img.bounce-in {
+    visibility: visible;
+    animation: cd-bounce-1 0.6s;
+}
+
+@keyframes cd-bounce-1 {
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+
+    60% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
 
 /* CAJON ABATIBLE AL HACER HOVER */
-.service ,.service-tw{
+.service ,.service-tw,.service-ig{
     width: 100%;
     height: 320px;
     margin: 80px 0;
     text-align: center;
     -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease; }
-.service .service-icon-box,.service-tw .service-icon-box-tw {
+.service .service-icon-box,.service-tw .service-icon-box-tw, .service-ig .service-icon-box-ig {
     position: relative;
     top: 100px;
     display: inline-block;
@@ -136,14 +176,15 @@
     padding: 10px;
     -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease; }
-.service .service-heading,.service-tw .service-heading-tw {
+.service .service-heading,.service-tw .service-heading-tw,.service-ig .service-heading-ig {
     position: relative;
     top: 80px;
     -webkit-transition: all 600ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
     transition: all 600ms cubic-bezier(0.68, -0.55, 0.265, 1.55); }
-.service .service-description,.service-tw .service-description-tw {
+.service .service-description,.service-tw .service-description-tw, .service-ig .service-description-ig {
+    display: block;
     width: 80%;
-    margin: -8.688em auto;
+    margin: -8.688em auto !important;
     visibility: hidden;
     opacity: 0;
     -webkit-transition: all 600ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
@@ -151,16 +192,17 @@
     -webkit-transform: scale(0);
     -ms-transform: scale(0);
     transform: scale(0); }
-.service .service-icon-box > img.service-icon, .service-tw .service-icon-box-tw > img.service-icon-tw {
+.service .service-icon-box > img.service-icon, .service-tw .service-icon-box-tw > img.service-icon-tw,.service-ig .service-icon-box-ig > img.service-icon-ig {
     width: 40px; }
-.service:hover, .service-tw:hover {
+.service:hover, .service-tw:hover,.service-ig:hover {
     border-color: #00a8ff; }
-.service:hover .service-icon-box, .service-tw:hover .service-icon-box-tw {
+.service:hover .service-icon-box, .service-tw:hover .service-icon-box-tw,.service-ig:hover .service-icon-box-ig {
     top: -96px; }
-.service:hover .service-heading, .service-tw:hover .service-heading-tw {
+.service:hover .service-heading, .service-tw:hover .service-heading-tw,.service-ig:hover .service-heading-ig {
     top: -136px;  }
-.service:hover .service-description, .service-tw:hover .service-description-tw {
+.service:hover .service-description, .service-tw:hover .service-description-tw,.service-ig:hover .service-description-ig {
     opacity: 1;
+    visibility: visible;
     -webkit-transform: scale(1);
     -ms-transform: scale(1);
     transform: scale(1); }
