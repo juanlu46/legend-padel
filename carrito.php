@@ -6,7 +6,6 @@ if(isset($_REQUEST['datos'])){
 
 }else {
     $cestaVacia='<h3>Cesta vacía</h3><p>En la cesta de compra puedes dejar temporalmente los productos que quieres. En ella aparecerá el precio más reciente de cada producto.</p><a href="tienda.html">Añade algún producto</a></p>';
-
 }
 ?>
 <html>

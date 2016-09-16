@@ -3,7 +3,7 @@ $(function() {
     var url=document.location.href;
     var cad=url.split('?');
     var producto=cad[1];
-    document.foundation();
+
     switch (producto){
         case 'invictus':
             document.title='Invictus 2.0';
