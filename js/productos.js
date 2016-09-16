@@ -3,7 +3,7 @@ $(function() {
     var url=document.location.href;
     var cad=url.split('?');
     var producto=cad[1];
-    
+    document.foundation();
     switch (producto){
         case 'invictus':
             document.title='Invictus 2.0';
@@ -88,6 +88,7 @@ $(function() {
     $('.anadirCarrito').on('click',function(){
         var cantidad=$('#cantidad').val();
         if(cantidad==""){
+            
             alert('PRUEBA: no deje cantidad vacio');
         }else {
             localStorage.setItem('producto', producto);

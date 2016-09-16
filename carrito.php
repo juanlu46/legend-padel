@@ -1,6 +1,13 @@
 <?php
-$sProducto=$_REQUEST['datos'];
-$oProducto=json_decode($sProducto);
+
+if(isset($_REQUEST['datos'])){
+    $sProducto=$_REQUEST['datos'];
+    $oProducto = json_decode($sProducto);
+
+}else {
+    $cestaVacia='<h3>Cesta vacía</h3><p>En la cesta de compra puedes dejar temporalmente los productos que quieres. En ella aparecerá el precio más reciente de cada producto.</p><a href="tienda.html">Añade algún producto</a></p>';
+
+}
 ?>
 <html>
 <head>
@@ -11,10 +18,15 @@ $oProducto=json_decode($sProducto);
     <link rel="stylesheet" href="css/estilo.css"/>
 </head>
 <body>
-<div class="column row">
+<div class="column row contenidoCarrito">
     <a href="tienda.html">Continuar comprando</a>
    
     <div class="panel callout radius">
+        <?php
+        if(isset($cestaVacia)){
+            echo $cestaVacia;
+        }else{
+        ?>
         <table>
             <thead>
             <tr>
@@ -40,6 +52,7 @@ $oProducto=json_decode($sProducto);
 
     </div>
     <a href="#" class="button expand comprar">Comprar</a>
+    <?php } ?>
 </div>
 
 <script src="js/jquery-2.2.0.min.js"></script>

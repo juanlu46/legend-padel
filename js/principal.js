@@ -42,6 +42,7 @@ var img="";
 var color="";
 
 $(function() {
+    $('.btnRegistro').on('click',cargarRegistro);
     $('.miniatura').on('click',function(){
         img=$(this).attr('src');
         abrirFoto(img);
@@ -90,5 +91,12 @@ function cambiarColor(color) {
 
 function  redireccionar(producto) {
     document.location.href="productos.html?"+producto;
+}
+function cargarRegistro(){
+    //CUANDO SE PULSA EL BOTON DE REGISTRA QUE SE CREE OTRA PESTAÑA EN EL PANEL DE REGISTRAR Y SE AÑADA EL FORM DE LOGIN (YA ESTA CREADO EL FORM)
+    $('.panelIndex').append('<li class="tabs-title registroPanel"><a href="#panel6">Registro</a></li>');
+    $('.divContenido').append('<div class="tabs-panel" id="panel6"> <p>regustro</p> </div>');
+
+
 
 }

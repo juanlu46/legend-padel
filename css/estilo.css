@@ -334,3 +334,11 @@ table tbody, table tfoot, table thead {
 .comprar{
     display: block;
 }
+
+.contenidoCarrito{
+    margin-top: 2%;
+}
+
+.imgCarrito {
+    width: 40%;
+}
