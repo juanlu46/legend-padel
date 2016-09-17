@@ -97,6 +97,9 @@ function  redireccionar(producto) {
 }
 function cargarRegistro(){
     //CUANDO SE PULSA EL BOTON DE REGISTRO QUE SE ABRA UN ALERT CON EL FORMULARIO
+    if($('.formularioRegistro').size() == 0 )
+        $(".formLogin").load("formLogin.html");
+    
     $('.contentLogin').css('display','block');
 
     $('.contenedor').css({
