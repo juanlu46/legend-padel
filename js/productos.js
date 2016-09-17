@@ -91,9 +91,8 @@ $(function() {
             
             alert('PRUEBA: no deje cantidad vacio');
         }else {
-
+                //CUANDO LA BD ESTE REALIALIZADA, QUE EN LOCALSTORAGE GUARDE EL ID DEL PRODUCTO
             localStorage.setItem('producto', producto);
-            cantidad=parseInt(cantidad);
             var cad ='{'+
                 '"producto":"'+document.title+'",'+
                 '"cantidad":"'+cantidad+'",'+

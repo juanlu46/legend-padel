@@ -342,3 +342,36 @@ table tbody, table tfoot, table thead {
 .imgCarrito {
     width: 40%;
 }
+html,body{
+    height:100%;
+    width:100%;
+
+}
+.contentLogin{
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    padding:50px;
+    background:rgba(0,0,0,0);
+    margin: 0 auto;
+    display: none;
+}
+div.item{
+    padding:5px;
+
+    width: 50%;
+    height: auto;
+    margin: auto;
+    float: inherit;
+    box-shadow: 1px 1px 10px rgba(0,0,0,0.4);
+    transition:box-shadow 2s, transform 500ms, filter 500ms ease-in-out;
+}
+
+div.difuminado{
+    transform: scale(1.05);
+    filter: blur(3px);
+    transition:box-shadow 2s, transform 500ms, filter 500ms ease-in-out;
+}
+

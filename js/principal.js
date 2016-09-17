@@ -42,6 +42,8 @@ var img="";
 var color="";
 
 $(function() {
+    cargarNumProductosCesta();
+    
     $('.btnRegistro').on('click',cargarRegistro);
     $('.miniatura').on('click',function(){
         img=$(this).attr('src');
@@ -52,6 +54,7 @@ $(function() {
         cambiarColor(color);
 
     });
+   
     //para la descripcion en las fotos
     var target = null;
     $('.img_thumb').hover(function(e){
@@ -93,10 +96,29 @@ function  redireccionar(producto) {
     document.location.href="productos.html?"+producto;
 }
 function cargarRegistro(){
-    //CUANDO SE PULSA EL BOTON DE REGISTRA QUE SE CREE OTRA PESTAÑA EN EL PANEL DE REGISTRAR Y SE AÑADA EL FORM DE LOGIN (YA ESTA CREADO EL FORM)
-    $('.panelIndex').append('<li class="tabs-title registroPanel"><a href="#panel6">Registro</a></li>');
-    $('.divContenido').append('<div class="tabs-panel" id="panel6"> <p>regustro</p> </div>');
+    //CUANDO SE PULSA EL BOTON DE REGISTRO QUE SE ABRA UN ALERT CON EL FORMULARIO
+    $('.item').addClass('difuminado');
+    $('.contenedor').css({
+        'filter'         : 'blur(3px)',
+        '-webkit-filter' : 'blur(3px)',
+        '-moz-filter'    : 'blur(3px)',
+        '-o-filter'      : 'blur(3px)',
+        '-ms-filter'     : 'blur(3px)'
+    });
+    $('.backstretch img').css({
+        'filter'         : 'blur(3px)',
+        '-webkit-filter' : 'blur(3px)',
+        '-moz-filter'    : 'blur(3px)',
+        '-o-filter'      : 'blur(3px)',
+        '-ms-filter'     : 'blur(3px)'
+    });
 
+    }
 
-
+function cargarNumProductosCesta() {
+   var total=localStorage.getItem('producto');
+    if(total==0){
+        var texto = $('<spam>0 productos</spam>');
+        $('.optCarrito').append(texto);
+    }
 }
