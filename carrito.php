@@ -18,7 +18,7 @@ if(isset($_REQUEST['datos'])){
 </head>
 <body>
 <div class="column row contenidoCarrito">
-    <a href="tienda.html">Continuar comprando</a>
+    <a href="index.html">Volver</a>
    
     <div class="panel callout radius">
         <?php

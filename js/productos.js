@@ -91,8 +91,9 @@ $(function() {
             
             alert('PRUEBA: no deje cantidad vacio');
         }else {
-            localStorage.setItem('producto', producto);
 
+            localStorage.setItem('producto', producto);
+            cantidad=parseInt(cantidad);
             var cad ='{'+
                 '"producto":"'+document.title+'",'+
                 '"cantidad":"'+cantidad+'",'+
