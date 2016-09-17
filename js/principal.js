@@ -97,7 +97,8 @@ function  redireccionar(producto) {
 }
 function cargarRegistro(){
     //CUANDO SE PULSA EL BOTON DE REGISTRO QUE SE ABRA UN ALERT CON EL FORMULARIO
-    $('.item').addClass('difuminado');
+    $('.contentLogin').css('display','block');
+
     $('.contenedor').css({
         'filter'         : 'blur(3px)',
         '-webkit-filter' : 'blur(3px)',
@@ -105,13 +106,14 @@ function cargarRegistro(){
         '-o-filter'      : 'blur(3px)',
         '-ms-filter'     : 'blur(3px)'
     });
-    $('.backstretch img').css({
+    $('.backstretch ').css({
         'filter'         : 'blur(3px)',
         '-webkit-filter' : 'blur(3px)',
         '-moz-filter'    : 'blur(3px)',
         '-o-filter'      : 'blur(3px)',
         '-ms-filter'     : 'blur(3px)'
     });
+    $('.item').addClass('difuminado');
 
     }
 

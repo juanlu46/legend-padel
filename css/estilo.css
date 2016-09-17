@@ -371,7 +371,6 @@ div.item{
 
 div.difuminado{
     transform: scale(1.05);
-    filter: blur(3px);
     transition:box-shadow 2s, transform 500ms, filter 500ms ease-in-out;
 }
 
