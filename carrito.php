@@ -1,5 +1,11 @@
 <?php
-
+header('Content-Type: text/html; charset=UTF-8');
+$mysqli = new mysqli('127.0.0.1', 'root', '', 'LegendPadel');
+if ($mysqli->connect_errno) {
+    //EDITAR ARCHIVO PHP.INI PARA ELIMINAR LOS WARNING Y ERRORES DE PHP
+    echo "<h3>Lo sentimos, el sitio web está experimentando problemas.</h3>";
+    exit();
+}else{
 if(isset($_REQUEST['datos'])){
     $sProducto=$_REQUEST['datos'];
     $oProducto = json_decode($sProducto);
@@ -18,7 +24,7 @@ if(isset($_REQUEST['datos'])){
 </head>
 <body>
 <div class="column row contenidoCarrito">
-    <a href="tienda.html">Continuar comprando</a>
+    <a href="index.html">Volver</a>
    
     <div class="panel callout radius">
         <?php
@@ -63,3 +69,7 @@ if(isset($_REQUEST['datos'])){
 </script>
 </body>
 </html>
+<?php
+}
+$mysqli->close();
+?>
