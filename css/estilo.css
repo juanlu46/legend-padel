@@ -55,7 +55,7 @@
     padding-top: 9em;
 }
 #header-landing .eslogan h2 {
-    padding: 15px 20px;
+    padding: 2em 0 0.6em 0;
     color: #fff;
     font-weight: 300;
     font-size: 60px;
@@ -119,47 +119,6 @@
     color: #333;
     transition: all .25s ease-in-out; }
 
-/** QUIENES SOMOS **/
-#cd-timeline {
-    position: relative;
-    padding: 2em 0;
-    margin-top: 2em;
-    margin-bottom: 2em;
-}
-#cd-timeline::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 18px;
-    height: 100%;
-    width: 4px;
-    background: #d7e4ed;
-}
-.cssanimations .cd-timeline-img.is-hidden {
-    visibility: hidden;
-}
-.cssanimations .cd-timeline-img.bounce-in {
-    visibility: visible;
-    animation: cd-bounce-1 0.6s;
-}
-
-@keyframes cd-bounce-1 {
-    0% {
-        opacity: 0;
-        transform: scale(0.5);
-    }
-
-    60% {
-        opacity: 1;
-        transform: scale(1.2);
-    }
-
-    100% {
-        transform: scale(1);
-    }
-}
-
-
 /* CAJON ABATIBLE AL HACER HOVER */
 .service ,.service-tw,.service-ig{
     width: 100%;
@@ -202,12 +161,18 @@
     top: -136px;  }
 .service:hover .service-description, .service-tw:hover .service-description-tw,.service-ig:hover .service-description-ig {
     opacity: 1;
+    display:block !important;
     visibility: visible;
     -webkit-transform: scale(1);
     -ms-transform: scale(1);
     transform: scale(1); }
 .service:hover #panel3, .service-tw:hover #panel3 {
     height: 39.222em !important;
+}
+.service-description-tw{
+    display: initial !important;
+    -webkit-transition: all 600ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transition: all 600ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
 p.textoDescripcion, dl.textoDescripcion{
@@ -342,3 +307,29 @@ table tbody, table tfoot, table thead {
 .imgCarrito {
     width: 40%;
 }
+
+/**** PIE DE PAGINA *****/
+.footer {
+    background-color: #292c2f;
+    text-align: center;
+    font-size: 1.2rem;
+    padding: 1rem; }
+.footer div.slogan {
+    margin: 0 auto;
+    width: 10em;}
+.footer p.copywrite {
+    color: #8f9296;
+    font-size: 0.875rem;
+    margin: 0; }
+.footer .links a {
+    list-style: none;
+    font-weight: bold;
+    color: #ffffff;
+    padding: 3rem 0 2rem;
+    margin: 0; }
+.footer .links a::after {
+    content: "•";
+    padding: 0 0.4rem 0 0.8rem; }
+.footer .links a:last-child::after {
+    content: "";
+    padding: 0 0.4rem 0 0.8rem; }
