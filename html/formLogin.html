@@ -1,0 +1,63 @@
+<form class="formularioRegistro">
+
+    <h3>Formulario Registro</h3>
+
+
+    <form data-abide novalidate>
+        <div data-abide-error class="alert callout" style="display: none;">
+            <p><i class="fi-alert"></i> There are some errors in your form.</p>
+        </div>
+        <div class="row">
+            <div class="small-12 columns">
+                <label>Nombre
+
+                    <input type="text" placeholder="Nombre" aria-describedby="exampleHelpTex" required>
+                </label>
+            </div>
+            <div class="small-12 columns">
+                <label>Apellidos
+                    <input type="text" placeholder="Apellidos" aria-describedby="exampleHelpTex" required>
+                </label>
+            </div>
+            <div class="small-12 columns">
+                <label>DNI
+                    <input type="text" placeholder="DNI" aria-describedby="exampleHelpTex" required maxlength="9">
+                </label>
+            </div>
+            <div class="small-12 columns">
+                <label>Correo electrónico;
+                    <input type="text" id="mail" placeholder="Correo electrónico" aria-describedby="exampleHelpText2" maxlength="50" required pattern="email">
+                       <span class="form-error">
+                         No puede dejar el correo electrónico en blanco
+                        </span>
+                </label>
+            </div>
+            <div class="small-12 columns">
+                <label>Contraseña
+                    <input type="password" id="password" placeholder="contraseña" aria-describedby="exampleHelpText2" maxlength="10" required pattern="alpha_numeric" data-equalto="password">
+                       <span class="form-error">
+                         No puede dejar contraseña en blanco
+                        </span>
+                </label>
+            </div>
+            <div class="small-12 columns">
+                <label>Confirme contraseña
+                    <input type="password" placeholder="contraseña" aria-describedby="exampleHelpText2" maxlength="10" required pattern="alpha_numeric" data-equalto="password">
+                        <span class="form-error">
+                         Las contraseñas deben de ser iguales
+                        </span>
+                </label>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <fieldset class="large-6 columns">
+                <button class="button" type="submit" value="Submit">Registrar</button>
+            </fieldset>
+            <fieldset class="large-6 columns">
+                <button class="button" type="reset" value="Reset">Borrar</button>
+            </fieldset>
+        </div>
+    </form>
+</form>
