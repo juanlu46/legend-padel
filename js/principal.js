@@ -1,6 +1,7 @@
 $(document).ready(inicio);
 function inicio(){
     $(document).foundation();
+    $('.btnRegistro').on('click',cargarRegistro);
     $('.top-bar').on('sticky.zf.stuckto:top', function(){
         $(this).addClass('shrink');
     }).on('sticky.zf.unstuckfrom:top', function(){
@@ -51,19 +52,7 @@ function inicio(){
 
     $(function() {
         cargarNumProductosCesta();
-
-        $('.btnRegistro').on('click',cargarRegistro);
-        $('.miniatura').on('click',function(){
-            img=$(this).attr('src');
-            abrirFoto(img);
-        });
-        $('.caja').on('click',function(){
-            color=$(this).attr('id');
-            cambiarColor(color);
-
-        });
-
-        //para la descripcion en las fotos
+//para la descripcion en las fotos
         var target = null;
         $('.img_thumb').hover(function(e){
             target = $(this);
@@ -86,34 +75,6 @@ function showBlocks(blocks, offset) {
     });
 }
 
-
-
-function abrirFoto(img) {
-    $('.fotoPrincipal').attr('src',img);
-}
-
-function cambiarColor(color) {
-    if(color=='negro'){
-        $('.fotoPrincipal').attr('src','imgProduct/targetBlack1.jpg');
-        $('.min1').attr('src','imgProduct/targetBlack1.jpg');
-        $('.min2').attr('src','imgProduct/targetBlack2.jpg');
-        $('.min3').attr('src','imgProduct/targetBlack3.jpg');
-        $('.min4').attr('src','imgProduct/targetBlack4.jpg');
-        if($('.min5').length > 0 )
-            $('.min5').attr('src','imgProduct/targetBlack5.jpg');
-        else{
-            $('.columna5').prepend('<img class="thumbnail miniatura min5" src="imgProduct/targetblack5.jpg">');
-        }
-
-    }else{
-        $('.fotoPrincipal').attr('src','imgProduct/targetwhite1.jpg');
-        $('.min1').attr('src','imgProduct/targetwhite1.jpg');
-        $('.min2').attr('src','imgProduct/targetwhite2.jpg');
-        $('.min3').attr('src','imgProduct/targetwhite3.jpg');
-        $('.min4').attr('src','imgProduct/targetwhite4.jpg');
-        $('.min5').remove();
-    }
-}
 
 function  redireccionar(producto) {
     document.location.href="productos.html?"+producto;
@@ -145,8 +106,11 @@ function cargarRegistro(){
 
 function cargarNumProductosCesta() {
    var total=localStorage.getItem('producto');
-    if(total==0){
-        var texto = $('<spam>0 productos</spam>');
+    if(total==null){
+        var texto = $('<span>0 productos</span>');
         $('.optCarrito').append(texto);
+    }
+    else{
+
     }
 }

@@ -304,11 +304,14 @@ table tbody, table tfoot, table thead {
 }
 
 .contenidoCarrito{
-    margin-top: 2%;
+    margin-top: 1em;
 }
-
+ .optCarrito > span{
+    display: inline;
+}
 .imgCarrito {
-    width: 40%;
+    width: 2.5em;
+
 }
 html,body{
     height:100%;
@@ -341,6 +344,12 @@ div.difuminado{
     transform: scale(1.05);
     transition:box-shadow 2s, transform 500ms, filter 500ms ease-in-out;
 }
+.formularioRegistro{
+   text-align: center;
+    width: 60em;
+
+}
+
 
 /**** PIE DE PAGINA *****/
 .footer {
