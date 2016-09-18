@@ -77,7 +77,7 @@ $(function() {
             $('h4.nombreProducto').text('Target 1.0');
             $('.descripcionPrincipal').html('Pala en forma redonda con un grosor de 38 milímetros. Pala de fibra de vidrio que incorpora nuestra tecnología revolucionaria como es el “Diaxagonal solid Frame”, un doble tubular macizo que estructuralmente hace prácticamente irrompible a la pala en la zonas más... <a href="#panel1">Leer más</a>');
             $('h5.precio').text('189 EURO');
-            $('h5.precio').append('<div class="row"><div class="small-3 columns"><label  class="middle textoDescripcion">Color</label> </div> <div class="small-9 columns divColor"> <div class="caja" id="negro"><div class="negro colores"></div><span class="info">Negro</span></div> <div class="caja" id="blanco"><div class="blanco colores" ></div><span class="info">Blanco</span></div> </div> </div>');
+            $('<div class="row"><div class="small-3 columns"><label  class="middle textoDescripcion">Color</label> </div> <div class="small-9 columns divColor"> <div class="caja" id="negro"><div class="negro colores"></div><span class="info">Negro</span></div> <div class="caja" id="blanco"><div class="blanco colores" ></div><span class="info">Blanco</span></div> </div> </div>').insertAfter('h5.precio');
             $('.descripcion').html(' <h5 class="textoDescripcion">Descripción</h5> <p>Pala en forma redonda con un grosor de 38 milímetros. Pala de fibra de vidrio que incorpora nuestra tecnología revolucionaria como es el “Diaxagonal solid Frame”, un doble tubular macizo que estructuralmente hace prácticamente irrompible a la pala en la zonas más críticas, su núcleo compuesto de FOAM de baja densidad de alta densidad unido a la mayor flexión de la fibra de vidrio  nos proporciona  un juego de ataque con una gran salida de bola sin perder el control de bola, muchos jugadores aseguran que las palas de fibra son las mejores dentro del mercado nosotros dejamos que eso lo decidáis vosotros una vez probéis esta hermosa y grandiosa pala. Este modelo lo podemos encontrar en dos combinaciones de colores, una en blanco perlado y otra con un negro brillo.</p><p>Su peso oscila de 355 gr a 365 gr.</p> <h5 class="textoDescripcion">Características técnicas</h5><dl class="textoDescripcion"> <dt>Plano</dt> <dd>100% fiberglass</dd><dt>Nucleo</dt><dd>FOAM EXPLOSSION</dd> <dt>Tubular</dt> <dd>Diaxagonal Solid frame</dd> <dt>Taladros</dt><dd>Control holes + ativibration system</dd></dl><h5 class="textoDescripcion">Diseño</h5><p>Diseñada por uno estudio de diseño más importantes en la industria del deporte, este modelo lo podemos encontrar en dos combinaciones de colores a cual más espectacular, una con una base en blanco perlado y otra con una base de negro metálico, ambas con un rosa fluor como como color referente.</p>');
                 if($('.masProductosTargetBlack').length > 0 ){
                 $('.masProductosTargetBlack').remove();
@@ -92,17 +92,62 @@ $(function() {
             alert('PRUEBA: no deje cantidad vacio');
         }else {
                 //CUANDO LA BD ESTE REALIALIZADA, QUE EN LOCALSTORAGE GUARDE EL ID DEL PRODUCTO
-            localStorage.setItem('producto', producto);
             var cad ='{'+
-                '"producto":"'+document.title+'",'+
+                '"producto":"'+producto+'",'+
                 '"cantidad":"'+cantidad+'",'+
                 '"precio":"'+$('h5.precio').text()+'"'+
                 '}';
-
+            var total=localStorage.getItem('producto');
+            if(total==null){
+                localStorage.setItem('producto', cad);
+            }
+            else{
+                var cadProduc="["+localStorage.getItem('producto')+","+cad+"]";
+                localStorage.setItem('producto',cadProduc);
+            }
             var sParametro="datos="+cad;
             $.ajax({url: 'carrito.php', data: sParametro,success:function(){alert('Producto añadido')}});
        
         }
     });
+
+    $('.btnRegistro').on('click',cargarRegistro);
+    $('.miniatura').on('click',function(){
+        img=$(this).attr('src');
+        abrirFoto(img);
+    });
+    $('.caja').on('click',function(){
+        color=$(this).attr('id');
+        cambiarColor(color);
+
+    });
+
+
+    function abrirFoto(img) {
+        $('.fotoPrincipal').attr('src',img);
+    }
+
+    function cambiarColor(color) {
+        if(color=='negro'){
+            $('.fotoPrincipal').attr('src','imgProduct/targetBlack1.jpg');
+            $('.min1').attr('src','imgProduct/targetBlack1.jpg');
+            $('.min2').attr('src','imgProduct/targetBlack2.jpg');
+            $('.min3').attr('src','imgProduct/targetBlack3.jpg');
+            $('.min4').attr('src','imgProduct/targetBlack4.jpg');
+            if($('.min5').length > 0 )
+                $('.min5').attr('src','imgProduct/targetBlack5.jpg');
+            else{
+                $('.columna5').prepend('<img class="thumbnail miniatura min5" src="imgProduct/targetblack5.jpg">');
+            }
+
+        }else{
+            $('.fotoPrincipal').attr('src','imgProduct/targetwhite1.jpg');
+            $('.min1').attr('src','imgProduct/targetwhite1.jpg');
+            $('.min2').attr('src','imgProduct/targetwhite2.jpg');
+            $('.min3').attr('src','imgProduct/targetwhite3.jpg');
+            $('.min4').attr('src','imgProduct/targetwhite4.jpg');
+            $('.min5').remove();
+        }
+    }
 
 });

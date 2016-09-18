@@ -6,10 +6,12 @@ if ($mysqli->connect_errno) {
     echo "<h3>Lo sentimos, el sitio web está experimentando problemas.</h3>";
     exit();
 }else{
+
 if(isset($_REQUEST['datos'])){
     $sProducto=$_REQUEST['datos'];
     $oProducto = json_decode($sProducto);
-
+   $id=mysqli_query($mysqli,"Select id from productos where nombre like '%".$oProducto->producto."'%");
+    echo($id);
 }else {
     $cestaVacia='<h3>Cesta vacía</h3><p>En la cesta de compra puedes dejar temporalmente los productos que quieres. En ella aparecerá el precio más reciente de cada producto.</p><a href="tienda.html">Añade algún producto</a></p>';
 }
