@@ -57,7 +57,7 @@ header h1 {
     left: 18px;
     height: 100%;
     width: 4px;
-    background: #d7e4ed;
+    background: #983535;
 }
 @media only screen and (min-width: 1170px) {
     #cd-timeline {
@@ -216,7 +216,7 @@ header h1 {
     background: white;
     border-radius: 0.25em;
     padding: 1em;
-    box-shadow: 0 3px 0 #d7e4ed;
+    box-shadow: 0 3px 0 #983535;
 }
 .cd-timeline-content:after {
     content: "";
@@ -260,7 +260,7 @@ header h1 {
     height: 0;
     width: 0;
     border: 7px solid transparent;
-    border-right: 7px solid white;
+    border-right: 7px solid #501919;
 }
 @media only screen and (min-width: 768px) {
     .cd-timeline-content h2 {
@@ -286,7 +286,7 @@ header h1 {
         top: 24px;
         left: 100%;
         border-color: transparent;
-        border-left-color: white;
+        border-left-color: #501919;
     }
     .cd-timeline-content .cd-read-more {
         float: left;
@@ -307,7 +307,7 @@ header h1 {
         left: auto;
         right: 100%;
         border-color: transparent;
-        border-right-color: white;
+        border-right-color: #501919;
     }
     .cd-timeline-block:nth-child(even) .cd-timeline-content .cd-read-more {
         float: right;

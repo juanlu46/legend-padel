@@ -22,7 +22,7 @@
 <div class="contenedor">
     <div id="header-landing" data-magellan-destination="home">
         <div data-sticky-container>
-            <div data-sticky data-margin-top='0' data-top-anchor="0" data-btm-anchor="eslogan:bottom">
+            <div data-sticky data-margin-top='0' data-top-anchor="1" data-btm-anchor="contenido:bottom">
                 <!-- Small Navigation -->
                 <div class="title-bar" data-responsive-toggle="nav-menu" data-hide-for="medium">
                     <a class="logo-small show-for-small-only" href="#"><img src="http://placehold.it/25x25?text=LOGO" alt="logo_legend_padel"/></a>
@@ -35,7 +35,7 @@
 
                     <div class="logo-wrapper hide-for-small-only">
                         <div class="logo">
-                            <img src="img/logo_LEGEND_nuevo.png" alt="logo_legend_padel">
+                            <img src="img/logo_blanco.png" alt="logo_legend_padel">
                         </div>
                     </div>
 
@@ -91,15 +91,15 @@
             <h2>BE <span>PADEL</span>, BE <span>LEGEND</span></h2>
             <ul class="tabs header-subnav panelIndex" data-tabs id="principal-tabs">
                 <li class="tabs-title is-active"><a href="#panel1" aria-selected="true">¿Quiénes Somos?</a></li>
-                <li class="tabs-title"><a href="#panel2">Tecnologías</a></li>
-                <li class="tabs-title"><a href="#panel3">Tienda</a></li>
-                <li class="tabs-title"><a href="#panel4" >Redes Sociales</a></li>
-                <li class="tabs-title "><a href="#panel5" >Galería</a></li>
+                <li class="tabs-title" id="btn-tab-tec"><a href="#panel2">Tecnologías</a></li>
+                <li class="tabs-title" id="btn-tab-tienda"><a href="#panel3">Tienda</a></li>
+                <li class="tabs-title" id="btn-tab-redes"><a href="#panel4" >Redes Sociales</a></li>
+                <li class="tabs-title " id="btn-tab-galeria"><a href="#panel5" >Galería</a></li>
             </ul>
         </div>
     </div>
     <div class="contenido">
-        <div class="tabs-content divContenido" data-tabs-content="principal-tabs">
+        <div class="tabs-content div-contenido" data-tabs-content="principal-tabs">
             <div class="tabs-panel is-active" id="panel1">
                 <section id="cd-timeline" class="cd-container">
                     <div class="cd-timeline-block">
@@ -263,7 +263,8 @@
 
 <script src="js/jquery-2.2.0.min.js"></script>
 <script src="js/foundation.js"></script>
-<script src="slick/slick.js"></script>
+<script src="slick/slick.min.js"></script>
+<script src="js/principal.js"></script>
 <!-- Foundation Utils -->
 <script src="js/fd_utils/modernizr.js"></script>
 <script src="js/fd_utils/fastclick.js"></script>
@@ -281,7 +282,7 @@
 <script src="js/parallax_utils/jquery.shuffle.js"></script>
 
 
-<script src="js/principal.js"></script>
+
 <footer class="footer">
     <div class="row">
         <div class="small-12 columns">
