@@ -15,27 +15,7 @@ function inicio(){
         fade: 700,
         duration: 5000
     });
-    //*** CARROUSEL GALERIA ***
-    $('.slider-for').slick({
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        arrows: false,
-        fade: true,
-        asNavFor: '.slider-nav'
-    });
-    var sliderNav=$(".slider-nav");
-    sliderNav.slick({
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        asNavFor: '.slider-for',
-        arrows: true,
-        dots: true,
-        centerMode: true,
-        focusOnSelect: true
-    });
     asignarEventos();
-    //*** CARROUSEL GALERIA ***
-    
     var timelineBlocks = $('.cd-timeline-block'),
         offset = 0.8;
 
@@ -52,17 +32,6 @@ function inicio(){
     var img="";
     var color="";
 
-    $(function() {
-        cargarNumProductosCesta();
-//para la descripcion en las fotos
-        var target = null;
-        $('.img_thumb').hover(function(e){
-            target = $(this);
-            $(target[0].firstElementChild).fadeIn(200);
-        }, function(){
-            $(target[0].firstElementChild).fadeOut(200);
-        });
-    });
 }
 
 function asignarEventos(){
@@ -78,14 +47,54 @@ function cargarTabTec(){
 }
 function cargarTabTienda(){
     if($(".productos").length<=0){
-
+        $("#panel3").load("html/tab_tienda.html",function() {
+            cargarNumProductosCesta();
+//para la descripcion en las fotos
+            var target = null;
+            $('.img_thumb').hover(function(e){
+                target = $(this);
+                $(target[0].firstElementChild).fadeIn(200);
+            }, function(){
+                $(target[0].firstElementChild).fadeOut(200);
+            });
+        });
     }
 }
 function cargarTabRedes(){
-
+    if($(".service-tw").length<=0){
+        $("#panel4").load("html/tab_redes.html",function(){
+            (function(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = "//connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v2.7";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+        });
+    }
 }
 function cargarTabGaleria(){
-    
+    if($(".slider-for").length<=0){
+        $("#panel5").load("html/tab_galeria.html",function(){
+            $('.slider-for').slick({
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                arrows: false,
+                fade: true,
+                asNavFor: '.slider-nav'
+            });
+            var sliderNav=$(".slider-nav");
+            sliderNav.slick({
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                asNavFor: '.slider-for',
+                arrows: true,
+                dots: true,
+                centerMode: true,
+                focusOnSelect: true
+            });
+        });
+    }
 }
 
 function hideBlocks(blocks, offset) {
