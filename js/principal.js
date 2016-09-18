@@ -1,30 +1,78 @@
-$(document).foundation();
-$('.top-bar').on('sticky.zf.stuckto:top', function(){
-    $(this).addClass('shrink');
-}).on('sticky.zf.unstuckfrom:top', function(){
-    $(this).removeClass('shrink');
-});
-$.backstretch([
-    "img/imgBG/img_bg_1.jpg",
-    "img/imgBG/img_bg_2.jpg",
-    "img/imgBG/img_bg_3.jpg"
-], {
-    fade: 700,
-    duration: 5000
-});
-
-var timelineBlocks = $('.cd-timeline-block'),
-    offset = 0.8;
+$(document).ready(inicio);
+function inicio(){
+    $(document).foundation();
+    $('.top-bar').on('sticky.zf.stuckto:top', function(){
+        $(this).addClass('shrink');
+    }).on('sticky.zf.unstuckfrom:top', function(){
+        $(this).removeClass('shrink');
+    });
+    $.backstretch([
+        "img/imgBG/img_bg_1.jpg",
+        "img/imgBG/img_bg_2.jpg",
+        "img/imgBG/img_bg_3.jpg"
+    ], {
+        fade: 700,
+        duration: 5000
+    });
+    //*** CARROUSEL GALERIA ***
+    $('.slider-for').slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: false,
+        fade: true,
+        asNavFor: '.slider-nav'
+    });
+    $('.slider-nav').slick({
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        asNavFor: '.slider-for',
+        arrows: true,
+        dots: true,
+        centerMode: true,
+        focusOnSelect: true
+    });
+    //*** CARROUSEL GALERIA ***
+    
+    var timelineBlocks = $('.cd-timeline-block'),
+        offset = 0.8;
 
 //hide timeline blocks which are outside the viewport
-hideBlocks(timelineBlocks, offset);
+    hideBlocks(timelineBlocks, offset);
 
 //on scolling, show/animate timeline blocks when enter the viewport
-$(window).on('scroll', function(){
-    (!window.requestAnimationFrame)
-        ? setTimeout(function(){ showBlocks(timelineBlocks, offset); }, 100)
-        : window.requestAnimationFrame(function(){ showBlocks(timelineBlocks, offset); });
-});
+    $(window).on('scroll', function(){
+        (!window.requestAnimationFrame)
+            ? setTimeout(function(){ showBlocks(timelineBlocks, offset); }, 100)
+            : window.requestAnimationFrame(function(){ showBlocks(timelineBlocks, offset); });
+    });
+
+    var img="";
+    var color="";
+
+    $(function() {
+        cargarNumProductosCesta();
+
+        $('.btnRegistro').on('click',cargarRegistro);
+        $('.miniatura').on('click',function(){
+            img=$(this).attr('src');
+            abrirFoto(img);
+        });
+        $('.caja').on('click',function(){
+            color=$(this).attr('id');
+            cambiarColor(color);
+
+        });
+
+        //para la descripcion en las fotos
+        var target = null;
+        $('.img_thumb').hover(function(e){
+            target = $(this);
+            $(target[0].firstElementChild).fadeIn(200);
+        }, function(){
+            $(target[0].firstElementChild).fadeOut(200);
+        });
+    });
+}
 
 function hideBlocks(blocks, offset) {
     blocks.each(function(){
@@ -38,32 +86,7 @@ function showBlocks(blocks, offset) {
     });
 }
 
-var img="";
-var color="";
 
-$(function() {
-    cargarNumProductosCesta();
-    
-    $('.btnRegistro').on('click',cargarRegistro);
-    $('.miniatura').on('click',function(){
-        img=$(this).attr('src');
-        abrirFoto(img);
-    });
-    $('.caja').on('click',function(){
-        color=$(this).attr('id');
-        cambiarColor(color);
-
-    });
-   
-    //para la descripcion en las fotos
-    var target = null;
-    $('.img_thumb').hover(function(e){
-        target = $(this);
-        $(target[0].firstElementChild).fadeIn(200);
-    }, function(){
-        $(target[0].firstElementChild).fadeOut(200);
-    });
-});
 
 function abrirFoto(img) {
     $('.fotoPrincipal').attr('src',img);
