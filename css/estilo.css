@@ -403,3 +403,27 @@ div.difuminado{
 .footer .links a:last-child::after {
     content: "";
     padding: 0 0.4rem 0 0.8rem; }
+
+
+/**** PAGINA DEVOLUCIONES ****/
+.contenedorDevoluciones{
+    background-color: #101010;
+}
+
+.cabeceraDevoluciones IMG{
+    width: 10em;
+}
+.contenidoDevoluciones{
+    color: white;
+    font-family: 'exo', sans-serif;
+    margin-bottom: 5em;
+}
+.contenedorDevoluciones h3, h4{
+    font-weight: bold;
+    margin-bottom: 2em;
+}
+.contenedorDevoluciones li{
+    margin-bottom: 1em;
+}
+
+
