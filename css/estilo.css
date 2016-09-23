@@ -1,5 +1,19 @@
 @import url(https://fonts.googleapis.com/css?family=Bitter);
 
+h1,h2,h3,h4{
+    font-family: 'Exo', sans-serif !important;
+}
+h2{
+    font-size: 2.48em !important;
+    font-weight: bold !important;
+}
+p{
+    font-family: 'Cagliostro', sans-serif !important;
+    font-size: 1.26em !important;
+}
+.titulo{
+
+}
 /**** TOP BAR ****/
 [data-sticky] {
     width: 100%; }
