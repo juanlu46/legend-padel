@@ -3,7 +3,8 @@ $(function() {
     var url=document.location.href;
     var cad=url.split('?');
     var producto=cad[1];
-
+    var img="";
+    var color="";
     switch (producto){
         case 'invictus':
             document.title='Invictus 2.0';
@@ -82,6 +83,12 @@ $(function() {
                 if($('.masProductosTargetBlack').length > 0 ){
                 $('.masProductosTargetBlack').remove();
             }
+            $('#blanco').on('click',function() {
+                cambiarColor('blanco')
+            });
+            $('#negro').on('click',function(){
+                cambiarColor('negro')
+            });
             break;
         
     }

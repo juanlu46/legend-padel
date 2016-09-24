@@ -28,10 +28,11 @@ function inicio(){
             ? setTimeout(function(){ showBlocks(timelineBlocks, offset); }, 100)
             : window.requestAnimationFrame(function(){ showBlocks(timelineBlocks, offset); });
     });
-
-    var img="";
-    var color="";
-
+    if(location.href=='http://localhost:63342/legend-padel/index.html?tienda'){
+        cargarTabTienda();
+        $(".panelIndex").foundation("selectTab", $("#panel3"));
+    }
+    cargarNumProductosCesta();
 }
 
 function asignarEventos(){
@@ -48,7 +49,6 @@ function cargarTabTec(){
 function cargarTabTienda(){
     if($(".productos").length<=0){
         $("#panel3").load("html/tab_tienda.html",function() {
-            cargarNumProductosCesta();
 //para la descripcion en las fotos
             var target = null;
             $('.img_thumb').hover(function(e){
@@ -141,6 +141,8 @@ function cargarRegistro(){
 function cargarNumProductosCesta() {
    var total=localStorage.getItem('producto');
     if(total==null){
+        if($('.optCarrito span').length != 0)
+            $('.optCarrito span').remove();
         var texto = $('<span>0 productos</span>');
         $('.optCarrito').append(texto);
     }
