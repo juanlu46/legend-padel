@@ -1,7 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Bitter);
 
 h1,h2,h3,h4{
-    font-family: 'Exo', sans-serif !important;
+    font-family: 'Orbitron', sans-serif !important;
 }
 h2{
     font-size: 2.48em !important;
@@ -11,9 +11,19 @@ p{
     font-family: 'Cagliostro', sans-serif !important;
     font-size: 1.26em !important;
 }
-.titulo{
-
+hr{
+    box-shadow: 0px 3px 8px 0px #a0a0a0;
 }
+.titulo{
+    font-weight: bold;
+}
+.contenedor{
+    transition:all 350ms ease-in-out;
+}
+.backstretch{
+    transition:all 350ms ease-in-out;
+}
+
 /**** TOP BAR ****/
 [data-sticky] {
     width: 100%; }
@@ -295,7 +305,7 @@ dd {
     position: absolute;
     z-index: 2;
     opacity: 0.9;
-    padding: 2%;
+    padding: 1%;
     display: none;
     background-color: #1b1b1b;
     color: white;
@@ -373,6 +383,13 @@ div.difuminado{
     transform: scale(1.05);
     transition:box-shadow 2s, transform 500ms, filter 500ms ease-in-out;
 }
+.on-blur{
+    transition:all 350ms ease-in-out;
+filter: blur(3px);
+-webkit-filter: blur(3px);
+-moz-filter: blur(3px);
+-ms-filter: blur(3px);
+}
 .formularioRegistro{
    text-align: center;
 }
@@ -383,11 +400,12 @@ div.difuminado{
     background-color: #101010;;
     text-align: center;
     font-size: 1.2rem;
-    padding: 1rem; }
+    padding: 1rem 1rem 2rem 1rem; }
 .footer div.slogan {
     margin: 0 auto;
     width: 10em;}
 .footer p.copywrite {
+    font-family: 'Orbitron', sans-serif !important;
     color: #8f9296;
     font-size: 0.875rem;
     margin: 0; }
@@ -395,6 +413,7 @@ div.difuminado{
     list-style: none;
     font-weight: bold;
     color: #ffffff;
+    font-family: 'Orbitron', sans-serif !important;
     padding: 3rem 0 2rem;
     margin: 0; }
 .footer .links a::after {
