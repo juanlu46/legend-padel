@@ -52,6 +52,19 @@ a:focus {
 .light {
   font-weight: 400;
 }
+
+.logo-legend-txt{
+  width: 93px;
+  margin-top: -8px;
+  display: inline-block !important;
+}
+.logo-legend-img{
+  width: 51px;
+  float: right;
+  margin-top: -14px;
+  margin-left: -13px;
+}
+
 .navbar-custom {
   margin-bottom: 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
@@ -124,7 +137,7 @@ a:focus {
   padding: 100px 0;
   text-align: center;
   color: white;
-  background: url(../img/intro-bg.jpg) no-repeat bottom center scroll;
+  background: url(../img/img_bg_2.jpg) no-repeat bottom center scroll;
   background-color: black;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -135,10 +148,10 @@ a:focus {
   display: table-cell;
   vertical-align: middle;
 }
-.intro .intro-body .brand-heading {
+.intro .intro-body .marca {
   font-size: 40px;
 }
-.intro .intro-body .intro-text {
+.intro .intro-body .eslogan {
   font-size: 18px;
 }
 @media (min-width: 768px) {
@@ -146,10 +159,10 @@ a:focus {
     height: 100%;
     padding: 0;
   }
-  .intro .intro-body .brand-heading {
+  .intro .intro-body .marca {
     font-size: 100px;
   }
-  .intro .intro-body .intro-text {
+  .intro .intro-body .eslogan {
     font-size: 26px;
   }
 }

@@ -70,8 +70,8 @@ var
 	// Define a local copy of jQuery
 	jQuery = function( selector, context ) {
 
-		// The jQuery object is actually just the init constructor 'enhanced'
-		// Need init if jQuery is called (just allow error to be thrown if not included)
+		// The jQuery object is actually just the inicio constructor 'enhanced'
+		// Need inicio if jQuery is called (just allow error to be thrown if not included)
 		return new jQuery.fn.init( selector, context );
 	},
 
@@ -352,7 +352,7 @@ jQuery.extend( {
 	},
 
 	// Convert dashed to camelCase; used by the css and data modules
-	// Microsoft forgot to hump their vendor prefix (#9572)
+	// Microsoft forgot to hump their terceros prefix (#9572)
 	camelCase: function( string ) {
 		return string.replace( rmsPrefix, "ms-" ).replace( rdashAlpha, fcamelCase );
 	},
@@ -554,7 +554,7 @@ if ( typeof Symbol === "function" ) {
 }
 /* jshint ignore: end */
 
-// Populate the class2type map
+// Populate the class2type oMapa
 jQuery.each( "Boolean Number String Function Array Date RegExp Object Error Symbol".split( " " ),
 function( i, name ) {
 	class2type[ "[object " + name + "]" ] = name.toLowerCase();
@@ -2289,7 +2289,7 @@ function setMatcher( preFilter, selector, matcher, postFilter, postFinder, postS
 			// Get initial elements from seed or context
 			elems = seed || multipleContexts( selector || "*", context.nodeType ? [ context ] : context, [] ),
 
-			// Prefilter to get matcher input, preserving a map for seed-results synchronization
+			// Prefilter to get matcher input, preserving a oMapa for seed-results synchronization
 			matcherIn = preFilter && ( seed || !selector ) ?
 				condense( elems, preMap, preFilter, context, xml ) :
 				elems,
@@ -2871,7 +2871,7 @@ var rootjQuery,
 			return this;
 		}
 
-		// init accepts an alternate rootjQuery
+		// inicio accepts an alternate rootjQuery
 		// so migrate can support jQuery.sub (gh-2101)
 		root = root || rootjQuery;
 
@@ -2978,7 +2978,7 @@ var rootjQuery,
 		return jQuery.makeArray( selector, this );
 	};
 
-// Give the init function the jQuery prototype for later instantiation
+// Give the inicio function the jQuery prototype for later instantiation
 init.prototype = jQuery.fn;
 
 // Initialize central reference
@@ -4524,7 +4524,7 @@ function createSafeFragment( document ) {
 var wrapMap = {
 	option: [ 1, "<select multiple='multiple'>", "</select>" ],
 	legend: [ 1, "<fieldset>", "</fieldset>" ],
-	area: [ 1, "<map>", "</map>" ],
+	area: [ 1, "<oMapa>", "</oMapa>" ],
 
 	// Support: IE8
 	param: [ 1, "<object>", "</object>" ],
@@ -4775,7 +4775,7 @@ function safeActiveElement() {
 function on( elem, types, selector, data, fn, one ) {
 	var origFn, type;
 
-	// Types can be a map of types/handlers
+	// Types can be a oMapa of types/handlers
 	if ( typeof types === "object" ) {
 
 		// ( types-Object, selector, data )
@@ -6858,15 +6858,15 @@ var
 	emptyStyle = document.createElement( "div" ).style;
 
 
-// return a css property mapped to a potentially vendor prefixed property
+// return a css property mapped to a potentially terceros prefixed property
 function vendorPropName( name ) {
 
-	// shortcut for names that are not vendor prefixed
+	// shortcut for names that are not terceros prefixed
 	if ( name in emptyStyle ) {
 		return name;
 	}
 
-	// check for vendor prefixed names
+	// check for terceros prefixed names
 	var capName = name.charAt( 0 ).toUpperCase() + name.slice( 1 ),
 		i = cssPrefixes.length;
 
@@ -9259,7 +9259,7 @@ function ajaxConvert( s, response, jqXHR, isSuccess ) {
 		// Work with a copy of dataTypes in case we need to modify it for conversion
 		dataTypes = s.dataTypes.slice();
 
-	// Create converters map with lowercased keys
+	// Create converters oMapa with lowercased keys
 	if ( dataTypes[ 1 ] ) {
 		for ( conv in s.converters ) {
 			converters[ conv.toLowerCase() ] = s.converters[ conv ];
