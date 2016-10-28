@@ -96,7 +96,7 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
                 <h2>About Grayscale</h2>
-                <iframe src="https://www.google.com/maps/d/embed?mid=15LBXTSIMHFvF3i6qZ28ju8QyErI" width="640" height="480"></iframe>
+                <div id="map"></div>
             </div>
         </div>
     </section>
@@ -149,8 +149,7 @@
         </div>
     </section>
 
-    <!-- Google Maps -->
-    <div id="map"></div>
+
 
     <footer>
         <div class="container text-center">
@@ -163,7 +162,44 @@
     <script src="terceros/bootstrap/js/bootstrap.min.js"></script>
     <script src="terceros/jquery/jquery.easing.min.js"></script>
     <script src="js/grayscale.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUaRcgKrG8NN_O_z_PeIJyFBAZBye1DUE&callback=initMap"
+            async defer></script>
+
 
 </body>
+<script type="text/javascript">
 
+    var map;
+
+    function initMap() {
+
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 37.5442706, lng:-4.727752799999962},
+            zoom: 6
+        });
+        var infinityIndoor = new google.maps.LatLng(37.312651, -5.975999);
+        var marker = new google.maps.Marker({
+            position: infinityIndoor
+            , title: 'Infinity Indoor'
+            , map: map
+             });
+        google.maps.event.addListener(marker, 'click', showInfo);
+        function showInfo() {
+            map.setZoom(16);
+            map.setCenter(marker.getPosition());
+            var contentString = '<div id="content">'+
+                    '<div id="bodyContent" style="color:black;padding-top: 1em">'+
+                    '<p><b>Infinity Indoor</b></p>'+
+                    '</div>';
+            var infowindow = new google.maps.InfoWindow({
+
+                content: contentString});
+            infowindow.open(map,marker);}
+
+
+
+    }
+
+
+</script>
 </html>
