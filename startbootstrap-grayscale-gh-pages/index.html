@@ -14,20 +14,19 @@
     <link href="terceros/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-    <link href="css/grayscale.min.css" rel="stylesheet">
+    <link href="css/grayscale.css" rel="stylesheet">
 
     <!-- Shim and Respond.js añade soporte HTML5 para IE8 y media queries-->
     <!--[if lt IE 9]>
         <script src="terceros/compatibilidad-ie/html5shiv.js"></script>
         <script src="terceros/compatibilidad-ie/respond.min.js"></script>
     <![endif]-->
-
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
 
     <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
-        <div class="container">
+        <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                     Menu <i class="fa fa-bars"></i>
@@ -65,7 +64,7 @@
 
     <header class="intro">
         <div class="intro-body">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
                         <img src="img/logo-lgn-txt.png" class="marca-titulo"/>
@@ -80,19 +79,34 @@
     </header>
 
     <!-- About Section -->
-    <section id="tienda" class="container content-section text-center">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2">
-                <h2>About Grayscale</h2>
-                <p>Grayscale is a free Bootstrap 3 theme created by Start Bootstrap. It can be yours right now, simply download the template on <a href="http://startbootstrap.com/template-overviews/grayscale/">the preview page</a>. The theme is open source, and you can use it for any purpose, personal or commercial.</p>
-                <p>This theme features stock photos by <a href="http://gratisography.com/">Gratisography</a> along with a custom Google Maps skin courtesy of <a href="http://snazzymaps.com/">Snazzy Maps</a>.</p>
-                <p>Grayscale includes full HTML, CSS, and custom JavaScript files along with LESS files for easy customization.</p>
+    <section id="tienda" class="content-section text-center">
+        <div class="sec-tienda">
+            <div class="container-fluid">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <h2>Tienda</h2>
+                    <div class="productos row">
+                        <div class="col-lg-3 col-md-4 col-sm-6">
+                            <div class="item">
+                                <div class="precio">715,00 $</div>
+                                <a href="#">
+                                    <img src="img/productos/pala1.jpg" alt="1">
+                                    <span class="capa-titulo"></span>
+                                </a>
+                                <div class="item-pie">
+                                    <a href="#">Leather bag with side pocket</a>
+                                    <span>by Anna Canara</span>
+                                    <button class="btn btn-primary">Add to Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- About Section -->
-    <section id="tecnologias" class="container content-section text-center">
+    <section id="tecnologias" class="container-fluid content-section text-center">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
                 <h2>About Grayscale</h2>
@@ -102,7 +116,7 @@
     </section>
 
     <!-- About Section -->
-    <section id="distribuidores" class="container content-section text-center">
+    <section id="distribuidores" class="container-fluid content-section text-center">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
                 <h2>About Grayscale</h2>
@@ -116,7 +130,7 @@
     <!-- Download Section -->
     <section id="quienes-somos" class="content-section text-center">
         <div class="download-section">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="col-lg-8 col-lg-offset-2">
                     <h2>Download Grayscale</h2>
                     <p>You can download Grayscale for free on the preview page at Start Bootstrap.</p>
@@ -127,7 +141,7 @@
     </section>
 
     <!-- CONTACTO -->
-    <section id="contacto" class="container content-section text-center">
+    <section id="contacto" class="container-fluid content-section text-center">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
                 <h2>Contact Start Bootstrap</h2>
@@ -152,7 +166,7 @@
 
 
     <footer>
-        <div class="container text-center">
+        <div class="container-fluid text-center">
             <p>Copyright &copy; Your Website 2016</p>
         </div>
     </footer>

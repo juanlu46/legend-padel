@@ -8,7 +8,12 @@ function ajustarNavBar() {
 }
 
 $(window).scroll(ajustarNavBar);
-$(document).ready(ajustarNavBar);
+$(document).ready(function(){
+    ajustarNavBar();
+});
+
+//Scroll más suave
+
 
 // Controlador de scroll
 $(function() {
