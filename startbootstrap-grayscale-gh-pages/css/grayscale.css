@@ -229,7 +229,7 @@ a:focus {
   }
 }
 .content-section {
-  padding-top: 100px;
+  padding-top: 40px;
 }
 
 /**** SECCION TIENDA *****/
@@ -237,27 +237,31 @@ a:focus {
   width: 100%;
   padding: 50px 0;
   color: white;
-  background-color:#4c4c4c;
+  background-color: #8a8a8a;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
   -o-background-size: cover;
+  box-shadow: inset 0 1px 9px -1px rgb(29, 29, 29);
 }
 .productos .item {
   width: 100%;
   max-width: 356px;
   position: relative;
   border: 1px solid #b2b2b2;
-  -webkit-border-radius: 0px;
-  -moz-border-radius: 0px;
-  border-radius: 0px;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
   margin: 16px auto 24px auto;
   text-align: left;
   background-color: white;
+  box-shadow: 1px 1px 10px -2px black;
 }
 .productos .item a {
   position: relative;
   display: block;
+  color:black;
+  font-size: 17px;
 }
 .productos .item a .capa-titulo {
   position: absolute;
@@ -277,15 +281,15 @@ a:focus {
 .productos .item img {
   display: block;
   margin: auto;
-  -webkit-border-radius: 0px 0px 0 0;
-  -moz-border-radius: 0px 0px 0 0;
-  border-radius: 0px 0px 0 0;
+  -webkit-border-radius: 0 0 0 0;
+  -moz-border-radius: 0 0 0 0;
+  border-radius: 0 0 0 0;
   max-width: 221px;
 }
 .productos .item .precio {
   position: absolute;
-  padding: 8px 10px 9px 12px;
-  height: 47px;
+  padding: 7px 7px 5px 11px;
+  height: 38px;
   background-color: black;
   top: 0;
   right: 0;
@@ -293,6 +297,9 @@ a:focus {
   font-size: 1.125em;
   color: #fff;
   font-weight: 900;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 .productos .item .item-pie {
   border-top: 1px solid #b2b2b2;
@@ -300,11 +307,23 @@ a:focus {
   background: #fff;
   position: relative;
   text-align: center;
-  -webkit-border-radius: 0 0 0px 0px;
-  -moz-border-radius: 0 0 0px 0px;
-  border-radius: 0 0 0px 0px;
+  -webkit-border-radius: 0 0 0 0;
+  -moz-border-radius: 0 0 0 0;
+  border-radius: 0 0 0 0;
+}
+.productos .item .item-pie .btn-primary{
+  background-color: black;
+  margin: auto;
+  display: block;
+}
+.productos .item .item-pie .btn-primary:hover,.productos .item .precio:hover,.productos .item:hover .precio{
+  background-color: #740606;
 }
 
+/**** SECCION TECNOLOGIAS ***/
+#tecnologias{
+  padding-top: 80px;
+}
 
 #map {
   width: 100%;
@@ -313,7 +332,7 @@ a:focus {
 }
 @media (min-width: 767px) {
   .content-section {
-    padding-top: 250px;
+    padding-top: 40px;
   }
   .download-section {
     padding: 100px 0;
