@@ -112,6 +112,7 @@ function initMap() {
     google.maps.event.addListener(posribera, 'click', function(){showInfo(cadribera,posribera)()});
 
     function showInfo(contentString,posicion) {
+        ocultarOtros();
         map.setZoom(18);
         map.setCenter(posicion.getPosition());
 
@@ -120,7 +121,10 @@ function initMap() {
             content: contentString});
         infowindow.open(map,posicion);
     }
-
+//no funciona aun
+    function ocultarOtros() {
+        infowindow.close();
+    }
 
 
 
