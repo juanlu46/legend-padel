@@ -533,3 +533,12 @@ img::-moz-selection {
 body {
   webkit-tap-highlight-color: rgba(255, 255, 255, 0.2);
 }
+/*CSS PRODUCTOS*/
+  .capa-productos{
+    position: fixed;
+    z-index:2;
+    width: 100%;
+    height:100%;
+    top:50px;
+
+  }
