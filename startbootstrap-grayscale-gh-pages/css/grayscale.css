@@ -413,10 +413,7 @@ a:focus {
   width: 60em;
   height: 400px;
   margin-top: 3em;
-  border-width:5px;
-  border-style:ridge;
 }
-
 #distribuidores ul{
   margin-top: 7em;
 }

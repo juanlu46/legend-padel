@@ -1,4 +1,5 @@
 var map;
+var infowindow;
 
 function initMap() {
 
@@ -6,6 +7,7 @@ function initMap() {
         center: {lat: 37.5442706, lng:-4.727752799999962},
         zoom: 6
     });
+
     var infinityIndoor = new google.maps.LatLng(37.312651, -5.975999);
     var posInifinity = new google.maps.Marker({
         position: infinityIndoor
@@ -111,21 +113,30 @@ function initMap() {
     google.maps.event.addListener(pospadelIndoor, 'click', function(){showInfo(cadpadelIndoor,pospadelIndoor)()});
     google.maps.event.addListener(posribera, 'click', function(){showInfo(cadribera,posribera)()});
 
-    function showInfo(contentString,posicion) {
-        ocultarOtros();
+
+    google.maps.event.addDomListener(map,'zoom_changed', function() {
+        var zoom = map.getZoom();
+        if (zoom <5) {
+            if (infowindow)
+            {
+                infowindow.close();
+            }
+
+        }
+    });
+
+        function showInfo(contentString,posicion) {
         map.setZoom(18);
         map.setCenter(posicion.getPosition());
-
-        var infowindow = new google.maps.InfoWindow({
-
+        if (infowindow)
+        {
+            infowindow.close();
+        }
+        infowindow = new google.maps.InfoWindow({
             content: contentString});
+
         infowindow.open(map,posicion);
     }
-//no funciona aun
-    function ocultarOtros() {
-        infowindow.close();
-    }
-
 
 
 }
