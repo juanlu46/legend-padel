@@ -8,17 +8,24 @@
     color: #FFBF00;
 }
 
+body,.container{
+    background-color: rgba(0, 0, 0, 0.04)!important;
+}
 /*********************************************
 					PRODUCTS
 *********************************************/
 
 .product{
     border: 1px solid #dddddd;
-    height: 321px;
+    height: 680px;
+    width: auto;
+    background-color: white;
+    padding-right: 0px;
+    padding-left: 0px;
 }
 
 .product>img{
-    max-width: 230px;
+    max-width: 100%;
 }
 
 .product-rating{
@@ -26,18 +33,30 @@
     margin-bottom: 25px;
 }
 
-.product-title{
-    font-size: 20px;
+.product-title h2{
+    font-size: 35px;
+    font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color:black;
+    font-weight: bold;
 }
 
 .product-desc{
-    font-size: 14px;
+    font-size: 20px;
+    font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .product-price{
     font-size: 22px;
 }
-
+.btn, .btn-comprar {
+    color: white;
+    background-color:black;
+}
+.btn:hover, .btn-comprar:hover {
+    background: rgba(0,0,0,0);
+    color: black;
+    box-shadow: inset 0 0 0 3px black;
+}
 .product-stock{
     color: #74DF00;
     font-size: 20px;
@@ -89,25 +108,32 @@
     position: relative;
     overflow: hidden;
     max-width: 100%;
-    height: 321px;
-    width: 130px;
+    height: 121px;
+    width: 100%;
+    padding-right: 1em;
+    padding-top: 1em;
 }
 
 .service1-item {
-    height: 107px;
-    width: 120px;
+    height: 90px;
+    width: 110px;
     display: block;
     float: left;
     position: relative;
-    padding-right: 20px;
-    border-right: 1px solid #DDD;
-    border-top: 1px solid #DDD;
-    border-bottom: 1px solid #DDD;
+    margin-right: 1em;
+    border: 1px solid #dddddd;
+    transition: box-shadow .2s ease-out;
+    border-radius: 3px;
 }
-
+#item-1{
+    margin-left: 1em;
+}
+#item-4{
+    margin-right: 0em;
+}
 .service1-item > img {
-    max-height: 110px;
-    max-width: 110px;
+    max-height: 90px;
+    max-width: 90px;
     opacity: 0.6;
     transition: all .2s ease-in;
     -o-transition: all .2s ease-in;
@@ -120,14 +146,10 @@
     opacity: 1;
 }
 
-.service-image-left {
-    padding-right: 50px;
-}
-
 .service-image-right {
     padding-left: 50px;
 }
 
 .service-image-left > center > img,.service-image-right > center > img{
-    max-height: 155px;
+    max-height: 650px;
 }
