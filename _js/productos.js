@@ -1,4 +1,3 @@
-
 $(function() {
     var url=document.location.href;
     var cad=url.split('?');

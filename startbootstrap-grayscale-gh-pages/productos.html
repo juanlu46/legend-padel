@@ -14,11 +14,10 @@
 <div class="container-fluid">
     <div class="content-wrapper">
         <div class="item-container">
-            <div class="container">
                 <div class="col-md-6">
                     <div class="product col-md-6 service-image-left">
                         <center>
-                            <img id="item-display" src="" alt="producto"></img>
+                            <img id="item-display" src="" class="fotoPrincipal" alt="producto"></img>
                         </center>
                     </div>
                     <div class="container service1-items col-sm-6 col-md-6 pull-left">
@@ -35,11 +34,12 @@
                             <a id="item-4" class="service1-item">
                                 <img  src="" alt="miniatura4"></img>
                             </a>
+                            <a id="item-5" class="service1-item">
+                                <img  src="" alt="miniatura5"></img>
+                            </a>
                         </center>
                     </div>
-
                 </div>
-
                 <div class="col-md-6">
                     <div class="product-title">
                         <h2></h2>
@@ -49,7 +49,7 @@
                     </div>
                     <hr>
                     <div class="product-price"></div>
-
+                    <div class="product-color"></div>
                     <hr>
                     <div class="btn-group-lg cart">
                         <button type="button" class="btn btn-comprar">
@@ -57,10 +57,6 @@
                         </button>
                     </div>
                 </div>
-
-
-
-            </div>
         </div>
         <div class="container-fluid">
             <div class="col-md-12 product-info">
@@ -81,36 +77,58 @@
                     <div class="tab-pane fade" id="service-two">
 
                         <section class="container">
-                            <div class="row medium-up-7 large-up-4">
-                                <div class="column masProductosInvictus">
+                            <div class="row otrosProductos">
+                                <div class=" col-md-3 col-lg-3 col-xs-3 masProductosInvictus">
                                     <img class="thumbnail" src="img/imgProduct/invictus1.jpg" alt="incitus">
                                     <h5 class="textoDescripcion">Invictus 2.0 <small>€239</small></h5>
                                     <p class="textoDescripcion">Pala en forma redonda con un grosor de 38 milímetros. Su paricularidad reside en un doble tubular 100 % de Kevlar, tejido de alta tecnología...<a href="productos.html?invictus"> Leer más</a></p>
-                                    <a href="#" class="button hollow tiny expanded">Añadir al carrito</a>
+                                    <center>
+                                        <button type="button" class="btn btn-comprarMin">
+                                            Añadir al carrito
+                                        </button>
+                                    </center>
                                 </div>
-                                <div class="column masProductosRedSkin" >
+                                <div class="col-md-3 col-lg-3 col-xs-3 masProductosRedSkin" >
                                     <img class="thumbnail" src="img/imgProduct/redskin1.jpg" alt="redSkin">
                                     <h5 class="textoDescripcion">Red Skin <small>€219</small></h5>
                                     <p class="textoDescripcion">Pala en forma redonda con un grosor de 38 milímetros. Su paricularidad reside en un doble tubular 100 % de Kevlar, tejido de alta tecnología...<a href="productos.html?redSkin">Leer más</a></p>
-                                    <a href="#" class="button hollow tiny expanded">Añadir al carrito</a>
+                                    <div class="btn-group-xs">
+                                        <center>
+                                        <button type="button" class="btn btn-comprarMin">
+                                            Añadir al carrito
+                                        </button>
+                                        </center>
+                                    </div>
                                 </div>
-                                <div class="column masProductosTargetBlack">
+                                <div class="col-md-3 col-lg-3 col-xs-3 masProductosTargetBlack">
                                     <img class="thumbnail" src="img/imgProduct/targetBlack1.jpg" alt="targetBlack">
                                     <h5 class="textoDescripcion">Target Black <small>€189</small></h5>
                                     <p class="textoDescripcion">Pala en forma redonda con un grosor de 38 milímetros. Pala de fibra de vidrio que incorpora nuestra tecnología revolucionaria como es el... <a href="productos.html?target">Leer más</a></p>
-                                    <a href="#" class="button hollow tiny expanded">Añadir al carrito</a>
+                                     <center>
+                                         <button type="button" class="btn btn-comprarMin">
+                                             Añadir al carrito
+                                         </button>
+                                     </center>
                                 </div>
-                                <div class="column masproductostargetwhite">
+                                <div class="col-md-3 col-lg-3 col-xs-3 masproductostargetwhite">
                                     <img class="thumbnail" src="img/imgProduct/targetwhite1.jpg" alt="targetWhite">
                                     <h5 class="textoDescripcion">Target White <small>€189</small></h5>
                                     <p class="textoDescripcion">Pala en forma redonda con un grosor de 38 milímetros. Pala de fibra de vidrio que incorpora nuestra tecnología revolucionaria como es el... <a href="productos.html?target">Leer más</a></p>
-                                    <a href="#" class="button hollow tiny expanded">Añadir al carrito</a>
+                                     <center>
+                                         <button type="button" class="btn btn-comprarMin">
+                                             Añadir al carrito
+                                         </button>
+                                     </center>
                                 </div>
-                                <div class="column masProductosSniper">
+                                <div class="col-md-3 col-lg-3 col-xs-3 masProductosSniper">
                                     <img class="thumbnail" src="img/imgProduct/sniper1.jpg" alt="sniper">
                                     <h5 class="textoDescripcion">Sniper <small>€169</small></h5>
                                     <p class="textoDescripcion">Pala en forma redonda con un grosor de 38 milímetros. Este pala cuanta con unas hendiduras que rodean a su corazón triangular, estas... <a href="productos.html?sniper">Leer más</a></p>
-                                    <a href="#" class="button hollow tiny expanded">Añadir al carrito</a>
+                                     <center>
+                                         <button type="button" class="btn btn-comprarMin">
+                                             Añadir al carrito
+                                         </button>
+                                     </center>
                                 </div>
                             </div>
                         </section>
@@ -125,5 +143,6 @@
 </div>
 <script src="terceros/jquery/jquery.min.js"></script>
 <script src="js/product.js"></script>
+<script src="terceros/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>
