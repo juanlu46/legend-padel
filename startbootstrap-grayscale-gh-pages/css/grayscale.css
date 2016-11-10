@@ -660,7 +660,10 @@ a:focus {
   background-color: #42DCA3;
 }
 
-
+/* CONTACTO */
+#contacto{
+  margin-bottom: 2em;
+}
 
 /**** PIE DE PAGINA ****/
 .pie {

@@ -1,6 +1,9 @@
+var producto='';
+
 $(function() {
     var url= window.location.href;
-    var producto=url.split('?')[1];
+    producto=url.split('?')[1];
+    
     $('.service1-item img').on('click',function(){
         img=$(this).attr('src');
         cambiarFoto(img);
@@ -65,6 +68,7 @@ $(function() {
             break;
 
         case 'target':
+            producto='TargetBlack';
             document.title='Target 1.0';
             $('#item-display').attr('src','img/imgProduct/targetBlack1.jpg');
             $('.product-title h2').text('TARGET 1.0');
@@ -118,3 +122,5 @@ function cambiarColor(color) {
         $('#item-5 img').remove();
     }
 }
+
+

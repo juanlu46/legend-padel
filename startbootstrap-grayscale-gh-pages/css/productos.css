@@ -8,9 +8,11 @@
     color: #FFBF00;
 }
 
-.container-fluid{
-    background: rgba(0, 0, 0, 0.04);
+.container-fluid,body{
+    background: black;
+    color:white;
 }
+
 /*********************************************
 					PRODUCTS
 *********************************************/
@@ -33,17 +35,20 @@
 .product-title h2{
     font-size: 35px;
     font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    color:black;
+    color:white;
     font-weight: bold;
 }
 
 .product-desc{
-    font-size: 20px;
+    font-size: 17px;
     font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    padding-top: 1em;
+    padding-bottom: 3em;
 }
 
 .product-price {
     font-size: 22px;
+    padding-bottom: 2em;
 }
 .btn-comprar {
     display: inline-block;
@@ -53,20 +58,20 @@
     box-shadow: 0 0 1px transparent;
     position: relative;
     overflow: hidden;
-
-
+    background: #4c4c4c;
 }
 .btn-comprar:before {
     content: "";
     position: absolute;
     z-index: -1;
-    left: 0;
-    right: 100%;
+    left: 50%;
+    right: 50%;
     bottom: 0;
-    background: #5e5e5e;
+    color:#cccccc;
+    background: white;
     height: 4px;
-    -webkit-transition-property: right;
-    transition-property: right;
+    -webkit-transition-property: left, right;
+    transition-property: left, right;
     -webkit-transition-duration: 0.3s;
     transition-duration: 0.3s;
     -webkit-transition-timing-function: ease-out;
@@ -74,6 +79,10 @@
 }
 .btn-comprar:hover:before, .btn-comprar:focus:before, .btn-comprar:active:before {
     right: 0;
+    left: 0;
+}
+.btn-comprar:hover{
+    color:#cccccc;
 }
 .product-stock{
     color: #74DF00;
@@ -152,8 +161,8 @@
 .service1-item > img {
     max-height: 90px;
     max-width: 100%;
-    width: 75px;
-    height: 80px;
+    width: 61px;
+    height: 65px;
     opacity: 0.6;
     transition: all .2s ease-in;
     -o-transition: all .2s ease-in;
@@ -171,9 +180,15 @@
 }
 
 .service-image-left > center > img,.service-image-right > center > img{
-    max-height: 650px;
+    max-height: 530px;
     max-width:500px;
     height:auto;
+}
+.descripcionProduct{
+    font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.hrPersonalizado{
+    border-top:2px solid rgb(29, 29, 29)
 }
 /*ESTILO OPCIONES COLOR N PRODUCTOS*/
 .colores{
@@ -200,23 +215,23 @@
 .textColor{
     font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 20px;
-    padding-top: 1em;
+    padding-bottom: 3em;
 }
 .divColor{
     display: inherit;
 }
 .caja {
     position: relative; /*Para poder ubicar la info dentro de la caja*/
-    margin: 15px ;
+    margin: 1em ;
 }
 .info {
     position: absolute; /*Info sobre la imagen*/
-    top: 5%;
-    left: 10%; /*Desplazamos a partir de la esquina superior izquierda*/
-    zoom: 1;
+    top: 13%;
+    left: 18%; /*Desplazamos a partir de la esquina superior izquierda*/
+    zoom: 2;
     filter: alpha(opacity=0); /*Opacidad Para IE */
     opacity: 0;
-    padding: 5px;
+    padding: 10px;
     color: white;
     background: black;
     -moz-transition:all ease .8s;
@@ -224,8 +239,8 @@
     transition:all ease .8s;
 }
 .caja:hover .info {
-    filter: alpha(opacity=80);
-    opacity: .8;
+    filter: alpha(opacity=100);
+    opacity: 100;
 }
 
 /*APARTADO MAS PRODUCTOS*/
@@ -234,8 +249,29 @@
     font-weight: bold;
 }
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover{
-    background-color: #EAEAEA;
-    color:#382f30;
+    background-color: transparent;
+    color:#DCD3D4;
+    border: 2px solid rgb(29, 29, 29);
+    border-bottom: 4px solid #DF0101;
+}
+.nav > li > a, .nav > li > a{
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    position: relative;
+    overflow: hidden;
+
+}
+.nav > li > a:focus, .nav > li > a:hover{
+    background-color: transparent;
+    border-color: transparent;
+    color:#DCD3D4;
+    border-bottom: 4px solid #740606;
+
+}
+#myTab {
+    border-bottom: 2px solid rgb(29, 29, 29);
 }
 .otrosProductos{
     margin-top: 2em;
@@ -249,10 +285,9 @@
     width: 15em;
 }
 .btn-comprarMin{
-    color:white;
-    background-color: black;
+    color:black;
+    background-color: white;
 }
 .btn-comprarMin:hover{
-    color:white;
-
+    color:black;
 }

@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title></title>
+        <script type="text/javascript">
+            var picPaths = ["Render0000.jpg",
+                            "Render0001.jpg",
+                            "Render0002.jpg",
+                            "Render0003.jpg",
+                            "Render0004.jpg",
+                            "Render0005.jpg",
+                            "Render0006.jpg",
+                            "Render0007.jpg",
+                            "Render0008.jpg",
+                            "Render0009.jpg",
+                            "Render0010.jpg",
+                            "Render0011.jpg",
+                            "Render0012.jpg",
+                            "Render0013.jpg",
+                            "Render0014.jpg",
+                            "Render0015.jpg",
+                            "Render0016.jpg",
+                            "Render0017.jpg",
+                            "Render0018.jpg",
+                            "Render0019.jpg",
+                            "Render0020.jpg",
+                            "Render0021.jpg",
+                            "Render0022.jpg",
+                            "Render0023.jpg",
+                            "Render0024.jpg",
+                            "Render0025.jpg",
+                            "Render0026.jpg",
+                            "Render0027.jpg",
+                            "Render0028.jpg",
+                            "Render0029.jpg",
+                            "Render0030.jpg",
+                            "Render0031.jpg",
+                            "Render0032.jpg",
+                            "Render0033.jpg",
+                            "Render0034.jpg",
+                            "Render0035.jpg",
+                            "Render0036.jpg",
+                            "Render0037.jpg",
+                            "Render0038.jpg",
+                            "Render0039.jpg",
+                            "Render0040.jpg",
+                            "Render0041.jpg",
+                            "Render0042.jpg",
+                            "Render0043.jpg",
+							"Render0044.jpg"];
+            var curPic = -1;
+            //preload the images for smooth animation
+            var imgO = new Array();
+            for(i=0; i < picPaths.length; i++) {
+                imgO[i] = new Image();
+                imgO[i].src = picPaths[i];
+            }
+
+            function swapImage() {
+                curPic = (++curPic > picPaths.length-1)? 0 : curPic;
+                imgCont.src = imgO[curPic].src;
+                setTimeout(swapImage,33);
+            }
+
+            window.onload=function() {
+                imgCont = document.getElementById('imgBanner');
+                swapImage();
+            }
+        </script>
+
+    </head>
+    <body>
+
+        <div>
+            <img id="imgBanner" src="" alt="" width="720" />
+        </div>
+
+    </body>
+</html>
