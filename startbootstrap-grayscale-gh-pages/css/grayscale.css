@@ -664,6 +664,27 @@ a:focus {
 #contacto{
   margin-bottom: 2em;
 }
+.btnContactar{
+  margin-top: 1em;
+  background-color: #740606;
+  border-color: #740606;
+}
+.btnContactar:hover {
+  background-color: #e40613;
+  transition: all 200ms linear;
+
+
+}
+.btnContactar img{
+  width: 2.5em;
+  margin-left: 12px;
+  opacity: 0;
+}
+.btnContactar:hover img{
+  transition:  all 1s ease 0s;
+  opacity: 10;
+}
+
 
 /**** PIE DE PAGINA ****/
 .pie {
