@@ -1,9 +1,11 @@
 var producto='';
-
-$(function() {
+var arrayFotos=new Array();
+var curPic = -1;
+var imgO = new Array();
+$(document).ready(function() {
     var url= window.location.href;
     producto=url.split('?')[1];
-    
+    imgCont = $('#item-display');
     $('.service1-item img').on('click',function(){
         img=$(this).attr('src');
         cambiarFoto(img);
@@ -93,9 +95,34 @@ $(function() {
             });
             break;
     }
-
+     arrayFotos = ["img/3D/"+producto+"/Render0000.jpg",
+        "img/3D/"+producto+"/Render0001.jpg","img/3D/"+producto+"/Render0002.jpg","img/3D/"+producto+"/Render0003.jpg","img/3D/"+producto+"/Render0004.jpg","img/3D/"+producto+"/Render0005.jpg","img/3D/"+producto+"/Render0006.jpg","img/3D/"+producto+"/Render0007.jpg",
+        "img/3D/"+producto+"/Render0008.jpg","img/3D/"+producto+"/Render0009.jpg","img/3D/"+producto+"/Render0010.jpg","img/3D/"+producto+"/Render0011.jpg","img/3D/"+producto+"/Render0012.jpg","img/3D/"+producto+"/Render0013.jpg","img/3D/"+producto+"/Render0014.jpg",
+        "img/3D/"+producto+"/Render0015.jpg","img/3D/"+producto+"/Render0016.jpg","img/3D/"+producto+"/Render0017.jpg","img/3D/"+producto+"/Render0018.jpg","img/3D/"+producto+"/Render0019.jpg","img/3D/"+producto+"/Render0020.jpg","img/3D/"+producto+"/Render0021.jpg",
+        "img/3D/"+producto+"/Render0022.jpg","img/3D/"+producto+"/Render0023.jpg","img/3D/"+producto+"/Render0024.jpg","img/3D/"+producto+"/Render0025.jpg","img/3D/"+producto+"/Render0026.jpg","img/3D/"+producto+"/Render0027.jpg","img/3D/"+producto+"/Render0028.jpg",
+        "img/3D/"+producto+"/Render0029.jpg","img/3D/"+producto+"/Render0030.jpg","img/3D/"+producto+"/Render0031.jpg","img/3D/"+producto+"/Render0032.jpg","img/3D/"+producto+"/Render0033.jpg","img/3D/"+producto+"/Render0034.jpg","img/3D/"+producto+"/Render0035.jpg",
+        "img/3D/"+producto+"/Render0036.jpg","img/3D/"+producto+"/Render0037.jpg","img/3D/"+producto+"/Render0038.jpg","img/3D/"+producto+"/Render0039.jpg","img/3D/"+producto+"/Render0040.jpg","img/3D/"+producto+"/Render0041.jpg","img/3D/"+producto+"/Render0042.jpg",
+        "img/3D/"+producto+"/Render0043.jpg","img/3D/"+producto+"/Render0044.jpg"];
+    for(i=0; i < arrayFotos.length; i++) {
+        imgO[i] = new Image();
+        imgO[i].src=arrayFotos[i];
+    }
+    setTimeout(swapImage,33);
+    setInterval('swapImage()',15000);
 
 });
+
+//preload the images for smooth animation
+
+
+function swapImage() {
+    curPic = (++curPic > arrayFotos.length-1)? 0 : curPic;
+    var src=imgO[curPic].src;
+    $('#item-display').attr('src',src);
+    setTimeout(swapImage,33);
+
+  
+}
 
 function cambiarFoto(img){
     $('.fotoPrincipal').attr('src',img);
