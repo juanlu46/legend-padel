@@ -112,9 +112,6 @@ $(document).ready(function() {
 
 });
 
-//preload the images for smooth animation
-
-
 function swapImage() {
     curPic = (++curPic > arrayFotos.length-1)? 0 : curPic;
     var src=imgO[curPic].src;
