@@ -108,7 +108,7 @@ $(document).ready(function() {
         imgO[i].src=arrayFotos[i];
     }
     setTimeout(swapImage,33);
-    setInterval('swapImage()',15000);
+  
 
 });
 
