@@ -1,3 +1,4 @@
+
 // Ajustar Navbar
 function ajustarNavBar() {
     if ($(".navbar").offset().top > 50) {
