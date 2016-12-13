@@ -53,8 +53,15 @@
 .product-price span{
     font-size: 22px;
     color:#740606;
-
 }
+.product-price p{
+     margin-bottom: 1em;
+}
+
+.product-price p, .descuentoAnimado{
+    display: inline-block;
+}
+
 .btn-comprar {
     display: inline-block;
     vertical-align: middle;
