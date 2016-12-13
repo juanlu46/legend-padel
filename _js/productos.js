@@ -112,7 +112,7 @@ $(function() {
                 localStorage.setItem('producto',cadProduc);
             }
             var sParametro="datos="+cad;
-            $.ajax({url: 'carrito.php', data: sParametro,success:function(){alert('Producto añadido')}});
+            $.ajax({url: '_carrito.php', data: sParametro,success:function(){alert('Producto añadido')}});
        
         }
     });
