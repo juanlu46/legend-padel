@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="css/productos.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
 </head>
 <body>
 <div class="container-fluid">
@@ -46,8 +47,8 @@
                     </div>
                         <div class="product-cant form-group row">
                             <p for="input-cant" class=" col-xs-2 col-md-2 col-lg-2 col-form-label">Cantidad</p>
-                            <div class="col-xs-5 col-md-5 col-lg-5">
-                                <input class="form-control" type="number" value="1" id="input-cant">
+                            <div class="col-xs-2 col-md-2 col-lg-2">
+                                <input class="form-control" type="number" value="1" min="1"  id="input-cant">
                             </div>
                     </div>
                     <div class="product-price"></div>
@@ -86,7 +87,7 @@
                             <div class="row otrosProductos">
                                 <div class=" col-md-3 col-lg-3 col-xs-3 masProductosInvictus">
                                     <img class="thumbnail" src="img/imgProduct/invictus1.jpg" alt="incitus">
-                                    <h5 class="textoDescripcion">Invictus 2.0 <small>€239</small></h5>
+                                    <h5 class="textoDescripcion">Invictus 2.0 <small>€191,20</small></h5>
                                     <p class="textoDescripcion">Pala en forma redonda con un grosor de 38 milímetros. Su paricularidad reside en un doble tubular 100 % de Kevlar, tejido de alta tecnología...<a href="productos.html?invictus"> Leer más</a></p>
                                     <center>
                                         <button type="button" class="btn btn-comprarMin">
@@ -96,8 +97,8 @@
                                 </div>
                                 <div class="col-md-3 col-lg-3 col-xs-3 masProductosRedSkin" >
                                     <img class="thumbnail" src="img/imgProduct/redskin1.jpg" alt="redSkin">
-                                    <h5 class="textoDescripcion">Red Skin <small>€219</small></h5>
-                                    <p class="textoDescripcion">Pala en forma redonda con un grosor de 38 milímetros. Su paricularidad reside en un doble tubular 100 % de Kevlar, tejido de alta tecnología...<a href="productos.html?redSkin">Leer más</a></p>
+                                    <h5 class="textoDescripcion">Red Skin <small>€175,20</small></h5>
+                                    <p class="textoDescripcion">Pala en forma redonda con un grosor de 38 milímetros. Su paricularidad reside en un doble tubular 100 % de Kevlar, tejido de alta tecnología...<a href="productos.html?redskin">Leer más</a></p>
                                     <div class="btn-group-xs">
                                         <center>
                                         <button type="button" class="btn btn-comprarMin">
@@ -108,7 +109,7 @@
                                 </div>
                                 <div class="col-md-3 col-lg-3 col-xs-3 masProductosTargetBlack">
                                     <img class="thumbnail" src="img/imgProduct/targetBlack1.jpg" alt="targetBlack">
-                                    <h5 class="textoDescripcion">Target Black <small>€189</small></h5>
+                                    <h5 class="textoDescripcion">Target Black <small>€151,20</small></h5>
                                     <p class="textoDescripcion">Pala en forma redonda con un grosor de 38 milímetros. Pala de fibra de vidrio que incorpora nuestra tecnología revolucionaria como es el... <a href="productos.html?target">Leer más</a></p>
                                      <center>
                                          <button type="button" class="btn btn-comprarMin">
@@ -118,7 +119,7 @@
                                 </div>
                                 <div class="col-md-3 col-lg-3 col-xs-3 masproductostargetwhite">
                                     <img class="thumbnail" src="img/imgProduct/targetwhite1.jpg" alt="targetWhite">
-                                    <h5 class="textoDescripcion">Target White <small>€189</small></h5>
+                                    <h5 class="textoDescripcion">Target White <small>€151,20</small></h5>
                                     <p class="textoDescripcion">Pala en forma redonda con un grosor de 38 milímetros. Pala de fibra de vidrio que incorpora nuestra tecnología revolucionaria como es el... <a href="productos.html?target">Leer más</a></p>
                                      <center>
                                          <button type="button" class="btn btn-comprarMin">
@@ -128,7 +129,7 @@
                                 </div>
                                 <div class="col-md-3 col-lg-3 col-xs-3 masProductosSniper">
                                     <img class="thumbnail" src="img/imgProduct/sniper1.jpg" alt="sniper">
-                                    <h5 class="textoDescripcion">Sniper <small>€169</small></h5>
+                                    <h5 class="textoDescripcion">Sniper <small>€135,20</small></h5>
                                     <p class="textoDescripcion">Pala en forma redonda con un grosor de 38 milímetros. Este pala cuanta con unas hendiduras que rodean a su corazón triangular, estas... <a href="productos.html?sniper">Leer más</a></p>
                                      <center>
                                          <button type="button" class="btn btn-comprarMin">
@@ -148,7 +149,7 @@
     </div>
 </div>
 <script src="terceros/jquery/jquery.min.js"></script>
-<script src="js/product.js"></script>
 <script src="terceros/bootstrap/js/bootstrap.min.js"></script>
+<script src="js/product.js"></script>
 </body>
 </html>

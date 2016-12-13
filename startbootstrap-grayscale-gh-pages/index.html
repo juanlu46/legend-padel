@@ -25,7 +25,6 @@
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
-
     <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -42,6 +41,12 @@
                 <ul class="nav navbar-nav">
                     <li class="hidden">
                         <a href="#page-top"></a>
+                    </li>
+                    <li class="btn-identificate">
+                        <a class="page-scroll" href="#">Identifícate</a>
+                    </li>
+                    <li>
+                        <div class="vertical-divider"></div>
                     </li>
                     <li>
                         <a class="page-scroll" href="#tienda">Tienda</a>
@@ -88,7 +93,7 @@
                     <div class="productos row">
                         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                             <div class="item">
-                                <div class="precio">239,00 €</div>
+                                <div class="precio">191,20 €</div>
                                 <div class="hovereffect">
                                     <img class="img-responsive" src="img/imgProduct/invictus1.jpg" alt="pala 1">
                                     <div class="overlay">
@@ -105,7 +110,7 @@
                         </div>
                         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                             <div class="item">
-                                <div class="precio">219,00 €</div>
+                                <div class="precio">175,20 €</div>
                                 <div class="hovereffect">
                                     <img class="img-responsive" src="img/imgProduct/redskin1.jpg" alt="pala 2">
                                     <div class="overlay">
@@ -123,7 +128,7 @@
 
                         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                             <div class="item">
-                                <div class="precio">189,00 €</div>
+                                <div class="precio">151,20 €</div>
                                 <div class="hovereffect">
                                     <img class="img-responsive" src="img/imgProduct/targetBlack1.jpg" alt="pala 3">
                                     <div class="overlay">
@@ -141,7 +146,7 @@
 
                         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                             <div class="item">
-                                <div class="precio">169,00 €</div>
+                                <div class="precio">135,20 €</div>
                                 <div class="hovereffect">
                                     <img class="img-responsive" src="img/imgProduct/sniper1.jpg" alt="pala 4">
                                     <div class="overlay">
@@ -379,7 +384,30 @@
             </div>
         </div>
     </footer>
+
 <div class="capa-productos"></div>
+    <div class="desenfoque"></div>
+    <div class="ContentLogin">
+    <div class="card card-container">
+        <img id="profile-img" class="profile-img-card" src="img/user.svg" />
+        <p id="profile-name" class="profile-name-card"></p>
+        <form class="form-signin">
+            <span id="reauth-email" class="reauth-email"></span>
+            <input type="email" id="inputEmail" class="form-control" placeholder="Email" required >
+            <input type="password" id="inputPassword" class="form-control" placeholder="Contraseña" required>
+            <div id="remember" class="checkbox">
+                <label>
+                    <input type="checkbox" id="chkRecordar" value="Recordar"> Recordar
+                </label>
+            </div>
+            <button class="btn btn-login btn-lg btn-primary btn-block btn-signin" type="submit">Identificate</button>
+        </form><!-- /form -->
+        <a href="#" class="forgot-password">
+            ¿Has olvidado tu contraseña?
+        </a>
+    </div>
+        <div class="alert mensaje" role="alert"></div>
+    </div>
     <!-- Librerias y plugins JavaScript-->
     <script src="terceros/jquery/jquery.min.js"></script>
     <script src="terceros/bootstrap/js/bootstrap.min.js"></script>

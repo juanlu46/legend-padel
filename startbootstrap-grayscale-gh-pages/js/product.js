@@ -21,7 +21,7 @@ $(document).ready(function() {
             document.title='Invictus 2.0';
             $('#item-display').attr('src','img/imgProduct/invictus1.jpg');
             $('.product-title h2').text('INVICTUS 2.0');
-            $('.product-price').html('<p>Precio: 239,00 €</p><br><p>Oferta: 191.20 €  <span>20% DESCUENTO<span> </P>');
+            $('.product-price').html('<p>Precio: <del>239,00 €</del></p><br><p>Oferta: <div class="descuentoAnimado">191.20 €</div>  <span>20% DESCUENTO<span> </P>');
             $('.tituloProduct').text('INVICTUS 2.0');
             cargarFotosDefecto();
             $('.descripcionProduct').html(' <h4 class="textoDescripcion">Descripción</h4><p>Pala en forma redonda con un grosor de 38 milímetros. Es la evolución tecnológica más puntera de nuestra marca en el que se dedicado más de un año en su desarrollo, utilizando los materiales de mayor calidad del mercado además de introduciendo una nueva tecnología revolucionaria como es el “<i>Diaxagonal solid Frame</i>”, un doble tubular macizo que estructuralmente hace prácticamente irrompible a la pala en la zonas más críticas, esto unido al núcleo de EVA de alta densidad especialmente desarrollado para conjugar lo más certeramente los materiales utilizados en toda la estructura del pala hacen que la pala no genere ningún tipo de vibración que pudiera ocasionar lesiones asi como hacernos gozar y aprovechar todas las capacidades de lo que seguramente sea la mejor pala del mercado.</p><p>Una de sus características más singulares es su sonido en el golpeo, su manejabilidad con un control de bola exquisito con una potencia precisa, todo proporcionado en gran parte es su peso perfectamente  equilibrado que oscila de 360 gr a 375gr.</p><h4 class="textoDescripcion">Características técnicas</h4> <dl class="textoDescripcion"><dt>Plano</dt><dd>Carbón Extreme  + fiberglass</dd><dt>Nucleo</dt><dd>HIPER SOFT EVA alta densidad Legend</dd><dt>Tubular</dt><dd>Diaxagonal Solid frame</dd><dt>Taladros</dt><dd>Control holes + ativibration system</dd></dl><h4 class="textoDescripcion">Diseño</h4><p>Diseñada por uno de los estudios de diseño mas importantes en la industria del deporte, su espectacularidad visual hace atractiva a la pala en el primer abrir y cerrar de ojos, integrando el diseño en perfecta armonía cromática con  el carbono visto</p>');
@@ -33,7 +33,7 @@ $(document).ready(function() {
             document.title='Red Skin';
             $('#item-display').attr('src','img/imgProduct/redskin1.jpg');
             $('.product-title h2').text('RED SKIN');
-            $('.product-price').html('<p>Precio: 219,00 €</p><br><p>Oferta: 175.20 €  <span>20% DESCUENTO<span> </P>');
+            $('.product-price').html('<p>Precio:<del> 219,00 €</del></p><br><p>Oferta: 175.20 €  <span>20% DESCUENTO<span> </P>');
             $('.tituloProduct').text('RED SKIN');
             cargarFotosDefecto();
             $('.descripcionProduct').html('<h4 class="textoDescripcion descripcionCompleta">Descripción</h4><p class="textoDescripcion">Pala en forma redonda con un grosor de 38 milímetros. Su paricularidad reside en un doble tubular 100% de Kevlar, tejido de alta tecnología utilizado en la industria aeronáutica y sobre todo militar, los planos de la pala están compuesto de carbono 3k con un núcleo EVA media de alta densidad, esta combinación de materiales evita cualquier tipo  de vibración que pudiera ocasionar lesiones asi como hacernos gozar y aprovechar todas las capacidades de lo que seguramente se una de la mejores palas del mercado.</p> <p class="textoDescripcion">Este modelo nos brinda un juego de control de bola exquisito con una potencia precisa, todo proporcionado en gran parte es su peso perfectamente  equilibrado que oscila de 360 gr a 375gr. </p><H4 class="textoDescripcion caracteristicastecnicas">Características técnicas</H4><dl class="textoDescripcion"> <dt>Plano</dt> <dd>Carbón Extreme  + fiberglass</dd> <dt>Nucleo</dt> <dd>EVA HIPER Soft  Legend</dd> <dt>Tubular</dt> <dd>Kevlar frame  tech</dd><dt>Taladros</dt><dd>Control holes + ativibration system</dd></dl><H4 class="textoDescripcion diseño">Diseño</H4><p class="textoDescripcion">Diseñada por uno estudio de diseño más importantes en la industria del deporte, su espectacularidad visual hace atractiva a la pala en el primer abrir y cerrar de ojos, integrando el diseño en perfecta armonía con los colores y el carbono visto en la parte central del logo de nuestra marca.</p>');
@@ -45,7 +45,7 @@ $(document).ready(function() {
             document.title='Sniper';
             $('#item-display').attr('src','img/imgProduct/sniper1.jpg');
             $('.product-title h2').text('SNIPER');
-            $('.product-price').html('<p>Precio: 169,00 €</p><br><p>Oferta: 135.20 €  <span>20% DESCUENTO<span> </P>');
+            $('.product-price').html('<p>Precio:<del> 169,00 €</del></p><br><p>Oferta: 135.20 €  <span>20% DESCUENTO<span> </P>');
             $('.tituloProduct').text('SNIPER');
             cargarFotosDefecto();
             $('.descripcionProduct').html('  <H4 class="textoDescripcion">Descripción</H4><p>Pala en forma redonda con un grosor de 38 milímetros. Este pala cuanta con unas hendiduras que rodean a su corazón triangular, estas hendiduras no solo embellecen estéticamente a la pala sino que también son importantes a nivel estructural, la composición de la  pala es de fibra de vidrio con refuerzos de carbono en sus puntos más críticos, pala muy equilibrada para jugadores principiantes con un núcleo de FOAM. </p> <p> Su peso oscila de 355 gr a 365 gr. </p> <H4 class="textoDescripcion">Características técnicas</H4> <dl class="textoDescripcion"> <dt>Plano</dt> <dd>100% ECO-fiberglass</dd> <dt>Nucleo</dt> <dd>FOAM EXPLOSSION</dd> <dt>Tubular</dt> <dd>Tubular de fibra reforzado</dd> <dt>Taladros</dt> <dd>Control holes + ativibration system</dd> </dl> <H4 class="textoDescripcion">Diseño</H4><p>Diseñada por uno estudio de diseño más importantes en la industria del deporte, este modelo está concebido para principiantes, su color dorado unto con un diseño con líneas muy sencillas y elegantes hacen de ella una pala muy elegante en cualquier pista.</p>');
@@ -77,6 +77,13 @@ $(document).ready(function() {
             });
             break;
     }
+    $('.descuentoAnimado').hover(function(){
+        $(this).addClass('animated pulse');
+    }
+    ,function () {
+            $(this).removeClass('animated pulse');
+        });
+
 
 
 });
