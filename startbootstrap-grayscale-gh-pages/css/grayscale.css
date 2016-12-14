@@ -899,3 +899,7 @@ body {
 .forgot-password:focus{
   color: rgb(12, 97, 33);
 }
+/*CSS MENSAJE ERROR FORM LOGIN*/
+.mensaje{
+  display:none;
+}

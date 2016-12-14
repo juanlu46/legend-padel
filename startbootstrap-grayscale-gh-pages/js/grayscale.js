@@ -55,29 +55,43 @@ $('.navbar-collapse ul li a').click(function() {
 });
 
 function cargarFormIdent(){
+    $("#inputEmail").val("");
+    $("#inputPassword").val("");
     $('.ContentLogin').css('display','block');
     $('.desenfoque').css('display','block');
+    if(sessionStorage.getItem('lgdusr')!=null){
+        $("#inputEmail").val(sessionStorage.getItem('lgdusr'));
+    }
+    if(localstorage.getItem('lgdusr')!=null ){
+        $("#inputEmail").val(localstorage.getItem('lgdusr'));
+    }
+
 }
 /* JS DE LOGIN */
 function validarLogin(){
-    var expEmail = new RegExp("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$");
+    var expEmail = new RegExp("^[A-Za-z]*[_a-z0-9-]+(\.[_A-Z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$");
     var email=$("#inputEmail").val();
-    if(!expEmail.test(email)) {
-        $(".mensaje").addClass('alert-danger');
-        $(".mensaje").text('Email Incorrecto');
-    }
 
     //Verifica la existencia de una letra minuscula(?=.*[a-z])  y (?=.*[A-Z]) la de una letra en mayusculas.
 // Por ultimo la longitud la verificamos con los valores entre llaves {6,15}.
     var expPass = new RegExp("^(?=.*[a-z])(?=.*[A-Z]).{6,15}$");
     var password=$("#inputPassword").val();
-    if(!expPass.test(password)) {
+
+    if(!expEmail.test(email)) {
+        $(".mensaje").addClass('alert-danger');
+        $(".mensaje").text('Email Incorrecto');
+        $(".mensaje").css('display','block');
+    }
+
+   else if(!expPass.test(password)) {
             $(".mensaje").addClass('alert-danger');
             $(".mensaje").text('Contraseña Incorrecta');
+            $(".mensaje").css('display','block');
         }
-    if(!expEmail.test(email) && !expPass.test(password) ){
+    else if(!expEmail.test(email) && !expPass.test(password) ){
         $(".mensaje").addClass('alert-danger');
         $(".mensaje").text('Email y Contraseña Incorrectos');
+        $(".mensaje").css('display','block');
     }
     else{
         sessionStorage.setItem('lgdusr', email);
@@ -85,7 +99,7 @@ function validarLogin(){
         $('.desenfoque').css('display','none');
     }
 
-    if( $('#chkRecordar').prop('checked') ) {
+    if($('#chkRecordar').prop('checked')) {
         localstorage.setItem('lgdusr',email);
     }
 
