@@ -97,6 +97,9 @@ function validarLogin(){
         sessionStorage.setItem('lgdusr', email);
         $('.ContentLogin').css('display','none');
         $('.desenfoque').css('display','none');
+        var  arrayJson='{"email":"'+email+'",'+
+            '"password":"'+password+'"}';
+        $.ajax({url:"php/usuarios.php" ,data:"datos="+arrayJson,method:'POST'});
     }
 
     if($('#chkRecordar').prop('checked')) {
