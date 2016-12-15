@@ -49,6 +49,14 @@ a:focus {
     margin-top: 68px;
 }
 
+.vertical-divider{
+    margin-top: 1em;
+    margin-right: 1em;
+    border: solid 2px white;
+    height: 2em;
+
+}
+
 .logo-legend-txt{
     width: 93px;
     margin-top: -8px;
@@ -110,6 +118,7 @@ a:focus {
 .navbar-custom .nav li.active a:hover {
     color: white;
 }
+
 @media (min-width: 768px) {
     .navbar-custom {
         padding: 20px 0;

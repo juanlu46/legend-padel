@@ -5,7 +5,7 @@ function inicio(){
         if(sessionStorage.getItem("nusrcrt")!=null){
             sCarrito=sessionStorage.getItem("nusrcrt");
             $.get("../php/montarCarrito.php",sCarrito,function(oProductos){
-                $('#productos:first-child').before(oProductos);
+                $('#productos').find('tr').first().before(oProductos);
                 aplicarManejadoresBoton();
             },'html');
         }
@@ -19,7 +19,7 @@ function inicio(){
 }
 
 function noProductos(){
-    $('#productos:first-child').before('<tr> <td colspan="5" class="col-sm-8 col-md-6"> <h1 class="text-center">No hay productos en el carrito</h1> </td> </tr>');
+    $('#productos').find('tr').first().before('<tr> <td colspan="5" class="col-sm-8 col-md-6"> <h1 class="text-center">No hay productos en el carrito</h1> </td> </tr>');
 }
 
 function aplicarManejadoresBoton(){
@@ -44,6 +44,9 @@ function guardarCarrito(){
         sessionStorage.setItem("nusrcrt",sCarrito);
     }
     else{
-        //bbdd
+        sSesion=sessionStorage.getItem("lgdusr");
+        $.get('php/montarCarrito.php',sSesion,function(sProductos){
+            $('#productos').find('tr').first().before(sProductos);
+        });
     }
 }
