@@ -10,6 +10,7 @@ function ajustarNavBar() {
 
 $(window).scroll(ajustarNavBar);
 $(document).ready(function(){
+    actualizarCarrito();
     ajustarNavBar();
     $(".marca-titulo").addClass("animated zoomInDown");
     $(".es1").addClass("animated fadeInLeftBig");
@@ -55,15 +56,16 @@ $('.navbar-collapse ul li a').click(function() {
 });
 
 function cargarFormIdent(){
-    $("#inputEmail").val("");
+    var inputEmail=$("#inputEmail");
+    inputEmail.val("");
     $("#inputPassword").val("");
     $('.ContentLogin').css('display','block');
     $('.desenfoque').css('display','block');
     if(sessionStorage.getItem('lgdusr')!=null){
-        $("#inputEmail").val(sessionStorage.getItem('lgdusr'));
+        inputEmail.val(sessionStorage.getItem('lgdusr'));
     }
     if(localstorage.getItem('lgdusr')!=null ){
-        $("#inputEmail").val(localstorage.getItem('lgdusr'));
+        inputEmail.val(localstorage.getItem('lgdusr'));
     }
 
 }
@@ -71,6 +73,7 @@ function cargarFormIdent(){
 function validarLogin(){
     var expEmail = new RegExp("^[A-Za-z]*[_a-z0-9-]+(\.[_A-Z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$");
     var email=$("#inputEmail").val();
+    var mendaje=$(".mensaje");
 
     //Verifica la existencia de una letra minuscula(?=.*[a-z])  y (?=.*[A-Z]) la de una letra en mayusculas.
 // Por ultimo la longitud la verificamos con los valores entre llaves {6,15}.
@@ -78,20 +81,20 @@ function validarLogin(){
     var password=$("#inputPassword").val();
 
     if(!expEmail.test(email)) {
-        $(".mensaje").addClass('alert-danger');
-        $(".mensaje").text('Email Incorrecto');
-        $(".mensaje").css('display','block');
+        mendaje.addClass('alert-danger');
+        mendaje.text('Email Incorrecto');
+        mendaje.css('display','block');
     }
 
    else if(!expPass.test(password)) {
-            $(".mensaje").addClass('alert-danger');
-            $(".mensaje").text('Contraseña Incorrecta');
-            $(".mensaje").css('display','block');
+        mendaje.addClass('alert-danger');
+        mendaje.text('Contraseña Incorrecta');
+        mendaje.css('display','block');
         }
     else if(!expEmail.test(email) && !expPass.test(password) ){
-        $(".mensaje").addClass('alert-danger');
-        $(".mensaje").text('Email y Contraseña Incorrectos');
-        $(".mensaje").css('display','block');
+        mendaje.addClass('alert-danger');
+        mendaje.text('Email y Contraseña Incorrectos');
+        mendaje.css('display','block');
     }
     else{
         sessionStorage.setItem('lgdusr', email);
@@ -107,4 +110,32 @@ function validarLogin(){
     }
 
 
+}
+
+/* carrito */
+function actualizarCarrito(){
+
+    if(sessionStorage.getItem("lgdusr")==null){
+        if(sessionStorage.getItem("nusrcrt")!=null){
+            sCarrito=sessionStorage.getItem("nusrcrt");
+            oCarrito=JSON.parse(sCarrito);
+            var nElementos=0;
+            for(i=0; i<oCarrito.length;i++){
+                nElementos+=oCarrito[i][1];
+            }
+            $(".carrito_n_productos").text(nElementos);
+           $.get('php/montarNavCarrito.php',sCarrito,function(sProductos){
+                $('.dropdown-cart').find('li').first().before(sProductos);
+           });
+        }
+        else{
+            $('.dropdown-cart').find('li').first().before('<li class="text-center">El carrito está vacío</li>');
+        }
+    }
+    else{
+        sSesion=sessionStorage.getItem("lgdusr");
+        $.get('php/montarNavCarrito.php',sSesion,function(sProductos){
+            $('.dropdown-cart').find('li').first().before(sProductos);
+        });
+    }
 }
