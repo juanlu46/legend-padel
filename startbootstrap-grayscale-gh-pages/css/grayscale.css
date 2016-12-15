@@ -427,14 +427,14 @@ a:focus {
   margin: 20px auto;
 }
 .tecno li{
-  width: 266px;
-  height: 542px;
+  width: 296px;
+  height: 523px;
   overflow: hidden;
   position: relative;
   float: left;
   border-radius: 17px 17px 0 0;
   transition: all 300ms linear;
-  margin-right: 30px;
+  margin-right: 60px;
 }
 .tec-icon{
   position: absolute;
