@@ -1,0 +1,22 @@
+body{
+    background-color: black;
+    font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.logo img{
+    margin-top: 2em;
+    width: 20em;
+}
+.titulo{
+    margin-top: 2em;
+    margin-bottom: 1em;
+    color: white;
+
+}
+.panelForm{
+    background: rgba(0, 0, 0, 0.04);
+    border-color:rgba(255, 255, 255, 0.3);
+    border: solid 4px;
+}
+.panelForm label{
+    color: white;
+}
