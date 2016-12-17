@@ -1,4 +1,3 @@
-
 // Ajustar Navbar
 function ajustarNavBar() {
     if ($(".navbar").offset().top > 50) {
@@ -148,7 +147,20 @@ function validarLogin(){
         $('.desenfoque').css('display','none');
         var  arrayJson='{"email":"'+email+'",'+
             '"password":"'+password+'"}';
-        $.ajax({url:"php/usuarios.php" ,data:"datos="+arrayJson,method:'POST'});
+
+        $.ajax({
+            url: "php/usuarios.php",
+            type: 'POST',
+            data:"datos="+arrayJson,
+            dataType: 'text',
+            success: function(data) {
+                mensaje.addClass('alert-success');
+                mensaje.text(data);
+                mensaje.css('display','block');
+                addIconUsuarioMenu();
+            }
+        });
+
     }
 
     if($('#chkRecordar').prop('checked')) {
@@ -157,7 +169,19 @@ function validarLogin(){
 
 
 }
-
+/*Añadir opciones usuario ya logueado en elmenu*/
+function addIconUsuarioMenu() {
+    $('.btn-identificate').addClass('dropdown menu-usuario');
+    $('.btn-identificate').removeClass('btn-identificate');
+    $('aaIdentificate').remove();
+    $('.nombre_usuario').text(sessionStorage.getItem('lgdusr'));
+    $('.menu-usuario').html('<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">+' +
+        '<span class="glyphicon glyphicon-user"></span> <span class="nombre_usuario"></span><span class="caret"></span></a>' +
+        '<ul class="dropdown-menu dropdown-cart" role="menu">' +
+        '<li><a class="text-center" href="#">Mi cuenta</a></li>' +
+        '<li class="divider"></li><li><a class="text-center" href="#">Mis pedidos</a></li>' +
+        '<li class="divider"></li> <li><a class="text-center" href="#">Desconexión</a></li></ul>');
+}
 /* carrito */
 function actualizarCarrito(){
 

@@ -1,9 +1,5 @@
 $(document).ready(function(){
     $('.btn-crearCuenta').on('click',validarForm);
-
-
-
-
 });
 
 function validarForm(){
@@ -79,13 +75,15 @@ function validarForm(){
             data:"datos="+sJson,
             dataType: 'text',
             success: function(data) {
+                sessionStorage.setItem('lgdusr', email);
                mensaje.addClass('alert-success');
                 mensaje.text(data);
                 mensaje.css('display','block');
                 setTimeout("redirrecionar()", 5000);
             }
         });
-        //limpiarCampos();
+         limpiarCampos();
+
     }
 
 }

@@ -29,20 +29,17 @@ else{
             echo $row_cnt;
             if($row_cnt==0)
                 Echo "Datos incorrectos, introduzca un usuario válido";
-            //$mensaje .= "Datos incorrectos, introduzca un usuario válido</div>\").alert();";
         }
         else {
             $sql = "INSERT INTO usuarios (nombre, apellidos, dni, email, contraseña) VALUES ('".$ousuario->nombre."','".$ousuario->apellidos."','".$ousuario->dni."','".$ousuario->email."','".$ousuario->password."')";
             // $mensaje = "$(\"<div  class='alert alert-success' role='alert' title='Alta usuario'>";
              if ($mysqli->query($sql))
                 echo "Se ha dado de alta con éxito el usuario";
-            //$mensaje .= "Se ha dado de alta con éxito el usuario" . "</div>\").alert();";
             else
                 echo "Se ha producido un error, este usuario ya existe";
-            // $mensaje .= "Se ha producido un error: " . $mySQLi->errno . "-" . $mySQLi->error . "</div>\").alert();";
         }
         } else {
-            echo '<p>Correo no valido</p>';
+            echo '<p>Email no valido</p>';
         }
 
 
