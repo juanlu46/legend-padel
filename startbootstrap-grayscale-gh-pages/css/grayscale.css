@@ -809,6 +809,11 @@ body {
   left:50%;
   margin-left: -10em;
   z-index: 13;
+  color: black;
+}
+.ContentLogin p{
+  font-size: 1em;
+  margin-top: 1em;
 }
 #remember{
   color: black;
@@ -816,6 +821,7 @@ body {
 .card-container.card {
   max-width: 350px;
   padding: 40px 40px;
+  padding-bottom: 10px;
 }
 
 .btn-login {

@@ -1,5 +1,5 @@
 <?php
-header('Content-Type: application/javascript');
+header('Content-type: text/plain');
 header('Cache-Control: no-cache, must-revalidate');
 header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
 $mysqli = new mysqli("localhost", "root", "", "legendpadel");
@@ -14,7 +14,8 @@ else{
         $susuario = "";
     }
     $ousuario=json_decode($susuario);
-    if(!isset($ousuario->dni)){//Si no contiene dni, es un login no un registro
+
+    if(!empty($ousuario->dni)){//Si no contiene dni, es un login no un registro
         //primero validaremos los datos de entrada
 
         $expEmail ="/^[A-Za-z]*[_a-z0-9-]+(\.[_A-Z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/";
@@ -31,17 +32,17 @@ else{
             //$mensaje .= "Datos incorrectos, introduzca un usuario válido</div>\").alert();";
         }
         else {
-            $sql = "INSERT INTO 'usuarios' ('nombre', 'apellidos', 'dni', 'email', 'contraseña') VALUES (" . $ousuario->nombre . ", " . $ousuario->apellidos . ", " . $ousuario->dni . ", " . $ousuario->email . ", " . $ousuario->password . ")";
+            $sql = "INSERT INTO usuarios (nombre, apellidos, dni, email, contraseña) VALUES ('".$ousuario->nombre."','".$ousuario->apellidos."','".$ousuario->dni."','".$ousuario->email."','".$ousuario->password."')";
             // $mensaje = "$(\"<div  class='alert alert-success' role='alert' title='Alta usuario'>";
-            if ($mysqli->query($sql))
+             if ($mysqli->query($sql))
                 echo "Se ha dado de alta con éxito el usuario";
             //$mensaje .= "Se ha dado de alta con éxito el usuario" . "</div>\").alert();";
             else
-                echo "Se ha producido un error: ";
+                echo "Se ha producido un error, este usuario ya existe";
             // $mensaje .= "Se ha producido un error: " . $mySQLi->errno . "-" . $mySQLi->error . "</div>\").alert();";
         }
         } else {
-            echo '<p>$correo no valido</p>';
+            echo '<p>Correo no valido</p>';
         }
 
 

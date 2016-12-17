@@ -13,10 +13,10 @@ body{
 
 }
 .panelForm{
-    background: rgba(0, 0, 0, 0.04);
-    border-color:rgba(255, 255, 255, 0.3);
-    border: solid 4px;
+    background-color: #D7D5D4;
+    border: solid 0px;
+    padding: 0.5em;
 }
-.panelForm label{
-    color: white;
+.mensaje{
+    display: none;
 }
