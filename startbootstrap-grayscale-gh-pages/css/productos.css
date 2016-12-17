@@ -274,6 +274,8 @@
 }
 .divColor{
     display: inherit;
+    background-color: #4c4c4c;
+    border-radius: 6px;
 }
 .caja {
     position: relative; /*Para poder ubicar la info dentro de la caja*/
@@ -288,7 +290,6 @@
     opacity: 0;
     padding: 10px;
     color: white;
-    background: black;
     -moz-transition:all ease .8s;
     -webkit-transition:all ease .8s ;
     transition:all ease .8s;

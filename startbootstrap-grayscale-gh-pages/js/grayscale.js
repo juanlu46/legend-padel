@@ -8,6 +8,43 @@ function ajustarNavBar() {
     }
 }
 
+$(document).on('click', '.btn-select', function (e) {
+    e.preventDefault();
+    var ul = $(this).find("ul");
+    if ($(this).hasClass("active")) {
+        if (ul.find("li").is(e.target)) {
+            var target = $(e.target);
+            target.addClass("selected").siblings().removeClass("selected");
+            var value = target.html();
+            $(this).find(".btn-select-input").val(value);
+            $(this).find(".btn-select-value").html(value);
+            var dataID=$(this).find(".btn-select-value").data("id");
+            if(value=="BLANCA") {
+                $('.item img[data-id="' + dataID + '"]').attr('src', 'img/imgProduct/targetwhite1.jpg');
+            }
+            else {
+                $('.item img[data-id="' + dataID + '"]').attr('src', 'img/imgProduct/targetBlack1.jpg');
+            }
+        }
+        ul.hide();
+        $(this).removeClass("active");
+    }
+    else {
+        $('.btn-select').not(this).each(function () {
+            $(this).removeClass("active").find("ul").hide();
+        });
+        ul.slideDown(300);
+        $(this).addClass("active");
+    }
+});
+
+$(document).on('click', function (e) {
+    var target = $(e.target).closest(".btn-select");
+    if (!target.length) {
+        $(".btn-select").removeClass("active").find("ul").hide();
+    }
+});
+
 $(window).scroll(ajustarNavBar);
 $(document).ready(function(){
     actualizarCarrito();
@@ -15,6 +52,15 @@ $(document).ready(function(){
     $(".marca-titulo").addClass("animated zoomInDown");
     $(".es1").addClass("animated fadeInLeftBig");
     $(".es2").css('visibility','visible').addClass("animated fadeInRightBig");
+    //TIENDA
+    $(".btn-select").each(function (e) {
+        var value = $(this).find("ul li.selected").html();
+        if (value != undefined) {
+            $(this).find(".btn-select-input").val(value);
+            $(this).find(".btn-select-value").html(value);
+        }
+    });
+    cargarEventosBotonCarrito();
     /*** copiar cuando se cargue quienes somos ***/
     (function(d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0];
@@ -128,9 +174,6 @@ function actualizarCarrito(){
                 $('.dropdown-cart').find('li').first().before(sProductos);
            });
         }
-        else{
-            $('.dropdown-cart').find('li').first().before('<li class="text-center">El carrito está vacío</li>');
-        }
     }
     else{
         sSesion=sessionStorage.getItem("lgdusr");
@@ -139,3 +182,39 @@ function actualizarCarrito(){
         });
     }
 }
+
+function cargarEventosBotonCarrito(){
+    var oProducto;
+    $(".item").each(function(){
+        var item =$(this);
+        oBoton=item.find('.item-pie button');
+        oBoton.on('click',function(boton){
+            oProducto=$('<li class="item_carrito"><span class="item"><span class="item-left"><img src="" alt="articulo_carrito"/><span class="item-info"><span class="item_cantidad">1x</span><span class="item_name"></span><span class="item_precio"></span></span></span><span class="item-right"><button class="btn btn-xs btn-danger pull-right">x</button></span></span></li>');
+            var bEncontrado=false;
+            var oItemCarrito;
+            var oCarrito=$('.dropdown-cart');
+            oCarrito.find('.item_carrito').each(function(){
+                if($(this).find('img').attr('src')==item.find('.hovereffect img').first().attr('src')) {
+                    bEncontrado = true;
+                    oItemCarrito=$(this);
+                }
+            });
+            if(bEncontrado){
+                alert("encontrado");
+                var oItemCantidad=oItemCarrito.find('.item_cantidad');
+                oItemCantidad.text((parseInt(oItemCantidad.text().replace('x',''))+1)+"x");
+                var oItemPrecio=oItemCarrito.find('.item_precio');
+                oItemPrecio.text((parseFloat(oItemPrecio.text().replace(',','.').replace(' €',''))+parseFloat(item.find('.precio').text().replace(',','.').replace(' €',''))).toFixed(2)+" €");
+            }
+            else{
+                alert("no encontrado");
+                oProducto.find('.item_name').text(item.find('.item-pie a').first().text());
+                oProducto.find('.item_precio').text(item.find('.precio').text());
+                oProducto.find('img').attr('src',item.find('.hovereffect img').first().attr('src'));
+                oCarrito.append(oProducto);
+            }
+            //GUARDAR CARRITO DONDE CORRESPONDA, SESSION O BBDD
+        });
+    });
+}
+
