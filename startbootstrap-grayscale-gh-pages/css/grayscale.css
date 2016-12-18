@@ -889,7 +889,7 @@ body {
   display: none;
   width: 20em;
   position: fixed;
-  top: 5em;
+  top: 2em;
   left:50%;
   margin-left: -10em;
   z-index: 13;
@@ -906,6 +906,7 @@ body {
   max-width: 350px;
   padding: 40px 40px;
   padding-bottom: 10px;
+  height: 34em;
 }
 
 .btn-login {

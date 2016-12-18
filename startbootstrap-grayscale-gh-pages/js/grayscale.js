@@ -46,6 +46,7 @@ $(document).on('click', function (e) {
 
 $(window).scroll(ajustarNavBar);
 $(document).ready(function(){
+    addIconUsuarioMenu();
     actualizarCarrito();
     ajustarNavBar();
     $(".marca-titulo").addClass("animated zoomInDown");
@@ -124,27 +125,22 @@ function validarLogin(){
 // Por ultimo la longitud la verificamos con los valores entre llaves {6,15}.
     var expPass = new RegExp("^(?=.*[a-z])(?=.*[A-Z]).{6,15}$");
     var password=$("#inputPassword").val();
-
-    if(!expEmail.test(email)) {
+    if(!expEmail.test(email) && !expPass.test(password)) {
         mendaje.addClass('alert-danger');
-        mendaje.text('Email Incorrecto');
-        mendaje.css('display','block');
+        mendaje.text('Email y Contraseña Incorrectos');
+        mendaje.css('display', 'block');
     }
-
    else if(!expPass.test(password)) {
         mendaje.addClass('alert-danger');
         mendaje.text('Contraseña Incorrecta');
         mendaje.css('display','block');
         }
-    else if(!expEmail.test(email) && !expPass.test(password) ){
+    else  if(!expEmail.test(email)) {
         mendaje.addClass('alert-danger');
-        mendaje.text('Email y Contraseña Incorrectos');
+        mendaje.text('Email Incorrecto');
         mendaje.css('display','block');
     }
     else{
-        sessionStorage.setItem('lgdusr', email);
-        $('.ContentLogin').css('display','none');
-        $('.desenfoque').css('display','none');
         var  arrayJson='{"email":"'+email+'",'+
             '"password":"'+password+'"}';
 
@@ -154,33 +150,56 @@ function validarLogin(){
             data:"datos="+arrayJson,
             dataType: 'text',
             success: function(data) {
-                mensaje.addClass('alert-success');
-                mensaje.text(data);
-                mensaje.css('display','block');
-                addIconUsuarioMenu();
+                if(data=='Datos incorrectos, introduzca un usuario válido'){
+                    $(".mensaje").removeClass('alert-success');
+                    $(".mensaje").addClass('alert-danger');
+                    $(".mensaje").text(data);
+                    $(".mensaje").css('display','block');
+                }else {
+                    sessionStorage.setItem('lgdusr', email);
+                    $(".mensaje").addClass('alert-success');
+                    $(".mensaje").text(data);
+                    $(".mensaje").css('display', 'block');
+                    $('.ContentLogin').css('display','none');
+                    $('.desenfoque').css('display','none');
+                    addIconUsuarioMenu();
+                    location.reload();
+                }
             }
         });
 
     }
 
     if($('#chkRecordar').prop('checked')) {
-        localstorage.setItem('lgdusr',email);
+        localStorage.setItem('lgdusr',email);
     }
 
 
 }
 /*Añadir opciones usuario ya logueado en elmenu*/
 function addIconUsuarioMenu() {
+    if(sessionStorage.getItem('lgdusr')!=null || localStorage.getItem('lgdusr')!=null){
+        if(sessionStorage.getItem('lgdusr')==null)
+            var emailUser='emailUser='+localStorage.getItem('lgdusr');
+        else
+            var emailUser='emailUser='+sessionStorage.getItem('lgdusr');
     $('.btn-identificate').addClass('dropdown menu-usuario');
     $('.btn-identificate').removeClass('btn-identificate');
     $('aaIdentificate').remove();
-    $('.nombre_usuario').text(sessionStorage.getItem('lgdusr'));
-    $('.menu-usuario').html('<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">+' +
-        '<span class="glyphicon glyphicon-user"></span> <span class="nombre_usuario"></span><span class="caret"></span></a>' +
-        '<ul class="dropdown-menu dropdown-cart" role="menu">' +
-        '<li><a class="text-center" href="#">Mi cuenta</a></li>' +
-        '<li class="divider"></li><li><a class="text-center" href="#">Mis pedidos</a></li>' +
-        '<li class="divider"></li> <li><a class="text-center" href="#">Desconexión</a></li></ul>');
+
+        $.get('php/devuelveCliente.php',emailUser,function(data){
+            var jsonCliente = JSON.parse(data);
+            var nombreCliente=jsonCliente.nombre;
+            $('.menu-usuario').html('<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">' +
+                '<span class="glyphicon glyphicon-user"></span> <span class="nombre_usuario">'+nombreCliente+'</span><span class="caret"></span></a>' +
+                '<ul class="dropdown-menu dropdown-cart" role="menu">' +
+                '<li><a class="text-center" href="#">Mi cuenta</a></li>' +
+                '<li class="divider"></li><li><a class="text-center" href="#">Mis pedidos</a></li>' +
+                '<li class="divider"></li> <li><a class="text-center" href="#">Desconexión</a></li></ul>');
+        });
+        
+
+    }
 }
 /* carrito */
 function actualizarCarrito(){

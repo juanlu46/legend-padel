@@ -8,6 +8,8 @@ function validarForm(){
     var nombre=$('#nombre').val();
     var apellidos=$('#apellidos').val();
     var dni=$('#dni').val();
+    var direccion=$('#direccion').val();
+    var telefono=$('#telefono').val();
     var email=$('#email').val();
     var password=$('#password').val();
     var password2=$('#password2').val();
@@ -15,6 +17,7 @@ function validarForm(){
 
     var expNombre=new RegExp("^[a-zA-ZñÑáéíóúÁÉÍÓÚ\ ]{4,15}$");
     var expApellidos=new RegExp("^[a-zA-ZñÑáéíóúÁÉÍÓÚ\ ]{4,25}$");
+    var expTelefono=new RegExp("^[9|6|7][0-9]{8}$");
     var expDni=new RegExp("^[0-9]{8}[a-zA-Z]$");
     var expEmail = new RegExp("^[A-Za-z]*[_a-z0-9-]+(\.[_A-Z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$");
     var expPass = new RegExp("^(?=.*[a-z])(?=.*[A-Z]).{6,15}$");
@@ -29,6 +32,18 @@ function validarForm(){
     if(!expApellidos.test(apellidos)) {
         mensaje.addClass('alert-danger');
         mensaje.append('Apellidos Incorrecto<br/>');
+        mensaje.css('display','block');
+        error=true;
+    }
+    if(!expTelefono.test(telefono)) {
+        mensaje.addClass('alert-danger');
+        mensaje.append('Teléfono Incorrecto<br/>');
+        mensaje.css('display','block');
+        error=true;
+    }
+    if(direccion==""){
+        mensaje.addClass('alert-danger');
+        mensaje.append('La dirección no puede estar vacía<br/>');
         mensaje.css('display','block');
         error=true;
     }
@@ -64,6 +79,8 @@ function validarForm(){
         var sJson='{'+
             '"nombre":"'+nombre+'",'+
             '"apellidos":"'+apellidos+'",'+
+            '"telefono":"'+telefono+'",'+
+            '"direccion":"'+direccion+'",'+
             '"dni":"'+dni+'",'+
             '"email":"'+email+'",'+
             '"password":"'+password+'"'+
@@ -92,5 +109,6 @@ function limpiarCampos(){
     $('input').val('');
 }
 function redirrecionar(){
-    window.location="http://www.legendpadel.com";
+        window.location="http://localhost/legend-padel/";
+    // window.location="http://www.legendpadel.com";
 }
