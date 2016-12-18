@@ -18,7 +18,7 @@ function validarForm(){
     var expNombre=new RegExp("^[a-zA-ZñÑáéíóúÁÉÍÓÚ\ ]{4,15}$");
     var expApellidos=new RegExp("^[a-zA-ZñÑáéíóúÁÉÍÓÚ\ ]{4,25}$");
     var expTelefono=new RegExp("^[9|6|7][0-9]{8}$");
-    var expDni=new RegExp("^[0-9]{8}[a-zA-Z]$");
+    var expDni=new RegExp("^[0-9]{8}[a-zA-ZñÑ]$");
     var expEmail = new RegExp("^[A-Za-z]*[_a-z0-9-]+(\.[_A-Z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$");
     var expPass = new RegExp("^(?=.*[a-z])(?=.*[A-Z]).{6,15}$");
 

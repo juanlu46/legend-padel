@@ -190,17 +190,32 @@ function addIconUsuarioMenu() {
         $.get('php/devuelveCliente.php',emailUser,function(data){
             var jsonCliente = JSON.parse(data);
             var nombreCliente=jsonCliente.nombre;
-            $('.menu-usuario').html('<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">' +
+                $('.menu-usuario').html('<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">' +
                 '<span class="glyphicon glyphicon-user"></span> <span class="nombre_usuario">'+nombreCliente+'</span><span class="caret"></span></a>' +
                 '<ul class="dropdown-menu dropdown-cart" role="menu">' +
-                '<li><a class="text-center" href="#">Mi cuenta</a></li>' +
-                '<li class="divider"></li><li><a class="text-center" href="#">Mis pedidos</a></li>' +
-                '<li class="divider"></li> <li><a class="text-center" href="#">Desconexión</a></li></ul>');
-        });
-        
+                '<li><a class="text-center" href="html/panelCliente.html">Mi cuenta</a></li>' +
+                '<li class="divider"></li><li class="pedidosCliente"><a class="text-center" href="#">Mis pedidos</a></li>' +
+                '<li class="divider"></li> <li class="desconexion"><a class="text-center" href="#">Desconexión</a></li></ul>');
+                $('.desconexion').on('click',desconectarse);
 
+                $('.pedidosCliente').on('click',function(){
+                accederPedidosCliente(jsonCliente);});
+        });
     }
 }
+function accederPedidosCliente(jsonCliente) {
+
+}
+function desconectarse(){
+        if(sessionStorage.getItem('lgdusr')!=null)
+            sessionStorage.removeItem('lgdusr');
+
+        if(localStorage.getItem('lgdusr')!=null)
+            localStorage.removeItem('lgdusr');
+
+    location.reload();
+}
+
 /* carrito */
 function actualizarCarrito(){
 
