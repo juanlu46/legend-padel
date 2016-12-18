@@ -8,9 +8,9 @@ $(function() {
         case 'invictus':
             document.title='Invictus 2.0';
             $('li.disabled').text('Invictus 2.0');
-            $('.fotoPrincipal').attr('src','imgProduct/invictus1.jpg');
-            $('.min1').attr('src','imgProduct/invictus1.jpg');
-            $('.min2').attr('src','imgProduct/invictus2.jpg');
+            $('.fotoPrincipal').attr('src','imgProduct/invictus2.jpg');
+            $('.min1').attr('src','imgProduct/invictus2.jpg');
+            $('.min2').attr('src','imgProduct/invictus_2.jpg');
             $('.min3').attr('src','imgProduct/invictus3.jpg');
             $('.min4').attr('src','imgProduct/invictus4.jpg');
             $('.min5').attr('src','imgProduct/invictus5.jpg');
@@ -27,8 +27,8 @@ $(function() {
         case 'redSkin':
             document.title='Red Skin';
             $('li.disabled').text('Red Skin');
-            $('.fotoPrincipal').attr('src','imgProduct/redskin1.jpg');
-            $('.min1').attr('src','imgProduct/redskin1.jpg');
+            $('.fotoPrincipal').attr('src','imgProduct/redskin.jpg');
+            $('.min1').attr('src','imgProduct/redskin.jpg');
             $('.min2').attr('src','imgProduct/redskin2.jpg');
             $('.min3').attr('src','imgProduct/redskin3.jpg');
             $('.min4').attr('src','imgProduct/redskin4.jpg');
@@ -46,8 +46,8 @@ $(function() {
         case 'sniper':
             document.title='Sniper';
             $('li.disabled').text('Sniper');
-            $('.fotoPrincipal').attr('src','imgProduct/sniper1.jpg');
-            $('.min1').attr('src','imgProduct/sniper1.jpg');
+            $('.fotoPrincipal').attr('src','imgProduct/sniper.jpg');
+            $('.min1').attr('src','imgProduct/sniper.jpg');
             $('.min2').attr('src','imgProduct/sniper2.jpg');
             $('.min3').attr('src','imgProduct/sniper3.jpg');
             $('.min4').attr('src','imgProduct/sniper4.jpg');
@@ -67,8 +67,8 @@ $(function() {
         case 'target':
             document.title='Target 1.0';
             $('li.disabled').text('Target 1.0');
-            $('.fotoPrincipal').attr('src','imgProduct/targetBlack1.jpg');
-            $('.min1').attr('src','imgProduct/targetBlack1.jpg');
+            $('.fotoPrincipal').attr('src','imgProduct/target1negra.jpg');
+            $('.min1').attr('src','imgProduct/target1negra.jpg');
             $('.min2').attr('src','imgProduct/targetBlack2.jpg');
             $('.min3').attr('src','imgProduct/targetBlack3.jpg');
             $('.min4').attr('src','imgProduct/targetBlack4.jpg');
@@ -135,8 +135,8 @@ $(function() {
 
     function cambiarColor(color) {
         if(color=='negro'){
-            $('.fotoPrincipal').attr('src','imgProduct/targetBlack1.jpg');
-            $('.min1').attr('src','imgProduct/targetBlack1.jpg');
+            $('.fotoPrincipal').attr('src','imgProduct/target1negra.jpg');
+            $('.min1').attr('src','imgProduct/target1negra.jpg');
             $('.min2').attr('src','imgProduct/targetBlack2.jpg');
             $('.min3').attr('src','imgProduct/targetBlack3.jpg');
             $('.min4').attr('src','imgProduct/targetBlack4.jpg');
@@ -147,8 +147,8 @@ $(function() {
             }
 
         }else{
-            $('.fotoPrincipal').attr('src','imgProduct/targetwhite1.jpg');
-            $('.min1').attr('src','imgProduct/targetwhite1.jpg');
+            $('.fotoPrincipal').attr('src','imgProduct/target1blanca.jpg');
+            $('.min1').attr('src','imgProduct/target1blanca.jpg');
             $('.min2').attr('src','imgProduct/targetwhite2.jpg');
             $('.min3').attr('src','imgProduct/targetwhite3.jpg');
             $('.min4').attr('src','imgProduct/targetwhite4.jpg');

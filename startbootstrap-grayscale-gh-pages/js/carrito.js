@@ -4,9 +4,10 @@ function inicio(){
     if(sessionStorage.getItem("lgdusr")==null){
         if(sessionStorage.getItem("nusrcrt")!=null){
             sCarrito=sessionStorage.getItem("nusrcrt");
-            $.get("../php/montarCarrito.php",sCarrito,function(oProductos){
+            $.get("../php/montarCarrito.php?carrito="+encodeURIComponent(sCarrito),function(oProductos){
                 $('#productos').find('tr').first().before(oProductos);
                 aplicarManejadoresBoton();
+                calcularTotales();
             },'html');
         }
         else{
@@ -14,12 +15,17 @@ function inicio(){
         }
     }
     else{
-
+        sSesion=sessionStorage.getItem("lgdusr");
+        $.get('php/montarCarritoUsuario.php?usuario='+encodeURIComponent(sSesion),function(sProductos){
+            $('#productos').find('tr').first().before(sProductos);
+            calcularTotales();
+        });
     }
 }
 
 function noProductos(){
     $('#productos').find('tr').first().before('<tr> <td colspan="5" class="col-sm-8 col-md-6"> <h1 class="text-center">No hay productos en el carrito</h1> </td> </tr>');
+    $(".envio_carrito").text("0 €");
 }
 
 function aplicarManejadoresBoton(){
@@ -34,19 +40,26 @@ function aplicarManejadoresBoton(){
 
 function guardarCarrito(){
     arrayProductos=[];
-    $(".productos").each(function(){
+    $(".producto").each(function(){
         id=$(this).data('id');
         cantidad=$(this).find('.cantidad_producto').val();
         arrayProductos.push([id,cantidad]);
     });
-    sCarrito=JSON.stringify(arrayProductos);
+    var sCarrito = JSON.stringify(arrayProductos);
     if(sessionStorage.getItem("lgdusr")==null){
         sessionStorage.setItem("nusrcrt",sCarrito);
     }
     else{
         sSesion=sessionStorage.getItem("lgdusr");
-        $.get('php/montarCarrito.php',sSesion,function(sProductos){
-            $('#productos').find('tr').first().before(sProductos);
-        });
+        $.get('php/guardarCarrito.php?usuario='+encodeURIComponent(sSesion)+'&carrito='+encodeURIComponent(sCarrito));
     }
+}
+
+function calcularTotales(){
+    var fSubTotal=0.0;
+    $(".total_producto").each(function(){
+        fSubTotal+=parseFloat($(this).text());
+    });
+    $(".subtotal_carrito").text(fSubTotal.toFixed(2)+" €");
+    $(".total_carrito").text((fSubTotal+6).toFixed(2)+" €");
 }

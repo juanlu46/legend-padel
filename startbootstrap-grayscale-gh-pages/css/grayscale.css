@@ -8,6 +8,7 @@ body {
 html {
   width: 100%;
   height: 100%;
+  overflow-x:hidden;
 }
 h1,
 h2,
@@ -47,6 +48,29 @@ p {
     font-size: 20px;
     line-height: 1.6;
   }
+}
+
+/*** ALERTS **/
+.notice {
+  padding: 15px;
+  background-color: #fafafa;
+  border-left: 6px solid #7f7f84;
+  margin-bottom: 10px;
+  -webkit-box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
+  -moz-box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
+  box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
+}
+.notice-success {
+  border-color: #80D651;
+}
+.notice-success>strong {
+  color: #80D651;
+}
+.notice-danger {
+  border-color: #d73814;
+}
+.notice-danger>strong {
+  color: #d73814;
 }
 
 /*BUTTON SELECT*/
@@ -263,7 +287,6 @@ ul.dropdown-cart li .item-right button{
   .navbar-custom {
     padding: 20px 0;
     border-bottom: none;
-    letter-spacing: 1px;
     background: transparent;
     -webkit-transition: background 0.5s ease-in-out, padding 0.5s ease-in-out;
     -moz-transition: background 0.5s ease-in-out, padding 0.5s ease-in-out;
@@ -560,7 +583,6 @@ ul.dropdown-cart li .item-right button{
   height: 523px;
   overflow: hidden;
   position: relative;
-  float: left;
   border-radius: 17px 17px 0 0;
   transition: all 300ms linear;
   margin-right: 60px;
@@ -1034,5 +1056,8 @@ body {
 }
 /*CSS MENSAJE ERROR FORM LOGIN*/
 .mensaje{
+  display:none;
+}
+.mensajesUsuarios{
   display:none;
 }

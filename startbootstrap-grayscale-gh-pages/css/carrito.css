@@ -138,6 +138,16 @@ a:focus {
 .thumbnail{
     margin-right: 20px;
 }
+.thumbnail img{
+    height: 7em;
+}
 tr:hover td{
     color:black;
+}
+.hover-color{
+    background-color: #f5f5f5;
+    color:black;
+}
+.no-hover-style{
+    background-color:rgba(0,0,0,0) !important;
 }

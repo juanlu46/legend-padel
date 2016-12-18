@@ -19,10 +19,10 @@ $(document).on('click', '.btn-select', function (e) {
             $(this).find(".btn-select-value").html(value);
             var dataID=$(this).find(".btn-select-value").data("id");
             if(value=="BLANCA") {
-                $('.item img[data-id="' + dataID + '"]').attr('src', 'img/imgProduct/targetwhite1.jpg');
+                $('.item img[data-id="' + dataID + '"]').attr('src', 'img/imgProduct/target1blanca.jpg');
             }
             else {
-                $('.item img[data-id="' + dataID + '"]').attr('src', 'img/imgProduct/targetBlack1.jpg');
+                $('.item img[data-id="' + dataID + '"]').attr('src', 'img/imgProduct/target1negra.jpg');
             }
         }
         ul.hide();
@@ -171,8 +171,9 @@ function validarLogin(){
 }
 /*Añadir opciones usuario ya logueado en elmenu*/
 function addIconUsuarioMenu() {
-    $('.btn-identificate').addClass('dropdown menu-usuario');
-    $('.btn-identificate').removeClass('btn-identificate');
+    var oBotonIdentificar=$('.btn-identificate');
+    oBotonIdentificar.addClass('dropdown menu-usuario');
+    oBotonIdentificar.removeClass('btn-identificate');
     $('aaIdentificate').remove();
     $('.nombre_usuario').text(sessionStorage.getItem('lgdusr'));
     $('.menu-usuario').html('<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">+' +
@@ -191,18 +192,18 @@ function actualizarCarrito(){
             oCarrito=JSON.parse(sCarrito);
             var nElementos=0;
             for(i=0; i<oCarrito.length;i++){
-                nElementos+=oCarrito[i][1];
+                nElementos+=parseInt(oCarrito[i][1]);
             }
             $(".carrito_n_productos").text(nElementos);
-           $.get('php/montarNavCarrito.php',sCarrito,function(sProductos){
-                $('.dropdown-cart').find('li').first().before(sProductos);
+           $.get('php/montarNavCarrito.php?carrito='+encodeURIComponent(sCarrito),function(sProductos){
+                $('.dropdown-cart').find('.divider').after(sProductos);
            });
         }
     }
     else{
         sSesion=sessionStorage.getItem("lgdusr");
-        $.get('php/montarNavCarrito.php',sSesion,function(sProductos){
-            $('.dropdown-cart').find('li').first().before(sProductos);
+        $.get('php/montarNavCarritoUsuario.php?usuario='+encodeURIComponent(sSesion),function(sProductos){
+            $('.dropdown-cart').find('.divider').after(sProductos);
         });
     }
 }
@@ -212,8 +213,9 @@ function cargarEventosBotonCarrito(){
     $(".item").each(function(){
         var item =$(this);
         oBoton=item.find('.item-pie button');
-        oBoton.on('click',function(boton){
-            oProducto=$('<li class="item_carrito"><span class="item"><span class="item-left"><img src="" alt="articulo_carrito"/><span class="item-info"><span class="item_cantidad">1x</span><span class="item_name"></span><span class="item_precio"></span></span></span><span class="item-right"><button class="btn btn-xs btn-danger pull-right">x</button></span></span></li>');
+        oBoton.on('click',function(){
+            var boton=$(this);
+            oProducto=$('<li class="item_carrito" data-id=""><span class="item"><span class="item-left"><img src="" alt="articulo_carrito"/><span class="item-info"><span class="item_cantidad">1x</span><span class="item_name"></span><span class="item_precio"></span></span></span><span class="item-right"><button class="btn btn-xs btn-danger pull-right">x</button></span></span></li>');
             var bEncontrado=false;
             var oItemCarrito;
             var oCarrito=$('.dropdown-cart');
@@ -224,21 +226,48 @@ function cargarEventosBotonCarrito(){
                 }
             });
             if(bEncontrado){
-                alert("encontrado");
                 var oItemCantidad=oItemCarrito.find('.item_cantidad');
                 oItemCantidad.text((parseInt(oItemCantidad.text().replace('x',''))+1)+"x");
                 var oItemPrecio=oItemCarrito.find('.item_precio');
                 oItemPrecio.text((parseFloat(oItemPrecio.text().replace(',','.').replace(' €',''))+parseFloat(item.find('.precio').text().replace(',','.').replace(' €',''))).toFixed(2)+" €");
             }
             else{
-                alert("no encontrado");
                 oProducto.find('.item_name').text(item.find('.item-pie a').first().text());
                 oProducto.find('.item_precio').text(item.find('.precio').text());
                 oProducto.find('img').attr('src',item.find('.hovereffect img').first().attr('src'));
+                var oColor=item.find('.btn-select .selected');
+                var sID=boton.data('id');
+                if(oColor.length>0){
+                    sID+=oColor.text().toLowerCase();
+                }
+                oProducto.data('id',sID);
                 oCarrito.append(oProducto);
             }
-            //GUARDAR CARRITO DONDE CORRESPONDA, SESSION O BBDD
+            var oAlert=$(".mensajesUsuarios");
+            oAlert.addClass("notice-success").html('<span class="glyphicon glyphicon-shopping-cart"></span> Artículo añadido');
+            oAlert.css({"display":"block","position":"fixed","top":"3em","left":"1em","font-size":"1.4em","margin":"auto","color":"black"});
+            setTimeout(function() {
+                oAlert.css({"display":"none","position":"","top":"","left":"","font-size":"","margin":""});
+            },3000);
+            guardarCarrito();
         });
     });
+}
+
+function guardarCarrito(){
+    arrayProductos=[];
+    $(".item_carrito").each(function(){
+        id=$(this).data('id');
+        cantidad=$(this).find('.item_cantidad').text().replace('x','');
+        arrayProductos.push([id,cantidad]);
+    });
+    sCarrito=JSON.stringify(arrayProductos);
+    if(sessionStorage.getItem("lgdusr")==null){
+        sessionStorage.setItem("nusrcrt",sCarrito);
+    }
+    else{
+        sSesion=sessionStorage.getItem("lgdusr");
+        $.get('php/guardarCarrito.php?usuario='+encodeURIComponent(sSesion)+'&carrito='+encodeURIComponent(sCarrito));
+    }
 }
 
