@@ -46,6 +46,7 @@ $(document).on('click', function (e) {
 
 $(window).scroll(ajustarNavBar);
 $(document).ready(function(){
+    $('.btnContactar').on('click',validarFormContacto);
     addIconUsuarioMenu();
     actualizarCarrito();
     ajustarNavBar();
@@ -303,4 +304,43 @@ function guardarCarrito(){
         $.get('php/guardarCarrito.php?usuario='+encodeURIComponent(sSesion)+'&carrito='+encodeURIComponent(sCarrito));
     }
 }
+function validarFormContacto(){
+    var nombre=$('#contact-nombre').val();
+    var apellidos=$('#contact-apellidos').val();
+    var email=$('#contact-email').val();
+    var asunto=$('#contact-asunto').val();
+    var mensaje=$('#contact-mensaje').val();
+    var alert=$('.mensajesUsuarios');
+    var error=false;
 
+    var expNombre=new RegExp("^[a-zA-ZñÑáéíóúÁÉÍÓÚ\ ]{4,15}$");
+    var expApellidos=new RegExp("^[a-zA-ZñÑáéíóúÁÉÍÓÚ\ ]{4,25}$");
+    var expEmail = new RegExp("^[A-Za-z]*[_a-z0-9-]+(\.[_A-Z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$");
+    if(!expNombre.test(nombre)) {
+        alert.addClass('notice-danger');
+        alert.html('Nombre Incorrecto<br/>');
+        alert.css('color','black');
+        error=true;
+    }
+
+    if(!expApellidos.test(apellidos)) {
+        alert.addClass('notice-danger');
+        alert.html('Apellidos Incorrecto<br/>');
+        alert.css('color','black');
+        error=true;
+    }
+    if(!expEmail.test(email)) {
+        alert.addClass('notice-danger');
+        alert.html('Email Incorrecto<br/>');
+        alert.css('color','black');
+        error=true;
+    }
+    if(error==false){
+        
+    }
+    else{
+        alert.css('display','block');
+    }
+
+
+}
