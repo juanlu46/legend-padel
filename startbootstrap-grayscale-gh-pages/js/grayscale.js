@@ -61,29 +61,44 @@ $(document).ready(function(){
         }
     });
     cargarEventosBotonCarrito();
-    /*** copiar cuando se cargue quienes somos ***/
-    (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v2.7";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-    $(".service,.service-tw").hover(function(){
-        $("#quienes-somos").stop(true).animate({'padding-top':'100px','padding-right': '0','padding-down': '170px', 'padding-left': '0'},300);
-    },function(){
-        $("#quienes-somos").stop(true).animate({'padding-top':'100px','padding-right': '0','padding-down': '0', 'padding-left': '0'},300);
-    });
-    $(".service-ig").hover(function(){
-        $("#quienes-somos").stop(true).animate({'padding-top':'100px','padding-right': '0','padding-down': '170px', 'padding-left': '0'},300);
-    },function(){
-        $("#quienes-somos").stop(true).animate({'padding-top':'100px','padding-right': '0','padding-down': '0', 'padding-left': '0'},300);
-    });
+
+    cargarEventoBotonRedes();
+
     $(".btn-identificate").on("click",cargarFormIdent);
     $('.btn-signin').on("click",validarLogin);
     /*********/
 
 });
+
+function cargarEventoBotonRedes(){
+    $('.btn-load-redes').on('click',function(){
+        $(this).addClass("m-progress");
+        $('.preload').load('html/redes_sociales.html',function(){
+            (function(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = "//connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v2.7";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+            setTimeout(function(){
+                $('.redes-sociales').html($('.preload').html());
+                $.getScript('//platform.twitter.com/widgets.js');
+                $(".service,.service-tw").hover(function(){
+                    $("#quienes-somos").stop(true).animate({'padding-top':'100px','padding-right': '0','padding-bottom': '240px', 'padding-left': '0'},300);
+                },function(){
+                    $("#quienes-somos").stop(true).animate({'padding-top':'100px','padding-right': '0','padding-bottom': '0', 'padding-left': '0'},300);
+                });
+                $(".service-ig").hover(function(){
+                    $("#quienes-somos").stop(true).animate({'padding-top':'100px','padding-right': '0','padding-bottom': '330px', 'padding-left': '0'},300);
+                },function(){
+                    $("#quienes-somos").stop(true).animate({'padding-top':'100px','padding-right': '0','padding-bottom': '0', 'padding-left': '0'},300);
+                });
+            },3000);
+        });
+    });
+
+}
 
 // Controlador de scroll
 $(function() {
@@ -230,6 +245,7 @@ function actualizarCarrito(){
             $(".carrito_n_productos").text(nElementos);
            $.get('php/montarNavCarrito.php?carrito='+encodeURIComponent(sCarrito),function(sProductos){
                 $('.dropdown-cart').find('.divider').after(sProductos);
+               cargarEventosBotonEliminarProducto()
            });
         }
     }
@@ -237,8 +253,20 @@ function actualizarCarrito(){
         sSesion=sessionStorage.getItem("lgdusr");
         $.get('php/montarNavCarritoUsuario.php?usuario='+encodeURIComponent(sSesion),function(sProductos){
             $('.dropdown-cart').find('.divider').after(sProductos);
+            cargarEventosBotonEliminarProducto()
         });
     }
+
+}
+
+function cargarEventosBotonEliminarProducto(){
+    $('.item_carrito').each(function(){
+        $(this).find('button').on('click',function(){
+            $(this).parents('.item_carrito').remove();
+            guardarCarrito();
+            actualizarNumeroCarrito();
+        });
+    });
 }
 
 function cargarEventosBotonCarrito(){
@@ -274,6 +302,11 @@ function cargarEventosBotonCarrito(){
                     sID+=oColor.text().toLowerCase();
                 }
                 oProducto.data('id',sID);
+                oProducto.find(".item-right button").on('click',function(){
+                    $(this).parents('.item_carrito').remove();
+                    guardarCarrito();
+                    actualizarNumeroCarrito();
+                });
                 oCarrito.append(oProducto);
             }
             var oAlert=$(".mensajesUsuarios");
@@ -282,9 +315,19 @@ function cargarEventosBotonCarrito(){
             setTimeout(function() {
                 oAlert.css({"display":"none","position":"","top":"","left":"","font-size":"","margin":""});
             },3000);
+
+            actualizarNumeroCarrito();
             guardarCarrito();
         });
     });
+}
+
+function actualizarNumeroCarrito(){
+    nCantidad=0;
+    $(".item_carrito").each(function(){
+        nCantidad+=parseInt($(this).find('.item_cantidad').text().replace('x',''));
+    });
+    $(".carrito_n_productos").text(nCantidad);
 }
 
 function guardarCarrito(){
@@ -294,13 +337,18 @@ function guardarCarrito(){
         cantidad=$(this).find('.item_cantidad').text().replace('x','');
         arrayProductos.push([id,cantidad]);
     });
-    sCarrito=JSON.stringify(arrayProductos);
-    if(sessionStorage.getItem("lgdusr")==null){
-        sessionStorage.setItem("nusrcrt",sCarrito);
+    if(arrayProductos.length==0){
+        sessionStorage.removeItem("nusrcrt");
     }
-    else{
-        sSesion=sessionStorage.getItem("lgdusr");
-        $.get('php/guardarCarrito.php?usuario='+encodeURIComponent(sSesion)+'&carrito='+encodeURIComponent(sCarrito));
+    else {
+        sCarrito = JSON.stringify(arrayProductos);
+        if (sessionStorage.getItem("lgdusr") == null) {
+            sessionStorage.setItem("nusrcrt", sCarrito);
+        }
+        else {
+            sSesion = sessionStorage.getItem("lgdusr");
+            $.get('php/guardarCarrito.php?usuario=' + encodeURIComponent(sSesion) + '&carrito=' + encodeURIComponent(sCarrito));
+        }
     }
 }
 

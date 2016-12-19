@@ -21,6 +21,9 @@ function inicio(){
             calcularTotales();
         });
     }
+    $('.btn-continuar-compra').on('click',function(){
+        location.href="http://www.legendpadel.com/index.html#tienda";
+    });
 }
 
 function noProductos(){
