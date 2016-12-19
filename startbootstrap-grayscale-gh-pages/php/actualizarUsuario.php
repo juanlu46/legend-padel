@@ -19,21 +19,12 @@ else{
     $expDni="/^[0-9]{8}[a-zA-ZñÑ]$/";
 
             if(preg_match($expEmail, $ousuario->email) && preg_match($expPass, $ousuario->password) && preg_match($expNombre, $ousuario->nombre) && preg_match($expApellidos, $ousuario->apellidos) && preg_match($expTelefono, $ousuario->telefono) && preg_match($expDni, $ousuario->dni)){
-                $sql = "UPDATE usuarios SET nombre='" . $ousuario->nombre . "',apellidos='" . $ousuario->apellidos . "',telefono='" . $ousuario->telefono . "',direccion='" . $ousuario->direccion . "', email='" . $ousuario->email . "', contraseña='" . $ousuario->password . "' where dni=".dni;
-               echo $sql;
+                $sql = "UPDATE usuarios SET nombre='" . $ousuario->nombre . "',apellidos='" . $ousuario->apellidos . "',telefono='" . $ousuario->telefono . "',direccion='" . $ousuario->direccion . "', email='" . $ousuario->email . "', contraseña='" . $ousuario->password . "' where dni='".$ousuario->dni."'";
                 if ($mysqli->query($sql))
                     echo "Se han actualizado los datos correctamente";
                 else
                     echo "Se ha producido un error al actualizarse los datos";
-
             }
-
-
-
 }
-/*
- UPDATE `usuarios` SET `nombre` = 'Celiaa', `apellidos` = 'Martínez Ortiz', `telefono` = '954395413', `direccion` = 'fdssfdsd,3', `email` = 'celia12@mail.com', `contraseña` = 'Celiaaa' WHERE `usuarios`.`dni` = '54789654A';
- * */
-
-
+$mysqli->close();
 ?>

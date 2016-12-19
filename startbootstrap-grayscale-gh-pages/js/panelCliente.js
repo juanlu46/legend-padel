@@ -100,7 +100,7 @@ function guardarCambios(cliente) {
                 '"telefono":"' + telefono + '",' +
                 '"direccion":"' + direccion + '",' +
                 '"email":"' + email + '",' +
-                '"dni":"' + dni + '",' +
+                '"dni":"' + cliente.dni + '",' +
                 '"password":"' + password + '"' +
                 '}';
 
