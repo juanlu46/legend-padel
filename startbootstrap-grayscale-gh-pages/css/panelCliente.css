@@ -1,5 +1,8 @@
 body,html{
     height: 100%;
+    background-color: black;
+    color:white;
+    font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 nav.sidebar, .main{
@@ -120,5 +123,6 @@ section{
 }
 
 .panelCliente{
-    margin-top: 1em;
+    margin-top: 2em;
 }
+

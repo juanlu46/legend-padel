@@ -97,7 +97,6 @@ function activar3D(){
         imgO[i].src=arrayFotos[i];
     }
     swapImage();
-
 }
 function cargarArrayFotos3D(){
     arrayFotos = ["img/3D/"+producto+"/Render0000.jpg",
@@ -114,7 +113,7 @@ function swapImage() {
     clearTimeout(intervalo);
     curPic = (++curPic > arrayFotos.length-1)? 0 : curPic;
     var src=imgO[curPic].src;
-    $('#item-display').attr('src',src);
+    imgCont.attr('src',src);
      intervalo=setTimeout(swapImage,33);
 }
 
@@ -123,8 +122,8 @@ function cambiarFoto(img){
     var src=img.attr('src');
     clearTimeout(intervalo);
     var id=$(img).parent().attr('id');
-     $('#'+id+' img').attr('src','img/3D/'+producto+'/Render0000.jpg');
-     $('#'+id+' img').attr('class','img3d');
+    $('#'+id+' img').attr('src','img/3D/'+producto+'/Render0000.jpg');
+    $('#'+id+' img').attr('class','img3d');
     $('.img3d').on('click',swapImage);
     $('.fotoPrincipal').attr('src',src);
 }
@@ -175,15 +174,17 @@ function cargarFotosDefecto(){
     }
 }
 function cambiarColor(color) {
+    clearTimeout(intervalo);
     if(color=='negro'){
         producto='TargetBlack';
-        cargarArrayFotos3D();
+        imgCont.attr('src','img/imgProduct/target1negra.jpg');
         $('#item-1 img').attr('src','img/imgProduct/target1negra.jpg');
         $('#item-2 img').attr('src','img/imgProduct/targetBlack2.jpg');
         $('#item-3 img').attr('src','img/imgProduct/targetBlack3.jpg');
         $('#item-4 img').attr('src','img/imgProduct/targetBlack4.jpg');
+        $('#item-5').css('display','block');
         if($('#item-5 img').length > 0 )
-            $('#item-5 img').attr('src','imgProduct/targetBlack5.jpg');
+            $('#item-5 img').attr('src','img/imgProduct/targetblack5.jpg');
         else{
             $('#item-5').prepend(' <img src="img/imgProduct/targetblack5.jpg" alt="miniatura5"></img>');
         }
@@ -191,13 +192,13 @@ function cambiarColor(color) {
     }else{
         producto='targetwhite';
         document.title='Target White';
-        cargarArrayFotos3D();
-        swapImage();
+        imgCont.attr('src','img/imgProduct/target1blanca.jpg');
         $('#item-1 img').attr('src','img/imgProduct/target1blanca.jpg');
         $('#item-2 img').attr('src','img/imgProduct/targetwhite2.jpg');
         $('#item-3 img').attr('src','img/imgProduct/targetwhite3.jpg');
         $('#item-4 img').attr('src','img/imgProduct/targetwhite4.jpg');
         $('#item-5 img').remove();
+        $('#item-5').css('display','none');
 
     }
 }

@@ -17,7 +17,9 @@ $(document).ready(function() {
 });
 
 function cargarDatosCliente(cliente){
-    $('legend').text('Datos Personales');
+    var legend=$('legend');
+    legend.text('Datos Personales');
+    legend.css('color', 'white');
     $('#nombre').val(cliente.nombre);
     $('#apellidos').val(cliente.apellidos);
     $('#direccion').val(cliente.direccion);
@@ -100,7 +102,7 @@ function guardarCambios(cliente) {
                 '"telefono":"' + telefono + '",' +
                 '"direccion":"' + direccion + '",' +
                 '"email":"' + email + '",' +
-                '"dni":"' + dni + '",' +
+                '"dni":"' + cliente.dni + '",' +
                 '"password":"' + password + '"' +
                 '}';
 

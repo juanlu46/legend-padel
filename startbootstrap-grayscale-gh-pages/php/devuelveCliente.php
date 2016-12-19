@@ -14,8 +14,6 @@ else{
         $expEmail ="/^[A-Za-z]*[_a-z0-9-].(\.[_A-Z0-9-].)*@[a-z0-9-].(\.[a-z0-9-].)*(\.[a-z]{2,3})$/";
         $query="SELECT * FROM usuarios WHERE email='".$susuario."'";
         $result = $mysqli->query($query);
-
-
         while($array=$result->fetch_assoc()){
             $usuario='{'.
                 '"nombre":"'.$array["nombre"].'",'.
@@ -26,15 +24,11 @@ else{
                 '"email":"'.$array["email"].'",'.
                 '"password":"'.$array["contraseña"].'"'.
                 '}';
-
         }
 
-         
-            
         echo $usuario;
-
     } else 
         echo '<p>Email no valido</p>';
 }
-
+$mysqli->close();
 ?>
