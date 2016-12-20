@@ -166,16 +166,17 @@ function validarLogin(){
             data:"datos="+arrayJson,
             dataType: 'text',
             success: function(data) {
+                var mensajeAlert=$(".mensaje");
                 if(data=='Datos incorrectos, introduzca un usuario válido'){
-                    $(".mensaje").removeClass('alert-success');
-                    $(".mensaje").addClass('alert-danger');
-                    $(".mensaje").text(data);
-                    $(".mensaje").css('display','block');
+                    mensajeAlert.removeClass('alert-success');
+                    mensajeAlert.addClass('alert-danger');
+                    mensajeAlert.text(data);
+                    mensajeAlert.css('display','block');
                 }else {
                     sessionStorage.setItem('lgdusr', email);
-                    $(".mensaje").addClass('alert-success');
-                    $(".mensaje").text(data);
-                    $(".mensaje").css('display', 'block');
+                    mensajeAlert.addClass('alert-success');
+                    mensajeAlert.text(data);
+                    mensajeAlert.css('display', 'block');
                     $('.ContentLogin').css('display','none');
                     $('.desenfoque').css('display','none');
                     addIconUsuarioMenu();
@@ -387,7 +388,11 @@ function validarFormContacto(){
         
     }
     else{
+        alert.css({"display":"block","position":"fixed","top":"3em","left":"1em","font-size":"1.4em","margin":"auto","color":"black"});
         alert.css('display','block');
+        setTimeout(function() {
+            alert.css({"display":"none","position":"","top":"","left":"","font-size":"","margin":""});
+        },3000);
     }
 
 
