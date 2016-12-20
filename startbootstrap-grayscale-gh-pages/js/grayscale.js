@@ -365,31 +365,53 @@ function validarFormContacto(){
     var expNombre=new RegExp("^[a-zA-ZñÑáéíóúÁÉÍÓÚ\ ]{4,15}$");
     var expApellidos=new RegExp("^[a-zA-ZñÑáéíóúÁÉÍÓÚ\ ]{4,25}$");
     var expEmail = new RegExp("^[A-Za-z]*[_a-z0-9-]+(\.[_A-Z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$");
+    var textError="";
+
     if(!expNombre.test(nombre)) {
         alert.addClass('notice-danger');
-        alert.html('Nombre Incorrecto<br/>');
+        textError='Nombre Incorrecto<br/>';
         alert.css('color','black');
         error=true;
     }
-
     if(!expApellidos.test(apellidos)) {
         alert.addClass('notice-danger');
-        alert.html('Apellidos Incorrecto<br/>');
+        textError+='Apellidos Incorrecto<br/>';
         alert.css('color','black');
         error=true;
     }
     if(!expEmail.test(email)) {
         alert.addClass('notice-danger');
-        alert.html('Email Incorrecto<br/>');
+        textError+='Email Incorrecto<br/>';
         alert.css('color','black');
         error=true;
     }
     if(error==false){
-        
+        var sJson='{'+
+            '"remitente":"'+email+'",'+
+            '"nombre":"'+nombre+'",'+
+            '"apellidos":"'+apellidos+'",'+
+            '"asunto":"'+asunto+'",'+
+            '"mensaje":"'+mensaje+'"'+
+            '}';
+        $.ajax({
+            url: "php/contacto.php",
+            type: 'POST',
+            data:"datos="+sJson,
+            dataType: 'text',
+            success: function(data) {
+                alert.html(data);
+                alert.addClass('notice-success');
+                alert.css({"display":"block","position":"fixed","top":"3em","left":"1em","font-size":"1.4em","margin":"auto","color":"black"});
+                alert.css('display','block');
+                setTimeout(function() {
+                    alert.css({"display":"none","position":"","top":"","left":"","font-size":"","margin":""});
+                },3000);
+            }
+        });
     }
     else{
+        alert.html(textError);
         alert.css({"display":"block","position":"fixed","top":"3em","left":"1em","font-size":"1.4em","margin":"auto","color":"black"});
-        alert.css('display','block');
         setTimeout(function() {
             alert.css({"display":"none","position":"","top":"","left":"","font-size":"","margin":""});
         },3000);
