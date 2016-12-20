@@ -399,10 +399,15 @@ function validarFormContacto(){
             data:"datos="+sJson,
             dataType: 'text',
             success: function(data) {
+                if(data=='Se produjo un error al enviar su mensaje'){
+                    alert.addClass('notice-danger');
+                }
+                else{
+                    alert.addClass('notice-success');
+                }
+
                 alert.html(data);
-                alert.addClass('notice-success');
                 alert.css({"display":"block","position":"fixed","top":"3em","left":"1em","font-size":"1.4em","margin":"auto","color":"black"});
-                alert.css('display','block');
                 setTimeout(function() {
                     alert.css({"display":"none","position":"","top":"","left":"","font-size":"","margin":""});
                 },3000);

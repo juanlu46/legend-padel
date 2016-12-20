@@ -5,22 +5,15 @@ $destinatario= 'info@legendpadel.com';
 $remitente = $ocontacto->remitente;
 $asunto = $ocontacto->asunto;
 $mensaje = $ocontacto->mensaje;
-$headers = array();
-$headers[] = 'MIME-Version: 1.0';
-$headers[] = 'Content-type: text/html; charset="iso-8859-1"' . "\n";
-$headers[] ='Content-Transfer-Encoding: 7bit' ;
-$headers[] = 'From: ' . $remitente;
+$cabeceras = 'From: '.$remitente . "\r\n" .
+    'Reply-To: '.$destinatario . "\r\n" .
+    'X-Mailer: PHP/' . phpversion();
 
-$success = mail($destinatario, $asunto, $mensaje, $headers);
+$success = mail($destinatario, $asunto, $mensaje, $cabeceras);
+
 if ($success) {
-    echo '<h1>Enhorabuena!</h1>';
-    echo '<p>El  siguiente mensaje ha sido enviado: <br/><br/>';
-    echo '<b>To:</b> ' . $destinatario . '<br/>';
-    echo '<b>From:</b> ' . $remitente . '<br/>';
-    echo '<b>Subject:</b> ' . $asunto . '<br/>';
-    echo '<b>Message:</b></p>';
-    echo nl2br($mensaje);
+    echo '<p>Su correo ha sido enviado correctamente</p>';
 } else {
-    echo '<p><strong>Se produjo un error al enviar su mensaje.</strong></p>';
+    echo '<p><strong>Se produjo un error al enviar su mensaje</strong></p>';
 }
 ?>
