@@ -46,7 +46,7 @@ $(document).on('click', function (e) {
 
 $(window).scroll(ajustarNavBar);
 $(document).ready(function(){
-    $('.btnContactar').on('click',validarFormContacto);
+    $('.btnContactar').on('click',abrirCaptcha);
     addIconUsuarioMenu();
     actualizarCarrito();
     ajustarNavBar();
@@ -423,4 +423,7 @@ function validarFormContacto(){
     }
 
 
+}
+function abrirCaptcha(){
+    $('.g-recaptcha').css('display','block');
 }

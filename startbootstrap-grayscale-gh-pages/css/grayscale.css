@@ -932,7 +932,9 @@ ul.dropdown-cart li .item-right button{
   transition:  all 1s ease 0s;
   opacity: 10;
 }
-
+.g-recaptcha{
+  display:none;
+}
 
 /**** PIE DE PAGINA ****/
 .pie {
