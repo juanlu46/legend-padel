@@ -299,7 +299,7 @@
             <div class="col-lg-6 col-lg-offset-3">
                 <h2 class="d3">Contacto</h2>
                 <div class="row">
-                    <form action="#" method="post" accept-charset="utf-8">
+                    <form action="php/datos.php" method="post" accept-charset="utf-8" id="frmcaptcha">
 
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6" style="padding-bottom: 10px;">
@@ -324,6 +324,7 @@
                                 <textarea style="resize:vertical;" class="form-control" id="contact-mensaje" placeholder="Mensaje..." rows="6" name="comment" required></textarea>
                             </div>
                         </div>
+                        <div class="g-recaptcha"  data-sitekey="6LcboA8UAAAAAOGrNhE3NwmiqjYDSKi4aWKg7UnL"></div>
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <button type="button" class="btn btn-danger btn-lg btn-block btnContactar">Enviar Mensaje
@@ -331,7 +332,7 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="g-recaptcha" data-sitekey="6LcboA8UAAAAAOGrNhE3NwmiqjYDSKi4aWKg7UnL"></div>
+
                     </form>
                 </div>
             </div>
@@ -412,6 +413,6 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUaRcgKrG8NN_O_z_PeIJyFBAZBye1DUE&callback=initMap"
             defer></script>
     <script src="terceros/maps.js"></script>
-    <script src='https://www.google.com/recaptcha/api.js?hl=es'></script>
+    <script src="https://www.google.com/recaptcha/api.js?hl=es"></script>
 </body>
 </html>

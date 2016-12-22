@@ -426,4 +426,19 @@ function validarFormContacto(){
 }
 function abrirCaptcha(){
     $('.g-recaptcha').css('display','block');
+
+}
+function recaptcha_callback(response){
+
+        if (g-recaptcha-response == true) {
+
+            document.getElementById('boton_oculto').style.display = 'block';
+
+        }else{
+
+            alert("compruebe que no es un robot");
+
+        }
+
+    
 }
