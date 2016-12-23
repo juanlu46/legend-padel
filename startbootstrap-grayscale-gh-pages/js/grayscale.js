@@ -46,6 +46,7 @@ $(document).on('click', function (e) {
 
 $(window).scroll(ajustarNavBar);
 $(document).ready(function(){
+    $('.btn-cerrar-login').on('click',cerrarFormLogin);
     $('.btnContactar').on('click',abrirCaptcha);
     addIconUsuarioMenu();
     actualizarCarrito();
@@ -118,6 +119,9 @@ $('.navbar-collapse ul li a').click(function() {
 });
 
 function cargarFormIdent(){
+    $('.btn-cerrar-login').on('click',function(){
+        return false;
+    });
     var inputEmail=$("#inputEmail");
     inputEmail.val("");
     $("#inputPassword").val("");
@@ -192,6 +196,10 @@ function validarLogin(){
     }
 
 
+}
+function cerrarFormLogin(){
+    $('.ContentLogin').css('display','none');
+    $('.desenfoque').css('display','none');
 }
 /*Añadir opciones usuario ya logueado en elmenu*/
 function addIconUsuarioMenu() {

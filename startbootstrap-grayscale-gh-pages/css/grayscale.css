@@ -49,13 +49,7 @@ p {
   font-size: 18px;
   line-height: 1.5;
 }
-@media (min-width: 768px) {
-  p {
-    margin: 0 0 35px;
-    font-size: 20px;
-    line-height: 1.6;
-  }
-}
+
 
 /*** ALERTS **/
 .notice {
@@ -290,21 +284,7 @@ ul.dropdown-cart li .item-right button{
   margin-top:14px;
 }
 
-@media (min-width: 768px) {
-  .navbar-custom {
-    padding: 20px 0;
-    border-bottom: none;
-    background: transparent;
-    -webkit-transition: background 0.5s ease-in-out, padding 0.5s ease-in-out;
-    -moz-transition: background 0.5s ease-in-out, padding 0.5s ease-in-out;
-    transition: background 0.5s ease-in-out, padding 0.5s ease-in-out;
-  }
-  .navbar-custom.top-nav-collapse {
-    padding: 0;
-    background: black;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-  }
-}
+
 .intro {
   display: table;
   width: 100%;
@@ -329,18 +309,7 @@ ul.dropdown-cart li .item-right button{
 .intro .intro-body .eslogan {
   font-size: 18px;
 }
-@media (min-width: 768px) {
-  .intro {
-    height: 100%;
-    padding: 0;
-  }
-  .intro .intro-body .marca {
-    font-size: 100px;
-  }
-  .intro .intro-body .eslogan {
-    font-size: 26px;
-  }
-}
+
 .marca-titulo{
   margin:auto;
 }
@@ -873,18 +842,7 @@ ul.dropdown-cart li .item-right button{
 
 }
 
-@media (min-width: 767px) {
-  .content-section {
-    padding-top: 60px;
-  }
-  #quienes-somos {
-    padding: 148px 0;
-  }
-  #map {
-    height: 400px;
-    margin-top: 3em;
-  }
-}
+
 .btn {
   text-transform: uppercase;
   font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -992,6 +950,11 @@ body {
   }
 
   /*CSS PARA FORMULARIO LOGIN*/
+.btn-cerrar-login{
+  color:#D4D4D4;
+  margin-left:85%;
+  top:25%;
+}
 .desenfoque{
   display: none;
   width: 100%;
@@ -1156,4 +1119,85 @@ body {
 }
 .mensajesUsuarios{
   display:none;
+}
+@media (max-width: 768px) {
+
+  .vertical-divider{
+    margin-bottom: 20%;
+    margin-right: 0.5em;
+    border: solid 1px white;
+    height: 1.5em;
+  }
+  .nav>li>a {
+    padding: 9px;
+  }
+  .navbar-custom {
+    font-size: 12px;
+    padding: 5px 0;
+  }
+  .navbar-header button{
+    display: inline;
+  }
+  .navbar-brand{
+    display:inline;
+    width:80%;
+  }
+
+  .logo-legend-txt{
+    width: 20%;
+    margin-top: -8px;
+    display: inline-block !important;
+  }
+  .logo-legend-img{
+    width: 10%;
+    float: right;
+    margin-top: -14px;
+    margin-right: 70%;
+  }
+
+  .marca-titulo{
+    width: 50%;
+  }
+
+  .intro {
+    height: 100%;
+    padding: 0;
+  }
+  .intro .intro-body .marca {
+    font-size: 100px;
+  }
+  .intro .intro-body .eslogan {
+    font-size: 26px;
+  }
+  .content-section {
+    padding-top: 60px;
+  }
+  #quienes-somos {
+    padding: 148px 0;
+  }
+  #map {
+    height: 400px;
+    margin-top: 3em;
+  }
+}
+@media (min-width: 768px) {
+  p {
+    margin: 0 0 35px;
+    font-size: 20px;
+    line-height: 1.6;
+  }
+
+  .navbar-custom {
+    padding: 20px 0;
+    border-bottom: none;
+    background: transparent;
+    -webkit-transition: background 0.5s ease-in-out, padding 0.5s ease-in-out;
+    -moz-transition: background 0.5s ease-in-out, padding 0.5s ease-in-out;
+    transition: background 0.5s ease-in-out, padding 0.5s ease-in-out;
+  }
+  .navbar-custom.top-nav-collapse {
+    padding: 0;
+    background: black;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  }
 }
