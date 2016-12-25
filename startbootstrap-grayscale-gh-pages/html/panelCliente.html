@@ -35,7 +35,7 @@
                             <ul class="dropdown-menu forAnimate" role="menu">
                                 <li><a href="panelCliente.html">Modificar datos</a></li>
                                 <li class="divider"></li>
-                                <li><a href="#">Mis Pedidos</a></li>
+                                <li><a href="#" class="btn-MisPedidos">Mis Pedidos</a></li>
                             </ul>
                         </li>
                         <li ><a href="carrito.html">Mi Cesta<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-shopping-cart"></span></a></li>
@@ -155,13 +155,39 @@
 
                         </div>
                     </div>
-                    <div class="mensajes alert" role="alert"></div>
-                </fieldset>
-            </form>
-        </div>
 
+                    <div class="mensajes alert" role="alert"></div>
+                   </fieldset>
+            </form>
+            <div class="misPedidos">
+                <div class="well">
+                    <h2 class="d3 text-center">Mis pedidos</h2>
+                    <div class="list-group">
+                        <i href="#" class="list-group-item item-defecto active">
+                            <div class="media col-md-3">
+                                <figure class="pull-left">
+                                    <img class="media-object img-rounded img-responsive imagenPedido" src="../img/sad.svg" alt="Producto">
+
+                                </figure>
+                            </div>
+                            <div class="col-md-6">
+                                <h4 class="list-group-item-heading">Sin pedidos</h4>
+                                <p class="list-group-item-text">Aquí aparecerán tus pedidos
+                                </p>
+                            </div>
+                            <div class="col-md-3 text-center">
+                                <h2>  <small>  </small></h2>
+                                <a href="../index.html#tienda"> <button type="button" class="btn btn-default btn-lg btn-block">Añade pedidos</button></a>
+                            </div>
+                        </i>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
+<div class="notice mensajesUsuarios"></div>
 <script src="../terceros/jquery/jquery.min.js"></script>
 <script src="../terceros/bootstrap/js/bootstrap.min.js"></script>
 <script src="../terceros/jquery/jquery.easing.min.js"></script>
