@@ -21,6 +21,10 @@ h6 {
     font-weight: 700;
     letter-spacing: 1px;
 }
+.aviso{
+    display:none;
+    margin-top:2em;
+}
 .d3{
     color: #382f30;
     font-size: 5em;
@@ -43,6 +47,9 @@ a:hover,
 a:focus {
     text-decoration: none;
     color: #d41414;
+}
+.cart-head{
+    display:none;
 }
 @-webkit-keyframes ld {
     0%   { transform: rotate(0deg) scale(1); }
