@@ -125,4 +125,70 @@ section{
 .panelCliente{
     margin-top: 2em;
 }
+.mensajesUsuarios{
+    display:none;
+}
+
+/*** ALERTS **/
+.notice {
+    padding: 15px;
+    background-color: #fafafa;
+    border-left: 6px solid #7f7f84;
+    margin-bottom: 10px;
+    -webkit-box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
+    -moz-box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
+    box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
+}
+.notice-success {
+    border-color: #80D651;
+}
+.notice-success>strong {
+    color: #80D651;
+}
+.notice-danger {
+    border-color: #d73814;
+}
+.notice-danger>strong {
+    color: #d73814;
+}
+/*MIS PEDIDOS*/
+i.list-group-item {
+    height:auto;
+    min-height:220px;
+}
+i.list-group-item.active small {
+    color:#fff;
+}
+.stars {
+    margin:20px auto 1px;
+}
+.well{
+    background-color: #e3e3e3;
+}
+.misPedidos{
+    display: none;
+
+}
+.imagenPedido{
+    width:100px;
+    /*height:250px;*/
+}
+
+.list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover{
+    background-color: #740606;
+    border-color:#e40613
+}
+
+.d3{
+    color: #382f30;
+    font-size: 5em;
+    font-weight: bold;
+    text-shadow: 0 1px 0 #aaa, 0 2px 0 #b9b9b9, 0 3px 0 #bbb, 0 4px 0 #c9c9c9, 0 5px 0 #ccc;
+}
+.ds {
+    color: #FFFFFF;
+    font-size: 2em;
+    font-weight: bold;
+    text-shadow: 0 1px 0 #ccc, 0 1px 0 #c9c9c9, 0 2px 0 #bbb, 0 3px 0 #b9b9b9, 0 4px 0 #aaa;
+}
 
