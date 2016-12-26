@@ -184,7 +184,6 @@ $(document).ready(function() {
                     if($('.item-defecto').length>0){
                         $('.item-defecto').remove();
                     }
-                    $('.list-group-item').remove();
 
 
 
@@ -197,12 +196,31 @@ $(document).ready(function() {
 
                         $('.list-group').append(nuevoItem);
 
-                        if (data[0]['id'] == 'invictus2') {
-                            while(data[0]['cantidad']>1)
-                                $('.list-group-item').remove();
-                            $('.titulo').text('Invictus 2.0');
-                            $('.imagenPedido').attr('src','../img/imgProduct/invictus2.jpg');
+                        var titulo=$('.titulo');
+                        var img=$('.imagenPedido');
+                        switch (data[i]['id']){
+                            case 'invictus2':
+                                titulo.text('Invictus 2.0');
+                                img.attr('src','../img/imgProduct/invictus2.jpg');
+                                break;
+                            case 'redskin':
+                                titulo.text('Red Skin');
+                                img.attr('src','../img/imgProduct/redskin.jpg');
+                                break;
+                            case 'target1negra':
+                                titulo.text('Target 1.0 Black');
+                                img.attr('src','../img/imgProduct/target1negra.jpg');
+                                break;
+                            case 'target1blanca':
+                                titulo.text('Target 1.0 White');
+                                img.attr('src','../img/imgProduct/target1blanca.jpg');
+                                break;
+                            case 'sniper':
+                                titulo.text('Sniper');
+                                img.attr('src','../img/imgProduct/sniper.jpg');
+                                break;
                         }
+
 
                     }
                 }
