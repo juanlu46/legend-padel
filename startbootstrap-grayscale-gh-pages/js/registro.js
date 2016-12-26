@@ -9,6 +9,9 @@ function validarForm(){
     var apellidos=$('#apellidos').val();
     var dni=$('#dni').val();
     var direccion=$('#direccion').val();
+    var provincia=$('#provincia').val();
+    var localidad=$('#localidad').val();
+    var cp=$('#cp').val();
     var telefono=$('#telefono').val();
     var email=$('#email').val();
     var password=$('#password').val();
@@ -21,54 +24,52 @@ function validarForm(){
     var expDni=new RegExp("^[0-9]{8}[a-zA-ZñÑ]$");
     var expEmail = new RegExp("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$");
     var expPass = new RegExp("^(?=.*[a-z])(?=.*[A-Z]).{6,15}$");
+    var expCP = new RegExp("^([1-9]{2}|[0-9][1-9]|[1-9][0-9])[0-9]{3}$");
+
 
 
     if(!expNombre.test(nombre)) {
-        mensaje.addClass('alert-danger');
         mensaje.html('Nombre Incorrecto<br/>');
-        mensaje.css('display','block');
         error=true;
     }
     if(!expApellidos.test(apellidos)) {
-        mensaje.addClass('alert-danger');
         mensaje.append('Apellidos Incorrecto<br/>');
-        mensaje.css('display','block');
         error=true;
     }
     if(!expTelefono.test(telefono)) {
-        mensaje.addClass('alert-danger');
         mensaje.append('Teléfono Incorrecto<br/>');
-        mensaje.css('display','block');
         error=true;
     }
     if(direccion==""){
-        mensaje.addClass('alert-danger');
         mensaje.append('La dirección no puede estar vacía<br/>');
-        mensaje.css('display','block');
+        error=true;
+    }
+    if(localidad==""){
+        mensaje.append('La localidad no puede estar vacía<br/>');
+        error=true;
+    }
+    if(provincia==""){
+        mensaje.append('La provincia no puede estar vacía<br/>');
+        error=true;
+    }
+    if(!expCP.test(cp)){
+        mensaje.append('Código Postal Incorrecto<br/>');
         error=true;
     }
     if(!expDni.test(dni)) {
-        mensaje.addClass('alert-danger');
         mensaje.append('Dni Incorrecto <br/>');
-        mensaje.css('display','block');
         error=true;
     }
     if(!expEmail.test(email)) {
-        mensaje.addClass('alert-danger');
         mensaje.append('Email Incorrecto <br/>');
-        mensaje.css('display','block');
         error=true;
     }
     if(!expPass.test(password)) {
-        mensaje.addClass('alert-danger');
         mensaje.append('Contraseña Incorrecta: La contraseña debe contener entre 6 y 15 caracteres, contener al menos una letra en mayúsculas y otra en minúsculas <br/>');
-        mensaje.css('display','block');
         error=true;
     }
     if(password!=password2) {
-        mensaje.addClass('alert-danger');
         mensaje.append('Las contraseñas no coinciden <br/>');
-        mensaje.css('display','block');
         error=true;
     }
 
@@ -81,6 +82,9 @@ function validarForm(){
             '"apellidos":"'+apellidos+'",'+
             '"telefono":"'+telefono+'",'+
             '"direccion":"'+direccion+'",'+
+            '"localidad":"'+localidad+'",'+
+            '"provincia":"'+provincia+'",'+
+            '"cp":"'+cp+'",'+
             '"dni":"'+dni+'",'+
             '"email":"'+email+'",'+
             '"password":"'+password+'"'+
@@ -92,15 +96,27 @@ function validarForm(){
             data:"datos="+sJson,
             dataType: 'text',
             success: function(data) {
-                sessionStorage.setItem('lgdusr', email);
-               mensaje.addClass('alert-success');
-                mensaje.text(data);
-                mensaje.css('display','block');
-                setTimeout("redirrecionar()", 5000);
+                if(data=='Email no valido' || data=='Datos incorrectos, introduzca un usuario válido' || data=='Se ha producido un error, este usuario ya existe'){
+                    mensaje.addClass('alert-danger');
+                    mensaje.text(data);
+                    mensaje.css('display', 'block');
+                }
+                else {
+                    sessionStorage.setItem('lgdusr', email);
+                    mensaje.addClass('alert-success');
+                    mensaje.text(data);
+                    mensaje.css('display', 'block');
+                    setTimeout("redirrecionar()", 5000);
+                    limpiarCampos();
+                }
             }
         });
-         limpiarCampos();
 
+
+    }
+    else{
+        mensaje.addClass('notice-danger');
+        mensaje.css('display','block');
     }
 
 }

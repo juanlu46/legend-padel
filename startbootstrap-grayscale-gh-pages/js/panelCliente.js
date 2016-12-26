@@ -174,8 +174,10 @@ $(document).ready(function() {
                 if(data=='<h3>Email no valido</h3>' || data=="" ){
                     var mensajes = $('.mensajesUsuarios');
                     mensajes.addClass('notice-danger');
-                    mensajes.append(data);
-                    mensajes.css('display', 'block'); 
+                    if(data!="") {
+                        mensajes.append(data);
+                        mensajes.css('display', 'block');
+                    }
                 }
                 else {
 

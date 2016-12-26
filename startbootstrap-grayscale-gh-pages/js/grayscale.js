@@ -46,7 +46,6 @@ $(document).on('click', function (e) {
 
 $(window).scroll(ajustarNavBar);
 $(document).ready(function(){
-    $('.btn-cerrar-login').on('click',cerrarFormLogin);
     $('.btnContactar').on('click',abrirCaptcha);
     addIconUsuarioMenu();
     actualizarCarrito();
@@ -68,6 +67,7 @@ $(document).ready(function(){
 
     $(".btn-identificate").on("click",cargarFormIdent);
     $('.btn-signin').on("click",validarLogin);
+    $('.btn-cerrar-login').on('click',cerrarFormLogin);
     /*********/
 
 });
@@ -137,7 +137,7 @@ function cargarFormIdent(){
 }
 /* JS DE LOGIN */
 function validarLogin(){
-    var expEmail = new RegExp("^[A-Za-z]*[_a-z0-9-]+(\.[_A-Z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$");
+    var expEmail = new RegExp("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$");
     var email=$("#inputEmail").val();
     var mendaje=$(".mensaje");
 
