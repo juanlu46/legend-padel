@@ -951,9 +951,11 @@ body {
 
   /*CSS PARA FORMULARIO LOGIN*/
 .btn-cerrar-login{
-  color:#D4D4D4;
-  margin-left:85%;
-  top:25%;
+  color: #D4D4D4;
+  position: relative;
+  float: right;
+  top: -2em;
+  right: -2em;
 }
 .desenfoque{
   display: none;

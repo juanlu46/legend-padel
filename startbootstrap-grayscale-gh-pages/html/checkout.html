@@ -105,7 +105,7 @@
                 </div>
                 <!--REVIEW ORDER END-->
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 col-md-pull-6 col-sm-pull-6">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 col-md-pull-3 col-sm-pull-3">
                 <!--SHIPPING METHOD-->
                 <div class="panel panel-info panel-envio">
                     <div class="panel-heading"><h4 class="ds text-center">Envío</h4></div>
@@ -152,12 +152,12 @@
                 <!--SHIPPING METHOD END-->
                 <!--CREDIT CART PAYMENT-->
                 <div class="panel panel-info">
-                    <div class="panel-heading"><h4 class="ds text-center"><span><i class="glyphicon glyphicon-lock"></i></span> Secure Payment</h4></div>
+                    <div class="panel-heading"><h4 class="ds text-center"><span><i class="glyphicon glyphicon-lock"></i></span> Pago seguro</h4></div>
                     <div class="panel-body">
                         <div class="form-group">
-                            <div class="col-md-12"><strong>Card Type:</strong></div>
+                            <div class="col-md-12"><strong>Tipo de tarjeta:</strong></div>
                             <div class="col-md-12">
-                                <select id="CreditCardType" name="CreditCardType" class="form-control">
+                                <select id="CreditCardType" name="tipo_tarjeta" class="form-control">
                                     <option value="5">Visa</option>
                                     <option value="6">MasterCard</option>
                                     <option value="7">American Express</option>
@@ -166,20 +166,20 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-md-12"><strong>Credit Card Number:</strong></div>
-                            <div class="col-md-12"><input type="text" class="form-control" name="car_number" value="" /></div>
+                            <div class="col-md-12"><strong>Nº tarjeta:</strong></div>
+                            <div class="col-md-12"><input type="text" class="form-control" name="num_tarjeta" maxlength="16" value="" /></div>
                         </div>
                         <div class="form-group">
-                            <div class="col-md-12"><strong>Card CVV:</strong></div>
-                            <div class="col-md-12"><input type="text" class="form-control" name="car_code" value="" /></div>
+                            <div class="col-md-12"><strong>Código seguro CVV:</strong></div>
+                            <div class="col-md-12"><input type="text" class="form-control" name="cvv_tarjeta" maxlength="3" value="" /></div>
                         </div>
                         <div class="form-group">
                             <div class="col-md-12">
-                                <strong>Expiration Date</strong>
+                                <strong>Caducidad:</strong>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <select class="form-control" name="">
-                                    <option value="">Month</option>
+                                    <option value="">Mes</option>
                                     <option value="01">01</option>
                                     <option value="02">02</option>
                                     <option value="03">03</option>
@@ -196,7 +196,7 @@
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <select class="form-control" name="">
-                                    <option value="">Year</option>
+                                    <option value="">Año</option>
                                     <option value="2015">2015</option>
                                     <option value="2016">2016</option>
                                     <option value="2017">2017</option>
@@ -213,23 +213,18 @@
                         </div>
                         <div class="form-group">
                             <div class="col-md-12">
-                                <span>Pay secure using your credit card.</span>
+                                <span>Pague de forma segura.</span>
                             </div>
                             <div class="col-md-12">
                                 <ul class="cards">
                                     <li class="visa hand">Visa</li>
                                     <li class="mastercard hand">MasterCard</li>
-                                    <li class="amex hand">Amex</li>
                                 </ul>
                                 <div class="clearfix"></div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <button type="submit" class="btn btn-primary btn-submit-fix">Place Order</button>
-                            </div>
-                        </div>
                     </div>
+                    <button type="submit" class="btn btn-success btn-group-justified btn-submit-fix">Pagar</button>
                 </div>
                 <!--CREDIT CART PAYMENT END-->
             </div>
@@ -239,6 +234,36 @@
     <div class="row cart-footer">
 
     </div>
+
+</div>
+<div class="desenfoque"></div>
+<div class="ContentLogin">
+
+    <div class="card card-container">
+        <a href="" class="glyphicon glyphicon-remove btn-cerrar-login"></a>
+        <img id="profile-img" class="profile-img-card" src="../img/user.svg" />
+        <p id="profile-name" class="profile-name-card"></p>
+        <form class="form-signin">
+            <span id="reauth-email" class="reauth-email"></span>
+            <input type="email" id="inputEmail" class="form-control" placeholder="Email" required >
+            <input type="password" id="inputPassword" class="form-control" placeholder="Contraseña" required>
+            <div id="remember" class="checkbox">
+                <label>
+                    <input type="checkbox" id="chkRecordar" value="Recordar"> Recordar
+                </label>
+            </div>
+            <button class="btn btn-login btn-lg btn-primary btn-block btn-signin" type="submit">Identificate</button>
+            <a href="#" class="forgot-password">
+                ¿Has olvidado tu contraseña?
+            </a>
+            <p>¿Usuario nuevo?
+                <a href="../html/form_registro.html" class="forgot-password">
+                    Crea tu cuenta aquí
+                </a>
+            </p>
+        </form><!-- /form -->
+    </div>
+    <div class="alert mensaje" role="alert"></div>
 </div>
 <script src="../terceros/jquery/jquery.min.js"></script>
 <script src="../terceros/bootstrap/js/bootstrap.min.js"></script>

@@ -111,6 +111,35 @@
         </div>
     </div>
 </div>
+<div class="desenfoque"></div>
+<div class="ContentLogin">
+
+    <div class="card card-container">
+        <a href="" class="glyphicon glyphicon-remove btn-cerrar-login"></a>
+        <img id="profile-img" class="profile-img-card" src="../img/user.svg" />
+        <p id="profile-name" class="profile-name-card"></p>
+        <form class="form-signin">
+            <span id="reauth-email" class="reauth-email"></span>
+            <input type="email" id="inputEmail" class="form-control" placeholder="Email" required >
+            <input type="password" id="inputPassword" class="form-control" placeholder="Contraseña" required>
+            <div id="remember" class="checkbox">
+                <label>
+                    <input type="checkbox" id="chkRecordar" value="Recordar"> Recordar
+                </label>
+            </div>
+            <button class="btn btn-login btn-lg btn-primary btn-block btn-signin" type="submit">Identificate</button>
+            <a href="#" class="forgot-password">
+                ¿Has olvidado tu contraseña?
+            </a>
+            <p>¿Usuario nuevo?
+                <a href="../html/form_registro.html" class="forgot-password">
+                    Crea tu cuenta aquí
+                </a>
+            </p>
+        </form><!-- /form -->
+    </div>
+    <div class="alert mensaje" role="alert"></div>
+</div>
 <script src="../terceros/jquery/jquery.min.js"></script>
 <script src="../terceros/bootstrap/js/bootstrap.min.js"></script>
 <script src="../js/carrito.js"></script>
