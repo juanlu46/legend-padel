@@ -1,6 +1,7 @@
 $(document).ready(inicio);
 
 function inicio(){
+    addIconUsuarioMenu();
     $('.btn-cerrar-login').on('click',cerrarFormLogin);
     $(".btn-identificate").on("click",cargarFormIdent);
     $('.btn-signin').on("click",validarLogin);
@@ -135,6 +136,9 @@ function validarLogin(){
                     mensajeAlert.css('display', 'block');
                     $('.ContentLogin').css('display','none');
                     $('.desenfoque').css('display','none');
+                    if($('#chkRecordar').prop('checked')) {
+                        localStorage.setItem('lgdusr',email);
+                    }
                     addIconUsuarioMenu();
                     location.href="http://localhost/legend-padel/index.html";
                 }
@@ -142,12 +146,6 @@ function validarLogin(){
         });
 
     }
-
-    if($('#chkRecordar').prop('checked')) {
-        localStorage.setItem('lgdusr',email);
-    }
-
-
 }
 function cerrarFormLogin(){
     $('.ContentLogin').css('display','none');
@@ -162,15 +160,14 @@ function addIconUsuarioMenu() {
             var emailUser='emailUser='+sessionStorage.getItem('lgdusr');
         $('.btn-identificate').addClass('dropdown menu-usuario');
         $('.btn-identificate').removeClass('btn-identificate');
-        $('aaIdentificate').remove();
 
         $.get('../php/devuelveCliente.php',emailUser,function(data){
             var jsonCliente = JSON.parse(data);
             var nombreCliente=jsonCliente.nombre;
             $('.menu-usuario').html('<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">' +
                 '<span class="glyphicon glyphicon-user"></span> <span class="nombre_usuario">'+nombreCliente+'</span><span class="caret"></span></a>' +
-                '<ul class="dropdown-menu dropdown-cart" role="menu">' +
-                '<li><a class="text-center" href="html/panelCliente.html">Mi cuenta</a></li>' +
+                '<ul class="dropdown-menu dropdown-login" role="menu">' +
+                '<li><a class="text-center" href="panelCliente.html">Mi cuenta</a></li>' +
                 '<li class="divider"></li><li class="pedidosCliente"><a class="text-center" href="#">Mis pedidos</a></li>' +
                 '<li class="divider"></li> <li class="desconexion"><a class="text-center" href="#">Desconexión</a></li></ul>');
             $('.desconexion').on('click',desconectarse);

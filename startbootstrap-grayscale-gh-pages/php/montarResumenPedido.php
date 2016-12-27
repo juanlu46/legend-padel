@@ -1,5 +1,8 @@
 <?php
 header("Content-type: text/html");
+header("Cache-Control: no-store, no-cache, must-revalidate");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
 $sEmail=$_GET['usuario'];
 $conn=new mysqli("localhost","root","","legendpadel");
 $select=$conn->query("SELECT c.id, c.cantidad, p.nombre, p.precio FROM carritos c, productos p WHERE p.id=c.id AND c.usuario='".$sEmail."'");

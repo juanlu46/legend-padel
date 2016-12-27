@@ -1,6 +1,9 @@
 <?php
 header("Content-type: text/html");
-$sEmail=$_GET['email'];
+header("Cache-Control: no-store, no-cache, must-revalidate");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+$sEmail=$_GET['usuario'];
 $conn=new mysqli("localhost","root","","legendpadel");
 $select=$conn->query("SELECT nombre,p.id id,precio,stock,cantidad FROM productos p, carritos c WHERE p.id=c.id AND usuario='".$sEmail."'");
 $sStock="";

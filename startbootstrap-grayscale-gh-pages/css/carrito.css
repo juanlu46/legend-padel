@@ -135,6 +135,54 @@ a:focus {
         border-bottom: 1px solid rgba(255, 255, 255, 0.3);
     }
 }
+
+/** icon-login **/
+ul.dropdown-login{
+    min-width:250px;
+    color:black;
+}
+ul.dropdown-login img{
+    height: 5em;
+}
+ul.dropdown-login li:hover a{
+    color:black !important;
+}
+ul.dropdown-login li .item{
+    display:block;
+    padding:3px 10px;
+    margin: 3px 0;
+}
+ul.dropdown-login li .item:hover{
+    background-color:#f3f3f3;
+}
+ul.dropdown-login li .item:after{
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+ul.dropdown-login li .item-left{
+    float:left;
+}
+ul.dropdown-login li .item-left img,
+ul.dropdown-login li .item-left span.item-info{
+    float:left;
+}
+ul.dropdown-login li .item-left span.item-info{
+    margin-left:10px;
+}
+ul.dropdown-login li .item-left span.item-info span{
+    display:block;
+}
+ul.dropdown-login li .item-right{
+    float:right;
+}
+ul.dropdown-login li .item-right button{
+    margin-top:14px;
+}
+
 .thumbnail{
     margin-right: 20px;
 }

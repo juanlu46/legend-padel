@@ -1,5 +1,8 @@
 <?php
 header("Content-type: text/html");
+header("Cache-Control: no-store, no-cache, must-revalidate");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
 $sEmail=$_GET['usuario'];
 $conn=new mysqli("localhost","root","","legendpadel");
 $select=$conn->query("SELECT nombre,p.id id,precio,cantidad FROM productos p, carritos c WHERE p.id=c.id AND usuario='".$sEmail."'");
@@ -11,6 +14,7 @@ while($res=$select->fetch_assoc()) {
             <span class="item-left">
                 <img src="img/imgProduct/<?php echo $res['id']; ?>.jpg" alt="articulo_carrito"></img>
                 <span class="item-info">
+                    <span class="item_cantidad"><?php echo $res['cantidad']; ?>x</span>
                     <span class="item_name"><?php echo $res['nombre']; ?></span>
                     <span class="item_precio"><?php echo $fTotal ?></span>
                 </span>

@@ -131,58 +131,61 @@ function cargarFormIdent(){
         inputEmail.val(sessionStorage.getItem('lgdusr'));
     }
     if(localstorage.getItem('lgdusr')!=null ){
-        inputEmail.val(localstorage.getItem('lgdusr'));
+        inputEmail.val(localStorage.getItem('lgdusr'));
     }
 
 }
 /* JS DE LOGIN */
-function validarLogin(){
+function validarLogin() {
     var expEmail = new RegExp("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$");
-    var email=$("#inputEmail").val();
-    var mendaje=$(".mensaje");
+    var email = $("#inputEmail").val();
+    var mendaje = $(".mensaje");
 
     //Verifica la existencia de una letra minuscula(?=.*[a-z])  y (?=.*[A-Z]) la de una letra en mayusculas.
 // Por ultimo la longitud la verificamos con los valores entre llaves {6,15}.
     var expPass = new RegExp("^(?=.*[a-z])(?=.*[A-Z]).{6,15}$");
-    var password=$("#inputPassword").val();
-    if(!expEmail.test(email) && !expPass.test(password)) {
+    var password = $("#inputPassword").val();
+    if (!expEmail.test(email) && !expPass.test(password)) {
         mendaje.addClass('alert-danger');
         mendaje.text('Email y Contraseña Incorrectos');
         mendaje.css('display', 'block');
     }
-   else if(!expPass.test(password)) {
+    else if (!expPass.test(password)) {
         mendaje.addClass('alert-danger');
         mendaje.text('Contraseña Incorrecta');
-        mendaje.css('display','block');
-        }
-    else  if(!expEmail.test(email)) {
+        mendaje.css('display', 'block');
+    }
+    else if (!expEmail.test(email)) {
         mendaje.addClass('alert-danger');
         mendaje.text('Email Incorrecto');
-        mendaje.css('display','block');
+        mendaje.css('display', 'block');
     }
-    else{
-        var  arrayJson='{"email":"'+email+'",'+
-            '"password":"'+password+'"}';
+    else {
+        var arrayJson = '{"email":"' + email + '",' +
+            '"password":"' + password + '"}';
 
         $.ajax({
             url: "php/usuarios.php",
             type: 'POST',
-            data:"datos="+arrayJson,
+            data: "datos=" + arrayJson,
             dataType: 'text',
-            success: function(data) {
-                var mensajeAlert=$(".mensaje");
-                if(data=='Datos incorrectos, introduzca un usuario válido'){
+            success: function (data) {
+                var mensajeAlert = $(".mensaje");
+                if (data == 'Datos incorrectos, introduzca un usuario válido') {
                     mensajeAlert.removeClass('alert-success');
                     mensajeAlert.addClass('alert-danger');
                     mensajeAlert.text(data);
-                    mensajeAlert.css('display','block');
-                }else {
+                    mensajeAlert.css('display', 'block');
+                } else {
                     sessionStorage.setItem('lgdusr', email);
                     mensajeAlert.addClass('alert-success');
                     mensajeAlert.text(data);
                     mensajeAlert.css('display', 'block');
-                    $('.ContentLogin').css('display','none');
-                    $('.desenfoque').css('display','none');
+                    $('.ContentLogin').css('display', 'none');
+                    $('.desenfoque').css('display', 'none');
+                    if ($('#chkRecordar').prop('checked')) {
+                        localStorage.setItem('lgdusr', email);
+                    }
                     addIconUsuarioMenu();
                     location.reload();
                 }
@@ -191,9 +194,6 @@ function validarLogin(){
 
     }
 
-    if($('#chkRecordar').prop('checked')) {
-        localStorage.setItem('lgdusr',email);
-    }
 
 
 }
@@ -210,14 +210,13 @@ function addIconUsuarioMenu() {
             var emailUser='emailUser='+sessionStorage.getItem('lgdusr');
     $('.btn-identificate').addClass('dropdown menu-usuario');
     $('.btn-identificate').removeClass('btn-identificate');
-    $('aaIdentificate').remove();
 
         $.get('php/devuelveCliente.php',emailUser,function(data){
             var jsonCliente = JSON.parse(data);
             var nombreCliente=jsonCliente.nombre;
                 $('.menu-usuario').html('<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">' +
                 '<span class="glyphicon glyphicon-user"></span> <span class="nombre_usuario">'+nombreCliente+'</span><span class="caret"></span></a>' +
-                '<ul class="dropdown-menu dropdown-cart" role="menu">' +
+                '<ul class="dropdown-menu dropdown-login" role="menu">' +
                 '<li><a class="text-center" href="html/panelCliente.html">Mi cuenta</a></li>' +
                 '<li class="divider"></li><li class="pedidosCliente"><a class="text-center" href="#">Mis pedidos</a></li>' +
                 '<li class="divider"></li> <li class="desconexion"><a class="text-center" href="#">Desconexión</a></li></ul>');
@@ -255,7 +254,8 @@ function actualizarCarrito(){
             $(".carrito_n_productos").text(nElementos);
            $.get('php/montarNavCarrito.php?carrito='+encodeURIComponent(sCarrito),function(sProductos){
                 $('.dropdown-cart').find('.divider').after(sProductos);
-               cargarEventosBotonEliminarProducto()
+               cargarEventosBotonEliminarProducto();
+               actualizarNumeroCarrito();
            });
         }
     }
@@ -263,7 +263,8 @@ function actualizarCarrito(){
         sSesion=sessionStorage.getItem("lgdusr");
         $.get('php/montarNavCarritoUsuario.php?usuario='+encodeURIComponent(sSesion),function(sProductos){
             $('.dropdown-cart').find('.divider').after(sProductos);
-            cargarEventosBotonEliminarProducto()
+            cargarEventosBotonEliminarProducto();
+            actualizarNumeroCarrito();
         });
     }
 
@@ -333,7 +334,7 @@ function cargarEventosBotonCarrito(){
 }
 
 function actualizarNumeroCarrito(){
-    nCantidad=0;
+    var nCantidad=0;
     $(".item_carrito").each(function(){
         nCantidad+=parseInt($(this).find('.item_cantidad').text().replace('x',''));
     });
