@@ -19,7 +19,7 @@ function inicio(){
     }
     else{
         sSesion=sessionStorage.getItem("lgdusr");
-        $.get('php/montarCarritoUsuario.php?usuario='+encodeURIComponent(sSesion),function(sProductos){
+        $.get('../php/montarCarritoUsuario.php?usuario='+encodeURIComponent(sSesion),function(sProductos){
             $('#productos').find('tr').first().before(sProductos);
             calcularTotales();
         });
@@ -57,7 +57,7 @@ function guardarCarrito(){
     }
     else{
         sSesion=sessionStorage.getItem("lgdusr");
-        $.get('php/guardarCarrito.php?usuario='+encodeURIComponent(sSesion)+'&carrito='+encodeURIComponent(sCarrito));
+        $.get('../php/guardarCarrito.php?usuario='+encodeURIComponent(sSesion)+'&carrito='+encodeURIComponent(sCarrito));
     }
 }
 
@@ -117,7 +117,7 @@ function validarLogin(){
             '"password":"'+password+'"}';
 
         $.ajax({
-            url: "php/usuarios.php",
+            url: "../php/usuarios.php",
             type: 'POST',
             data:"datos="+arrayJson,
             dataType: 'text',
@@ -136,7 +136,7 @@ function validarLogin(){
                     $('.ContentLogin').css('display','none');
                     $('.desenfoque').css('display','none');
                     addIconUsuarioMenu();
-                    location.reload();
+                    location.href="http://localhost/legend-padel/index.html";
                 }
             }
         });
@@ -164,7 +164,7 @@ function addIconUsuarioMenu() {
         $('.btn-identificate').removeClass('btn-identificate');
         $('aaIdentificate').remove();
 
-        $.get('php/devuelveCliente.php',emailUser,function(data){
+        $.get('../php/devuelveCliente.php',emailUser,function(data){
             var jsonCliente = JSON.parse(data);
             var nombreCliente=jsonCliente.nombre;
             $('.menu-usuario').html('<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">' +
