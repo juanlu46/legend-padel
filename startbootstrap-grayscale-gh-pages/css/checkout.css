@@ -35,7 +35,7 @@ h6 {
     color: #FFFFFF;
     font-size: 2em;
     font-weight: bold;
-    text-shadow: 0 1px 0 #ccc, 0 1px 0 #c9c9c9, 0 2px 0 #bbb, 0 3px 0 #b9b9b9, 0 4px 0 #aaa;
+    text-shadow: 0 1px 0 #ccc, 0 1px 0 #c9c9c9, 0 1px 0 #bbb, 0 2px 0 #b9b9b9, 0 3px 0 #aaa;
 }
 a {
     color: #9f0606;

@@ -171,55 +171,48 @@ $(document).ready(function() {
             var jsonCliente = JSON.parse(data);
             var dni='usuario='+jsonCliente.dni;
             $.get('../php/devolverPedidos.php',dni,function(data){
-                if(data=='<h3>Email no valido</h3>' || data=="" ){
-                    var mensajes = $('.mensajesUsuarios');
-                    mensajes.addClass('notice-danger');
-                    if(data!="") {
-                        mensajes.append(data);
-                        mensajes.css('display', 'block');
-                    }
-                }
-                else {
-
+                if(data!="" ){
                     if($('.item-defecto').length>0){
                         $('.item-defecto').remove();
                     }
 
-
-
                     for(var i=0;i<data.length;i++) {
-                        var nuevoItem = $('<i href="#" class="list-group-item active"><div class="media col-md-3"><figure class="pull-left">' +
-                            '<img class="media-object img-rounded img-responsive imagenPedido" src="#" alt="Producto"></figure></div><div class="col-md-6">' +
-                            '<h4 class="list-group-item-heading titulo"></h4><p class="list-group-item-text descripcion"></p> </div> ' +
-                            '<div class="col-md-3 text-center"><h2><small></small></h2>' +
-                            ' <button type="button" class="btn btn-default btn-lg btn-block btn-eliminar">Eliminar</button> </div> </i>');
 
-                        $('.list-group').append(nuevoItem);
+                        var titulo=data[i]['nombre'];
+                        var precio=data[i]['precio'];
+                        var cantidad=data[i]['cantidad'];
+                        var total=data[i]['total'];
+                        var direccion=data[i]['direccion'];
+                        var localidad=data[i]['localidad'];
+                        var provincia=data[i]['provincia'];
+                        var cp=data[i]['cp'];
+                        var telefono=data[i]['telefono'];
 
-                        var titulo=$('.titulo');
-                        var img=$('.imagenPedido');
+                        var img='';
                         switch (data[i]['id']){
                             case 'invictus2':
-                                titulo.text('Invictus 2.0');
-                                img.attr('src','../img/imgProduct/invictus2.jpg');
+                                img='../img/imgProduct/invictus2.jpg';
                                 break;
                             case 'redskin':
-                                titulo.text('Red Skin');
-                                img.attr('src','../img/imgProduct/redskin.jpg');
+                                img='../img/imgProduct/redskin.jpg';
                                 break;
                             case 'target1negra':
-                                titulo.text('Target 1.0 Black');
-                                img.attr('src','../img/imgProduct/target1negra.jpg');
+                                img='../img/imgProduct/target1negra.jpg';
                                 break;
                             case 'target1blanca':
-                                titulo.text('Target 1.0 White');
-                                img.attr('src','../img/imgProduct/target1blanca.jpg');
+                                img='../img/imgProduct/target1blanca.jpg';
                                 break;
                             case 'sniper':
-                                titulo.text('Sniper');
-                                img.attr('src','../img/imgProduct/sniper.jpg');
+                                img='../img/imgProduct/sniper.jpg';
                                 break;
                         }
+                        var nuevoItem = $('<i href="#" class="list-group-item active"><div class="media col-md-3"><figure class="pull-left">' +
+                            '<img class="media-object img-rounded img-responsive" src='+img+' alt="Producto"></figure></div><div class="col-md-6">' +
+                            '<h4 class="list-group-item-heading">'+titulo+'</h4><p class="list-group-item-text descripcion"></p> </div> ' +
+                            '<div class="col-md-3 text-center"><h2><small></small></h2></div> </i>');
+
+
+                        $('.list-group').append(nuevoItem);
 
 
                     }

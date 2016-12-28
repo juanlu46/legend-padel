@@ -10,18 +10,15 @@ if ($mysqli->connect_errno) {
 else{
     $mysqli->query("SET NAMES utf8");
     $susuario = $_REQUEST['usuario'];
-
-    if($susuario!=NULL){
-        $expEmail ="/^[A-Za-z]*[_a-z0-9-].(\.[_A-Z0-9-].)*@[a-z0-9-].(\.[a-z0-9-].)*(\.[a-z]{2,3})$/";
-        $query="SELECT id,cantidad FROM carritos WHERE usuario='".$susuario."'";
-        $result = $mysqli->query($query);
-        $res=array();
-        while($array=$result->fetch_assoc()){
-            $res[]=$array;
-        }
-        echo json_encode($res);
-    } else
-        echo '<h3>Email no valido</h3>';
+    
+    $query="SELECT p.nombre,p.precio,l.cantidad,pe.total,di.direccion,di.localidad,.di.provincia,di.cp,di.telefono FROM productos p,pedidos pe,direcciones_envio di,lote l WHERE di.dni_usuario=pe.dni_usuario and p.id=l.id_producto and pe.id_envio=di.id and l.id=pe.id_lote and pe.dni_usuario='".$susuario."'";
+    $result = $mysqli->query($query);
+    $res=array();
+    while($array=$result->fetch_assoc()){
+          $res[]=$array;
+    }
+    echo json_encode($res);
+    
 }
 $mysqli->close();
 ?>
