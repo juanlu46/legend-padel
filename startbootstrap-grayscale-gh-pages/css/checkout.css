@@ -25,6 +25,15 @@ h6 {
     display:none;
     margin-top:2em;
 }
+.titulo-producto{
+    font-size: 1.7em;
+}
+.mediano{
+    font-size: 1.3em;
+}
+.grande{
+    font-size: 1.8em;
+}
 .d3{
     color: #382f30;
     font-size: 5em;
@@ -109,6 +118,51 @@ a:focus {
     -o-animation: ld 1s ease-in-out infinite;
     animation: ld 1s ease-in-out infinite;
 }
+
+.btn-m-progress {
+    position: relative;
+    opacity: .8;
+    color: transparent !important;
+    text-shadow: none !important;
+}
+
+.btn-m-progress:hover,
+.btn-m-progress:active,
+.btn-m-progress:focus {
+    cursor: default;
+    color: transparent;
+    outline: none !important;
+    box-shadow: none;
+}
+
+.btn-m-progress:before {
+    content: '';
+
+    display: inline-block;
+
+    position: absolute;
+    background: transparent;
+    border: 1px solid #fff;
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+
+    box-sizing: border-box;
+
+    top: 50%;
+    left: 50%;
+    margin-top: -12px;
+    margin-left: -12px;
+
+    width: 24px;
+    height: 24px;
+
+    -webkit-animation: ld 1s ease-in-out infinite;
+    -moz-animation:    ld 1s ease-in-out infinite;
+    -o-animation:      ld 1s ease-in-out infinite;
+    animation:         ld 1s ease-in-out infinite;
+}
+
 .container{
     margin-top: 35px;
 }
@@ -719,4 +773,27 @@ hr{
 .forgot-password:active,
 .forgot-password:focus{
     color: rgb(12, 97, 33);
+}
+
+/*** ALERTS **/
+.notice {
+    padding: 15px;
+    background-color: #fafafa;
+    border-left: 6px solid #7f7f84;
+    margin-bottom: 10px;
+    -webkit-box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
+    -moz-box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
+    box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
+}
+.notice-success {
+    border-color: #80D651;
+}
+.notice-success>strong {
+    color: #80D651;
+}
+.notice-danger {
+    border-color: #d73814;
+}
+.notice-danger>strong {
+    color: #d73814;
 }

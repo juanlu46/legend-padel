@@ -17,11 +17,11 @@ while($producto=$select->fetch_assoc()){
             <img class="img-responsive" alt="foto_producto" src="../img/imgProduct/<?php echo $producto['id']; ?>.jpg" ></img>
         </div>
         <div class="col-sm-6 col-xs-6">
-            <div class="col-xs-12"><?php echo $producto['nombre']; ?></div>
-            <div class="col-xs-12"><small>Cantidad: <span><?php echo $producto['cantidad']; ?></span></small></div>
+            <div class="col-xs-12 titulo-producto"><strong><?php echo $producto['nombre']; ?></strong></div>
+            <div class="col-xs-12 mediano">Cantidad: <span><strong><?php echo $producto['cantidad']; ?></strong></span></div>
         </div>
         <div class="col-sm-3 col-xs-3 text-right">
-            <h6><?php echo $producto['precio']*$producto['cantidad']; ?><span> €</span></h6>
+            <h4><?php echo $producto['precio']*$producto['cantidad']; ?><span> €</span></h4>
         </div>
     </div>
 <?php
@@ -33,12 +33,12 @@ if($resultados) {
     </div>
     <div class="form-group">
         <div class="col-xs-12">
-            <strong>Subtotal</strong>
-            <div class="pull-right"><span><?php echo round($subtotal, 2); ?></span><span> €</span></div>
+            <span class="grande">Subtotal</span>
+            <div class="pull-right mediano"><strong><?php echo round($subtotal, 2); ?></strong><strong> €</strong></div>
         </div>
-        <div class="col-xs-12">
-            <small>Envío</small>
-            <div class="pull-right"><span>6 €</span></div>
+        <div class="col-xs-12 mediano">
+            <strong>Envío</strong>
+            <div class="pull-right"><strong>6 €</strong></div>
         </div>
     </div>
     <div class="form-group">
@@ -46,8 +46,8 @@ if($resultados) {
     </div>
     <div class="form-group">
         <div class="col-xs-12">
-            <strong>Total</strong>
-            <div class="pull-right"><span><?php echo round(($subtotal + 6), 2); ?></span><span> €</span></div>
+            <strong class="grande">Total</strong>
+            <div class="pull-right grande"><strong><?php echo round(($subtotal + 6), 2); ?></strong><strong> €</strong></div>
         </div>
     </div>
     <?php

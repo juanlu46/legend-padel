@@ -5,6 +5,12 @@ function inicio(){
     $('.btn-cerrar-login').on('click',cerrarFormLogin);
     $(".btn-identificate").on("click",cargarFormIdent);
     $('.btn-signin').on("click",validarLogin);
+    $('.btn-actualizar').on('click',calcularTotalProductos);
+    $('.btn-comprar').on('click',function(){
+        if($('.producto').length>0){
+            location.href='http://localhost/legend-padel/html/checkout.html';
+        }
+    });
     if(sessionStorage.getItem("lgdusr")==null){
         if(sessionStorage.getItem("nusrcrt")!=null){
             sCarrito=sessionStorage.getItem("nusrcrt");
@@ -32,14 +38,16 @@ function inicio(){
 
 function noProductos(){
     $('#productos').find('tr').first().before('<tr> <td colspan="5" class="col-sm-8 col-md-6"> <h1 class="text-center">No hay productos en el carrito</h1> </td> </tr>');
-    $(".envio_carrito").text("0 €");
+    $(".envio_carrito, .total_carrito").text("0 €");
 }
 
 function aplicarManejadoresBoton(){
     $(".producto").each(function(){
-        oProducto=$(this);
         $(this).find("button").on('click',function(){
-            oProducto.remove();
+            $(this).parents('.producto').remove();
+            calcularTotales();
+            if($('.producto').length==0)
+                noProductos();
             guardarCarrito();
         });
     });
@@ -69,6 +77,15 @@ function calcularTotales(){
     });
     $(".subtotal_carrito").text(fSubTotal.toFixed(2)+" €");
     $(".total_carrito").text((fSubTotal+6).toFixed(2)+" €");
+}
+
+function calcularTotalProductos(){
+    $('.producto').each(function(){
+        var cantidad=$(this).find('.cantidad_producto').val();
+        var precioUnitario=parseFloat($(this).find('.precio').text().replace(' €',''));
+        $(this).find('.total_producto').text((cantidad*precioUnitario).toFixed(2));
+    });
+    calcularTotales();
 }
 
 function cargarFormIdent(){

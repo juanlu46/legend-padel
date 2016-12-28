@@ -20,7 +20,7 @@ function inicio(){
                 $('.productos').append(sProductos);
                 var oPanelPedido=$('.panel-pedido');
                 oPanelPedido.css('display', 'block');
-                oPanelPedido.find('.btn-continar').on('click',function(){
+                oPanelPedido.find('.btn-continuar').on('click',function(){
                     cargarPanelEnvio();
                 });
 
@@ -32,6 +32,7 @@ function inicio(){
         $('.aviso').html('INICIE SESIÓN Y HAGA SU PEDIDO').css('display','block');
     }
 }
+
 function cargarFormIdent(){
     $('.btn-cerrar-login').on('click',function(){
         return false;
@@ -164,10 +165,9 @@ function manejadoresCartHead(){
     });
     $('.step_envio').find('a').on('click',function(event){
         event.preventDefault();
-        $('.panel-info').css('display','none');
+        cargarPanelEnvio();
         $('.step_complete').removeClass('step_complete');
         $('.step_pedido , .step_pedido .step_flecha, .step_envio, .step_envio .step_flecha').addClass('step_complete');
-        $('.panel-envio').css('display','block');
     });
     $('.step_pago').on('click',function(event){
         event.preventDefault();
@@ -182,9 +182,9 @@ function cargarPanelEnvio(){
     $('.step_envio, .step_envio .step_flecha').addClass('step_complete');
     $('.btn_mi_direccion').on('click',function(){
         var oBoton=$(this);
-        oBoton.addClass("m-progress");
+        oBoton.addClass("btn-m-progress");
         $.get('../php/getDireccion.php?usuario='+encodeURIComponent(sessionStorage.getItem('lgdusr')),function(oDireccion){
-            oBoton.removeClass("m-progress");
+            oBoton.removeClass("btn-m-progress");
             oBoton.css('display','none');
             $('input[name="direccion"]').val(oDireccion['direccion']);
             $('input[name="localidad"]').val(oDireccion['localidad']);
@@ -214,38 +214,52 @@ function validarFormDireccion(){
     var expEmail = new RegExp("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$");
     if(!expDireccion.test(oDireccion.val())){
         bCorrecto=false;
-        iTiemp+=3;
-        sErrores+="La dirección debe ser válida y no vacía<br>";
-    }else if(!expNombre.test(oLocalidad.val())){
-        bCorrecto=false;
-        iTiemp+=3;
-        sErrores+="La localidad debe ser válida y no vacía<br>";
+        iTiempo+=3;
+        sErrores+="- La dirección debe ser válida y no vacía<br>";
     }
-    else if(!expNombre.test(oProvincia.val())){
+    if(!expNombre.test(oLocalidad.val())){
         bCorrecto=false;
-        iTiemp+=3;
-        sErrores+="La provincia debe ser válida y no vacía<br>";
+        iTiempo+=3;
+        sErrores+="- La localidad debe ser válida y no vacía<br>";
     }
-    else if(!expCP.test(oCP.val())){
+
+    if(!expNombre.test(oProvincia.val())){
         bCorrecto=false;
-        iTiemp+=3;
-        sErrores+="El código postal debe ser válido y no vacío<br>";
+        iTiempo+=3;
+        sErrores+="- La provincia debe ser válida y no vacía<br>";
     }
-    else if(!expTelefono.test(oTelefono.val())){
+
+    if(!expCP.test(oCP.val())){
         bCorrecto=false;
-        iTiemp+=3;
-        sErrores+="El código postal debe ser válido y no vacío<br>";
+        iTiempo+=3;
+        sErrores+="- El código postal debe ser válido y no vacío<br>";
+    }
+
+    if(!expTelefono.test(oTelefono.val())){
+        bCorrecto=false;
+        iTiempo+=3;
+        sErrores+="- El código postal debe ser válido y no vacío<br>";
     }
 
     if(bCorrecto){
-
+        cargarPanelPago();
     }
     else{
         var oAlert=$(".mensajesUsuarios");
-        oAlert.addClass("notice-success").html('<span class="glyphicon glyphicon-shopping-cart"></span> Artículo añadido');
+        oAlert.addClass("notice-success").html('<span class="glyphicon glyphicon-alert"></span> Algo va mal:<br>'+sErrores);
         oAlert.css({"display":"block","position":"fixed","top":"3em","left":"1em","font-size":"1.4em","margin":"auto","color":"black"});
         setTimeout(function() {
             oAlert.css({"display":"none","position":"","top":"","left":"","font-size":"","margin":""});
-        },3000);
+        },iTiempo*1000);
+    }
+}
+
+function cargarPanelPago(){
+    $('.panel-envio').css('display','none');
+    var oPanelPago=$('.panel-pago');
+    var annoActual=(new Date).getFullYear();
+    var selectAnnoCaducidad=oPanelPago.find('select[name="a-caducidad"]');
+    for(i=0;i<10;i++){
+        selectAnnoCaducidad.append('<option value="'+(annoActual+i)+'">'+(annoActual+i)+'</option>');
     }
 }
