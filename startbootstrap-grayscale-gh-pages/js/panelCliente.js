@@ -189,7 +189,7 @@ $(document).ready(function() {
                         var telefono=data[i]['telefono'];
 
                         var img='';
-                        switch (data[i]['id']){
+                        switch (data[i]['id_producto']){
                             case 'invictus2':
                                 img='../img/imgProduct/invictus2.jpg';
                                 break;
@@ -206,10 +206,15 @@ $(document).ready(function() {
                                 img='../img/imgProduct/sniper.jpg';
                                 break;
                         }
-                        var nuevoItem = $('<i href="#" class="list-group-item active"><div class="media col-md-3"><figure class="pull-left">' +
+
+                        var nuevoItem='<i href="#" class="list-group-item active" style="font-family: \'Roboto Condensed\', "Helvetica Neue", Helvetica, Arial, sans-serif;"><div class="media col-md-3"><figure class="pull-left">' +
                             '<img class="media-object img-rounded img-responsive" src='+img+' alt="Producto"></figure></div><div class="col-md-6">' +
-                            '<h4 class="list-group-item-heading">'+titulo+'</h4><p class="list-group-item-text descripcion"></p> </div> ' +
-                            '<div class="col-md-3 text-center"><h2><small></small></h2></div> </i>');
+                            '<h3 class="list-group-item-heading">'+titulo+'</h3><p class=" text-center">' +
+                            'Su pedido se enviará a la siguiente dirección:</p><p class="text-center"><strong>Dirrección: </strong>'+direccion+'</p>' +
+                            '<p class="text-center"><strong>Provincia: </strong>'+provincia+'</p><p class="text-center"><strong>Localidad: </strong>'+localidad+'</p>' +
+                            '<p class="text-center"><strong>Código postal: </strong>'+cp+'</p><p class="text-center"><strong>Teléfono: </strong>'+telefono+'</p>' +
+                            '<p class="text-center" style="display: inline"><strong>Cantidad: </strong>'+cantidad+'</p>' +
+                            '<p class="text-right"  style="display: inline;margin-left: 10em"><strong>Total:</strong>'+total+'</p></div></i>';
 
 
                         $('.list-group').append(nuevoItem);
