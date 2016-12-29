@@ -163,6 +163,7 @@ section{
 
 /*** ALERTS **/
 .notice {
+    color: black;
     padding: 15px;
     background-color: #fafafa;
     border-left: 6px solid #7f7f84;

@@ -69,7 +69,12 @@ $(document).ready(function(){
     $('.btn-signin').on("click",validarLogin);
     $('.btn-cerrar-login').on('click',cerrarFormLogin);
     /*********/
-
+    var url=window.location.href;
+    var a=url.split('?');
+    if(a[1]=='login') {
+        cargarFormIdent();
+        window.location.href='http://localhost/legend-padel/index.html';
+    }
 });
 
 function cargarEventoBotonRedes(){
@@ -145,6 +150,7 @@ function validarLogin() {
 // Por ultimo la longitud la verificamos con los valores entre llaves {6,15}.
     var expPass = new RegExp("^(?=.*[a-z])(?=.*[A-Z]).{6,15}$");
     var password = $("#inputPassword").val();
+    
     if (!expEmail.test(email) && !expPass.test(password)) {
         mendaje.addClass('alert-danger');
         mendaje.text('Email y Contraseña Incorrectos');

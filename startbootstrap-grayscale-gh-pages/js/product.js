@@ -122,9 +122,6 @@ function cambiarFoto(img){
     var src=img.attr('src');
     clearTimeout(intervalo);
     var id=$(img).parent().attr('id');
-    $('#'+id+' img').attr('src','img/3D/'+producto+'/Render0000.jpg');
-    $('#'+id+' img').attr('class','img3d');
-    $('.img3d').on('click',swapImage);
     $('.fotoPrincipal').attr('src',src);
 }
 function cargarFotosDefecto(){
