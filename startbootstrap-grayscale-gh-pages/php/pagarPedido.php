@@ -2,9 +2,12 @@
 header("Cache-Control: no-store, no-cache, must-revalidate");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
-/**
- * Created by PhpStorm.
- * User: Juanlu
- * Date: 26/12/2016
- * Time: 18:13
- */
+require_once 'apiRedsysWs.php';
+$tpv=new RedsysAPIWs;
+$tpv->setParameter("DS_MERCHANT_AMOUNT",$_GET['cantidad']);
+$tpv->setParameter("DS_MERCHANT_ORDER",$_GET['id']);
+$tpv->setParameter("DS_MERCHANT_MERCHANTCODE",126590918);
+$tpv->setParameter("DS_MERCHANT_CURRENCY",978);
+$tpv->setParameter("DS_MERCHANT_TERMINAL",002);
+$tpv->setParameter("DS_MERCHANT_TRANSACTIONTYPE",0);
+$TPV->setParameter("DS_MERCHANT_MERCHANTURL",);

@@ -11,7 +11,7 @@
     <link href="../terceros/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-    <link href="../css/checkout.css?v=001" rel="stylesheet" type="text/css">
+    <link href="../css/checkout.css?v=002" rel="stylesheet" type="text/css">
 </head>
 <body>
 <nav class="navbar navbar-custom navbar-fixed-top top-nav-collapse" role="navigation">
@@ -157,11 +157,16 @@
                         <div class="form-group">
                             <div class="col-md-12"><strong>Tipo de tarjeta:</strong></div>
                             <div class="col-md-12">
-                                <select id="CreditCardType" name="tipo_tarjeta" class="form-control">
+                                <select id="tipo_tarjeta" name="tipo_tarjeta" class="form-control">
+                                    <option value="t">Seleccione una tarjeta</option>
                                     <option value="v">Visa</option>
                                     <option value="m">MasterCard</option>
                                 </select>
                             </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12"><strong>Titular:</strong></div>
+                            <div class="col-md-12"><input type="text" class="form-control" name="tit_tarjeta" maxlength="60" value="" /></div>
                         </div>
                         <div class="form-group">
                             <div class="col-md-12"><strong>Nº tarjeta:</strong></div>
@@ -178,15 +183,15 @@
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <select class="form-control" name="m-caducidad">
                                     <option value="">Mes</option>
-                                    <option value="01">01</option>
-                                    <option value="02">02</option>
-                                    <option value="03">03</option>
-                                    <option value="04">04</option>
-                                    <option value="05">05</option>
-                                    <option value="06">06</option>
-                                    <option value="07">07</option>
-                                    <option value="08">08</option>
-                                    <option value="09">09</option>
+                                    <option value="1">01</option>
+                                    <option value="2">02</option>
+                                    <option value="3">03</option>
+                                    <option value="4">04</option>
+                                    <option value="5">05</option>
+                                    <option value="6">06</option>
+                                    <option value="7">07</option>
+                                    <option value="8">08</option>
+                                    <option value="9">09</option>
                                     <option value="10">10</option>
                                     <option value="11">11</option>
                                     <option value="12">12</option>
@@ -212,7 +217,7 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-success btn-group-justified btn-submit-fix">Pagar</button>
+                    <button type="button" class="btn btn-success btn-group-justified btn-pagar">Pagar</button>
                 </div>
                 <!--CREDIT CART PAYMENT END-->
             </div>
@@ -257,6 +262,6 @@
 <div class="notice mensajesUsuarios"></div>
 <script src="../terceros/jquery/jquery.min.js"></script>
 <script src="../terceros/bootstrap/js/bootstrap.min.js"></script>
-<script src="../js/checkout.js?v=006"></script>
+<script src="../js/checkout.js?v=013"></script>
 </body>
 </html>

@@ -8,6 +8,7 @@ function inicio(){
     $('.btn-cerrar-login').on('click',cerrarFormLogin);
     $(".btn-identificate").on("click",cargarFormIdent);
     $('.btn-signin').on("click",validarLogin);
+    $('.btn-pagar').on('click',validarPago);
     if(sessionStorage.getItem('lgdusr')!=null) {
         $.get('../php/montarResumenPedido.php?usuario='+encodeURIComponent(sessionStorage.getItem('lgdusr')) , function (sProductos) {
             $('.m-progress').css('display', 'none');
@@ -164,6 +165,7 @@ function manejadoresCartHead(){
         vistoEnvio=false;
     });
     $('.step_envio').find('a').on('click',function(event){
+        vistoEnvio=false;
         event.preventDefault();
         cargarPanelEnvio();
         $('.step_complete').removeClass('step_complete');
@@ -255,11 +257,103 @@ function validarFormDireccion(){
 }
 
 function cargarPanelPago(){
+    vistoEnvio=true;
     $('.panel-envio').css('display','none');
+    $('.step_pago, .step_pago .step_flecha').addClass('step_complete');
     var oPanelPago=$('.panel-pago');
+    oPanelPago.css('display','block');
     var annoActual=(new Date).getFullYear();
     var selectAnnoCaducidad=oPanelPago.find('select[name="a-caducidad"]');
     for(i=0;i<10;i++){
         selectAnnoCaducidad.append('<option value="'+(annoActual+i)+'">'+(annoActual+i)+'</option>');
+    }
+}
+
+function validarPago(){
+    if(vistoEnvio){
+        var regNombre=new RegExp("^[a-zA-ZñÑáéíóúÁÉÍÓÚ\ ]{6,50}$");
+        var regCVV=new RegExp("^[0-9]{3}$");
+        var bCorrecto=true;
+        var sErrores="";
+        var iTiempo=2;
+        var tipoTarjeta=$('#tipo_tarjeta').val();
+        var oPanelPago=$('.panel-pago');
+        var numeroTarjeta=oPanelPago.find('input[name="num_tarjeta"]').val();
+        var cvvTarjeta=oPanelPago.find('input[name="cvv_tarjeta"]').val();
+        var titularTarjeta=oPanelPago.find('input[name="tit_tarjeta"]').val();
+        var mesCaducidad=oPanelPago.find('select[name="m-caducidad"]').val();
+        var annoCaducidad=oPanelPago.find('select[name="a-caducidad"]').val();
+        switch(tipoTarjeta){
+            case 't':
+                sErrores+="- Debe seleccionar un tipo de tarjeta<br>";
+                bCorrecto=false;
+                iTiempo+=3;
+                break;
+
+            case 'v':
+                if(!/^4\d{3}\d{4}\d{4}\d{4}$/.test(numeroTarjeta)){
+                    sErrores+="- Nº de tarjeta no válido<br>";
+                    bCorrecto=false;
+                    iTiempo+=3;
+                }
+                break;
+
+            case 'm':
+                if(!/^5[1-5]\d{2}\d{4}\d{4}\d{4}$/.test(numeroTarjeta)){
+                    sErrores+="- Nº de tarjeta no válido<br>";
+                    iTiempo+=3;
+                    bCorrecto=false;
+                }
+                break;
+
+            default:
+                sErrores+="- Ha ocurrido un error inesperado<br>";
+                iTiempo+=3;
+                bCorrecto=false;
+                break;
+        }
+
+        if(!regNombre.test(titularTarjeta)){
+            sErrores+="- Nombre de titular vacío o no válido<br>";
+            bCorrecto=false;
+            iTiempo+=3;
+        }
+        if(!regCVV.test(cvvTarjeta)){
+            sErrores+="- El código CVV no es válido<br>";
+            bCorrecto=false;
+            iTiempo+=3;
+        }
+        if(annoCaducidad=="" || mesCaducidad==""){
+            sErrores+="- La fecha de caducidad no puede estar vacia<br>";
+            bCorrecto=false;
+            iTiempo+=3;
+        }
+        else{
+            if(parseInt(annoCaducidad)>=(new Date).getFullYear()){
+                if(parseInt(annoCaducidad)==(new Date).getFullYear() && parseInt(mesCaducidad)<((new Date).getMonth()+1)){
+                    sErrores+="- La tarjeta está caducada<br>";
+                    bCorrecto=false;
+                    iTiempo+=3;
+                }
+            }
+            else{
+                sErrores+="- La tarjeta está caducada<br>";
+                bCorrecto=false;
+                iTiempo+=3;
+            }
+        }
+
+
+        if(bCorrecto){
+            //tpv pagar
+        }
+        else{
+            var oAlert=$(".mensajesUsuarios");
+            oAlert.addClass("notice-success").html('<span class="glyphicon glyphicon-alert"></span> Algo va mal:<br>'+sErrores);
+            oAlert.css({"display":"block","position":"fixed","top":"3em","left":"1em","font-size":"1.4em","margin":"auto","color":"black"});
+            setTimeout(function() {
+                oAlert.css({"display":"none","position":"","top":"","left":"","font-size":"","margin":""});
+            },iTiempo*1000);
+        }
     }
 }
