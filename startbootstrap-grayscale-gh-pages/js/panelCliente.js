@@ -104,11 +104,13 @@ $(document).ready(function() {
                 mensajes.css('display', 'block');
                 error = true;
             }
-            if (!expPass.test(password)) {
-                mensajes.addClass('notice-danger');
-                mensajes.append('Nueva Contraseña Incorrecta: La contraseña debe contener entre 6 y 15 caracteres, contener al menos una letra en mayúsculas y otra en minúsculas <br/>');
-                mensajes.css('display', 'block');
-                error = true;
+            if(password!="" && password2!="") {
+                if (!expPass.test(password)) {
+                    mensajes.addClass('notice-danger');
+                    mensajes.append('Nueva Contraseña Incorrecta: La contraseña debe contener entre 6 y 15 caracteres, contener al menos una letra en mayúsculas y otra en minúsculas <br/>');
+                    mensajes.css('display', 'block');
+                    error = true;
+                }
             }
             if (password != password2) {
                 mensajes.addClass('notice-danger');
@@ -120,26 +122,36 @@ $(document).ready(function() {
             if (error == false) {
                 mensajes.css('display', 'none');
                 sessionStorage.setItem('lgdusr', email);
-                //nombre', 'apellidos', 'dni', 'email', 'contraseña'
-                var sJson = '{' +
-                    '"nombre":"' + nombre + '",' +
-                    '"apellidos":"' + apellidos + '",' +
-                    '"telefono":"' + telefono + '",' +
-                    '"direccion":"' + direccion + '",' +
-                    '"email":"' + email + '",' +
-                    '"dni":"' + cliente.dni + '",' +
-                    '"password":"' + password + '"' +
-                    '}';
-
+                if(password=="" && password2==""){
+                    var sJson = '{' +
+                        '"nombre":"' + nombre + '",' +
+                        '"apellidos":"' + apellidos + '",' +
+                        '"telefono":"' + telefono + '",' +
+                        '"direccion":"' + direccion + '",' +
+                        '"email":"' + email + '",' +
+                        '"dni":"' + cliente.dni + '",' +
+                        '"password":""' +
+                        '}';
+                }else {
+                    var sJson = '{' +
+                        '"nombre":"' + nombre + '",' +
+                        '"apellidos":"' + apellidos + '",' +
+                        '"telefono":"' + telefono + '",' +
+                        '"direccion":"' + direccion + '",' +
+                        '"email":"' + email + '",' +
+                        '"dni":"' + cliente.dni + '",' +
+                        '"password":"' + password + '"' +
+                        '}';
+                }
                 $.ajax({
                     url: "../php/actualizarUsuario.php",
                     type: 'POST',
                     data: "datos=" + sJson,
                     dataType: 'text',
-                    success: function (data) {
+                    success: function () {
                         sessionStorage.setItem('lgdusr', email);
                         mensajes.addClass('notice-success');
-                        mensajes.text(data);
+                        mensajes.text('Los cambios se han guardado correctamente');
                         mensajes.css('display', 'block');
                         setTimeout("redirrecionar()", 5000);
                     }
@@ -148,13 +160,13 @@ $(document).ready(function() {
         }
         else {
             mensajes.addClass('notice-danger');
-            mensajes.append('Contraseña Incorrecta');
+            mensajes.append('Contraseña actual Incorrecta');
             mensajes.css('display', 'block');
         }
     }
 
     function stopEvent() {
-        var link = $("a");
+        var link = $("a:not(.iniciarSesion)");
         $(link).on('click', function () {
             return false;
         });
@@ -207,14 +219,15 @@ $(document).ready(function() {
                                 break;
                         }
 
-                        var nuevoItem='<i href="#" class="list-group-item active" style="font-family: \'Roboto Condensed\', "Helvetica Neue", Helvetica, Arial, sans-serif;"><div class="media col-md-3"><figure class="pull-left">' +
+                        var nuevoItem='<i href="#" class="list-group-item active" style="height:25em;font-size:14px;"><div class="media col-md-3"><figure style="margin-top: 4em;" class="pull-left">' +
                             '<img class="media-object img-rounded img-responsive" src='+img+' alt="Producto"></figure></div><div class="col-md-6">' +
                             '<h3 class="list-group-item-heading">'+titulo+'</h3><p class=" text-center">' +
                             'Su pedido se enviará a la siguiente dirección:</p><p class="text-center"><strong>Dirrección: </strong>'+direccion+'</p>' +
                             '<p class="text-center"><strong>Provincia: </strong>'+provincia+'</p><p class="text-center"><strong>Localidad: </strong>'+localidad+'</p>' +
                             '<p class="text-center"><strong>Código postal: </strong>'+cp+'</p><p class="text-center"><strong>Teléfono: </strong>'+telefono+'</p>' +
-                            '<p class="text-center" style="display: inline"><strong>Cantidad: </strong>'+cantidad+'</p>' +
-                            '<p class="text-right"  style="display: inline;margin-left: 10em"><strong>Total:</strong>'+total+'</p></div></i>';
+                            '<p class="text-center"><strong>Precio del artículo: </strong>'+precio+'</p>' +
+                            '<p class="text-center"><strong>Cantidad de artículos comprados: </strong>'+cantidad+'</p>' +
+                            '<p class="text-right"  style="margin-right: -40%"><strong>Total del pedido: </strong>'+total+'</p></div></i><div class="divider" style="background-color: whitesmoke;height: 3px;"></div>';
 
 
                         $('.list-group').append(nuevoItem);
@@ -226,7 +239,7 @@ $(document).ready(function() {
 
             });
         });
-
+        $('.navbar-dark').css('height','100%');
 
         
     }
