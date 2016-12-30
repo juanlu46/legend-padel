@@ -28,7 +28,7 @@ else{
 
             if ($row_cnt == 0)
                 Echo "Datos incorrectos, introduzca un usuario válido";
-
+            
         }
     }
     else
@@ -58,5 +58,5 @@ else{
 }
 
 
-
+$mysqli->close();
 ?>

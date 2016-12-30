@@ -13,6 +13,55 @@
 </head>
 <body>
 <div class="container-fluid">
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand page-scroll" href="#page-top">
+                    <img class="logo-legend-txt img-responsive" src="img/logo-lgn-txt.png" alt="logo legend padel texto"/>
+                    <img class="logo-legend-img img-responsive" src="img/logo-lgn-img.png" alt="logo legend padel imagen"/>
+                </a>
+            </div>
+
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="glyphicon glyphicon-shopping-cart"></span> <span class="carrito_n_productos">0</span><span class="caret"></span></a>
+                        <ul class="dropdown-menu dropdown-cart" role="menu">
+                            <li><a class="text-center" href="html/carrito.html">Ver carrito</a></li>
+                            <li class="divider"></li>
+                        </ul>
+                    </li>
+                    <li class="btn-identificate">
+                        <a class="page-scroll aIdentificate" href="#">Identifícate</a>
+                    </li>
+                    <li>
+                        <div class="hidden-xs vertical-divider"></div>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="index.html#tienda">Tienda</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="index.html#tecnologias">Tecnologías</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="index.html#quienes-somos">Quiénes somos</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="index.html#distribuidores">Distribuidores</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="index.html#contacto">Contacto</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
     <div class="content-wrapper">
         <div class="item-container">
                 <div class="col-md-6">
@@ -147,6 +196,35 @@
             </div>
         </div>
     </div>
+</div>
+<div class="desenfoque"></div>
+<div class="ContentLogin">
+
+    <div class="card card-container">
+        <a href="" class="glyphicon glyphicon-remove btn-cerrar-login"></a>
+        <img id="profile-img" class="profile-img-card" src="img/user.svg" />
+        <p id="profile-name" class="profile-name-card"></p>
+        <form class="form-signin">
+            <span id="reauth-email" class="reauth-email"></span>
+            <input type="email" id="inputEmail" class="form-control" placeholder="Email" required >
+            <input type="password" id="inputPassword" class="form-control" placeholder="Contraseña" required>
+            <div id="remember" class="checkbox">
+                <label>
+                    <input type="checkbox" id="chkRecordar" value="Recordar"> Recordar
+                </label>
+            </div>
+            <button class="btn btn-login btn-lg btn-primary btn-block btn-signin" type="submit">Identificate</button>
+            <a href="#" class="forgot-password">
+                ¿Has olvidado tu contraseña?
+            </a>
+            <p>¿Usuario nuevo?
+                <a href="html/form_registro.html" class="forgot-password">
+                    Crea tu cuenta aquí
+                </a>
+            </p>
+        </form><!-- /form -->
+    </div>
+    <div class="alert mensaje" role="alert"></div>
 </div>
 <script src="terceros/jquery/jquery.min.js"></script>
 <script src="terceros/bootstrap/js/bootstrap.min.js"></script>

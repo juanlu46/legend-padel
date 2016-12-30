@@ -4,6 +4,11 @@ var curPic = -1;
 var imgO = [];
 
 $(document).ready(function() {
+    actualizarCarrito();
+    cargarEventosBotonCarrito();
+    $(".btn-identificate").on("click",cargarFormIdent);
+    $('.btn-signin').on("click",validarLogin);
+    $('.btn-cerrar-login').on('click',cerrarFormLogin);
     var url= window.location.href;
     producto=url.split('?')[1];
     imgCont = $('#item-display');
@@ -201,3 +206,201 @@ function cambiarColor(color) {
 }
 
 
+function cargarFormIdent(){
+    $('.btn-cerrar-login').on('click',function(){
+        return false;
+    });
+    var inputEmail=$("#inputEmail");
+    inputEmail.val("");
+    $("#inputPassword").val("");
+    $('.ContentLogin').css('display','block');
+    $('.desenfoque').css('display','block');
+    if(sessionStorage.getItem('lgdusr')!=null){
+        inputEmail.val(sessionStorage.getItem('lgdusr'));
+    }
+    if(localStorage.getItem('lgdusr')!=null ){
+        inputEmail.val(localStorage.getItem('lgdusr'));
+    }
+
+}
+function validarLogin() {
+    var expEmail = new RegExp("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$");
+    var email = $("#inputEmail").val();
+    var mendaje = $(".mensaje");
+
+    //Verifica la existencia de una letra minuscula(?=.*[a-z])  y (?=.*[A-Z]) la de una letra en mayusculas.
+// Por ultimo la longitud la verificamos con los valores entre llaves {6,15}.
+    var expPass = new RegExp("^(?=.*[a-z])(?=.*[A-Z]).{6,15}$");
+    var password = $("#inputPassword").val();
+
+    if (!expEmail.test(email) && !expPass.test(password)) {
+        mendaje.addClass('alert-danger');
+        mendaje.text('Email y Contraseña Incorrectos');
+        mendaje.css('display', 'block');
+    }
+    else if (!expPass.test(password)) {
+        mendaje.addClass('alert-danger');
+        mendaje.text('Contraseña Incorrecta');
+        mendaje.css('display', 'block');
+    }
+    else if (!expEmail.test(email)) {
+        mendaje.addClass('alert-danger');
+        mendaje.text('Email Incorrecto');
+        mendaje.css('display', 'block');
+    }
+    else {
+        var arrayJson = '{"email":"' + email + '",' +
+            '"password":"' + password + '"}';
+
+        $.post("php/usuarios.php", "datos=" + arrayJson,
+             function (data) {
+                var mensajeAlert = $(".mensaje");
+                if (data == 'Datos incorrectos, introduzca un usuario válido') {
+                    mensajeAlert.removeClass('alert-success');
+                    mensajeAlert.addClass('alert-danger');
+                    mensajeAlert.text(data);
+                    mensajeAlert.css('display', 'block');
+                }
+                 if(data=='') {
+                    sessionStorage.setItem('lgdusr', email);
+                    mensajeAlert.addClass('alert-success');
+                    mensajeAlert.text(data);
+                    mensajeAlert.css('display', 'block');
+                    $('.ContentLogin').css('display', 'none');
+                    $('.desenfoque').css('display', 'none');
+                    if ($('#chkRecordar').prop('checked')) {
+                        localStorage.setItem('lgdusr', email);
+                    }
+                    addIconUsuarioMenu();
+                    location.reload();
+                }
+            }
+        );
+    }
+}
+function cerrarFormLogin(){
+    $('.ContentLogin').css('display','none');
+    $('.desenfoque').css('display','none');
+}
+/* carrito */
+function actualizarCarrito(){
+
+    if(sessionStorage.getItem("lgdusr")==null){
+        if(sessionStorage.getItem("nusrcrt")!=null){
+            sCarrito=sessionStorage.getItem("nusrcrt");
+            oCarrito=JSON.parse(sCarrito);
+            var nElementos=0;
+            for(i=0; i<oCarrito.length;i++){
+                nElementos+=parseInt(oCarrito[i][1]);
+            }
+            $(".carrito_n_productos").text(nElementos);
+            $.get('php/montarNavCarrito.php?carrito='+encodeURIComponent(sCarrito),function(sProductos){
+                $('.dropdown-cart').find('.divider').after(sProductos);
+                cargarEventosBotonEliminarProducto();
+                actualizarNumeroCarrito();
+            });
+        }
+    }
+    else{
+        sSesion=sessionStorage.getItem("lgdusr");
+        $.get('php/montarNavCarritoUsuario.php?usuario='+encodeURIComponent(sSesion),function(sProductos){
+            $('.dropdown-cart').find('.divider').after(sProductos);
+            cargarEventosBotonEliminarProducto();
+            actualizarNumeroCarrito();
+        });
+    }
+
+}
+
+function cargarEventosBotonEliminarProducto(){
+    $('.item_carrito').each(function(){
+        $(this).find('button').on('click',function(){
+            $(this).parents('.item_carrito').remove();
+            guardarCarrito();
+            actualizarNumeroCarrito();
+        });
+    });
+}
+
+function cargarEventosBotonCarrito(){
+    var oProducto;
+    $(".item").each(function(){
+        var item =$(this);
+        oBoton=item.find('.item-pie button');
+        oBoton.on('click',function(){
+            var boton=$(this);
+            oProducto=$('<li class="item_carrito" data-id=""><span class="item"><span class="item-left"><img src="" alt="articulo_carrito"/><span class="item-info"><span class="item_cantidad">1x</span><span class="item_name"></span><span class="item_precio"></span></span></span><span class="item-right"><button class="btn btn-xs btn-danger pull-right">x</button></span></span></li>');
+            var bEncontrado=false;
+            var oItemCarrito;
+            var oCarrito=$('.dropdown-cart');
+            oCarrito.find('.item_carrito').each(function(){
+                if($(this).find('img').attr('src')==item.find('.hovereffect img').first().attr('src')) {
+                    bEncontrado = true;
+                    oItemCarrito=$(this);
+                }
+            });
+            if(bEncontrado){
+                var oItemCantidad=oItemCarrito.find('.item_cantidad');
+                oItemCantidad.text((parseInt(oItemCantidad.text().replace('x',''))+1)+"x");
+                var oItemPrecio=oItemCarrito.find('.item_precio');
+                oItemPrecio.text((parseFloat(oItemPrecio.text().replace(',','.').replace(' €',''))+parseFloat(item.find('.precio').text().replace(',','.').replace(' €',''))).toFixed(2)+" €");
+            }
+            else{
+                oProducto.find('.item_name').text(item.find('.item-pie a').first().text());
+                oProducto.find('.item_precio').text(item.find('.precio').text());
+                oProducto.find('img').attr('src',item.find('.hovereffect img').first().attr('src'));
+                var oColor=item.find('.btn-select .selected');
+                var sID=boton.data('id');
+                if(oColor.length>0){
+                    sID+=oColor.text().toLowerCase();
+                }
+                oProducto.data('id',sID);
+                oProducto.find(".item-right button").on('click',function(){
+                    $(this).parents('.item_carrito').remove();
+                    guardarCarrito();
+                    actualizarNumeroCarrito();
+                });
+                oCarrito.append(oProducto);
+            }
+            var oAlert=$(".mensajesUsuarios");
+            oAlert.addClass("notice-success").html('<span class="glyphicon glyphicon-shopping-cart"></span> Artículo añadido');
+            oAlert.css({"display":"block","position":"fixed","top":"3em","left":"1em","font-size":"1.4em","margin":"auto","color":"black"});
+            setTimeout(function() {
+                oAlert.css({"display":"none","position":"","top":"","left":"","font-size":"","margin":""});
+            },3000);
+
+            actualizarNumeroCarrito();
+            guardarCarrito();
+        });
+    });
+}
+
+function actualizarNumeroCarrito(){
+    var nCantidad=0;
+    $(".item_carrito").each(function(){
+        nCantidad+=parseInt($(this).find('.item_cantidad').text().replace('x',''));
+    });
+    $(".carrito_n_productos").text(nCantidad);
+}
+
+function guardarCarrito(){
+    arrayProductos=[];
+    $(".item_carrito").each(function(){
+        id=$(this).data('id');
+        cantidad=$(this).find('.item_cantidad').text().replace('x','');
+        arrayProductos.push([id,cantidad]);
+    });
+    if(arrayProductos.length==0){
+        sessionStorage.removeItem("nusrcrt");
+    }
+    else {
+        sCarrito = JSON.stringify(arrayProductos);
+        if (sessionStorage.getItem("lgdusr") == null) {
+            sessionStorage.setItem("nusrcrt", sCarrito);
+        }
+        else {
+            sSesion = sessionStorage.getItem("lgdusr");
+            $.get('php/guardarCarrito.php?usuario=' + encodeURIComponent(sSesion) + '&carrito=' + encodeURIComponent(sCarrito));
+        }
+    }
+}

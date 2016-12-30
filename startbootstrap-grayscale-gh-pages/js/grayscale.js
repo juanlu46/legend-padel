@@ -122,7 +122,7 @@ $(function() {
 $('.navbar-collapse ul li a').click(function() {
     $(this).closest('.collapse').collapse('toggle');
 });
-
+/* JS DE LOGIN */
 function cargarFormIdent(){
     $('.btn-cerrar-login').on('click',function(){
         return false;
@@ -140,7 +140,7 @@ function cargarFormIdent(){
     }
 
 }
-/* JS DE LOGIN */
+
 function validarLogin() {
     var expEmail = new RegExp("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$");
     var email = $("#inputEmail").val();
