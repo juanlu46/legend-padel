@@ -9,8 +9,9 @@ $(document).ready(function() {
     $(".btn-identificate").on("click",cargarFormIdent);
     $('.btn-signin').on("click",validarLogin);
     $('.btn-cerrar-login').on('click',cerrarFormLogin);
+
     var url= window.location.href;
-    producto=url.split('?')[1];
+    producto=url.split('?')[1].replace('#','');
     imgCont = $('#item-display');
     productTitleH2=$('.product-title h2');
     productPrice=$('.product-price');
