@@ -185,7 +185,14 @@ function validarLogin(a) {
                     mensajeAlert.text(data);
                     mensajeAlert.css('display', 'block');
                 } else {
-                    sessionStorage.setItem('lgdusr', email);
+                    $.get('php/encriptar.php','cadena='+email,function(data){
+                        sessionStorage.setItem('lgdusr', data);
+                        $.get('php/desencriptar.php','cadena='+sessionStorage.getItem('lgdusr'),function(data){
+                            alert(data);
+                        });
+
+                    });
+
                     mensajeAlert.addClass('alert-success');
                     mensajeAlert.text(data);
                     mensajeAlert.css('display', 'block');
@@ -195,12 +202,12 @@ function validarLogin(a) {
                         localStorage.setItem('lgdusr', email);
                     }
                     addIconUsuarioMenu();
-                    if(a.legnth==1){
+                   /* if(a.legnth==1){
                         location.reload();
                     }
                     else{
                         document.location.href='http://localhost/legend-padel/index.html';
-                    }
+                    }*/
 
                 }
             }
