@@ -13,23 +13,30 @@ function inicio(){
     });
     if(sessionStorage.getItem("lgdusr")==null){
         if(sessionStorage.getItem("nusrcrt")!=null){
-            sCarrito=sessionStorage.getItem("nusrcrt");
-            $.get("../php/montarCarrito.php?carrito="+encodeURIComponent(sCarrito),function(oProductos){
-                $('#productos').find('tr').first().before(oProductos);
-                aplicarManejadoresBoton();
-                calcularTotales();
-            },'html');
+
+            $.get('php/desencriptar.php?cadena='+sessionStorage.getItem('nusrcrt'),function(data){
+                sCarrito=data;
+                $.get("../php/montarCarrito.php?carrito="+encodeURIComponent(sCarrito),function(oProductos){
+                    $('#productos').find('tr').first().before(oProductos);
+                    aplicarManejadoresBoton();
+                    calcularTotales();
+                },'html');
+            });
         }
         else{
             noProductos();
         }
     }
     else{
-        sSesion=sessionStorage.getItem("lgdusr");
-        $.get('../php/montarCarritoUsuario.php?usuario='+encodeURIComponent(sSesion),function(sProductos){
-            $('#productos').find('tr').first().before(sProductos);
-            calcularTotales();
+
+        $.get('php/desencriptar.php?cadena='+sessionStorage.getItem('lgdusr'),function(data){
+            sSesion=data;
+            $.get('../php/montarCarritoUsuario.php?usuario='+encodeURIComponent(sSesion),function(sProductos){
+                $('#productos').find('tr').first().before(sProductos);
+                calcularTotales();
+            });
         });
+
     }
     $('.btn-continuar-compra').on('click',function(){
         location.href="http://www.legendpadel.com/index.html#tienda";
@@ -62,11 +69,17 @@ function guardarCarrito(){
     });
     var sCarrito = JSON.stringify(arrayProductos);
     if(sessionStorage.getItem("lgdusr")==null){
-        sessionStorage.setItem("nusrcrt",sCarrito);
+
+        $.get('php/encriptar.php?cadena='+sCarrito,function(data){
+            sessionStorage.setItem('nusrcrt', data);
+        });
     }
     else{
-        sSesion=sessionStorage.getItem("lgdusr");
-        $.get('../php/guardarCarrito.php?usuario='+encodeURIComponent(sSesion)+'&carrito='+encodeURIComponent(sCarrito));
+
+        $.get('php/desencriptar.php?cadena='+sessionStorage.getItem('lgdusr'),function(data){
+            sSesion=data;
+            $.get('../php/guardarCarrito.php?usuario='+encodeURIComponent(sSesion)+'&carrito='+encodeURIComponent(sCarrito));
+        });
     }
 }
 
@@ -98,10 +111,15 @@ function cargarFormIdent(){
     $('.ContentLogin').css('display','block');
     $('.desenfoque').css('display','block');
     if(sessionStorage.getItem('lgdusr')!=null){
-        inputEmail.val(sessionStorage.getItem('lgdusr'));
+        $.get('php/desencriptar.php?cadena='+sessionStorage.getItem('lgdusr'),function(data){
+            inputEmail.val(data);
+        });
     }
     if(localStorage.getItem('lgdusr')!=null ){
-        inputEmail.val(localStorage.getItem('lgdusr'));
+        $.get('php/desencriptar.php?cadena='+localStorage.getItem('lgdusr'),function(data){
+            inputEmail.val(data);
+        });
+
     }
 
 }
@@ -147,7 +165,10 @@ function validarLogin(){
                     mensajeAlert.text(data);
                     mensajeAlert.css('display','block');
                 }else {
-                    sessionStorage.setItem('lgdusr', email);
+
+                    $.get('php/encriptar.php?cadena='+email,function(data){
+                        sessionStorage.setItem('lgdusr', data);
+                    });
                     mensajeAlert.addClass('alert-success');
                     mensajeAlert.text(data);
                     mensajeAlert.css('display', 'block');
@@ -171,27 +192,44 @@ function cerrarFormLogin(){
 /*Añadir opciones usuario ya logueado en elmenu*/
 function addIconUsuarioMenu() {
     if(sessionStorage.getItem('lgdusr')!=null || localStorage.getItem('lgdusr')!=null){
-        if(sessionStorage.getItem('lgdusr')==null)
-            var emailUser='emailUser='+localStorage.getItem('lgdusr');
+        if(sessionStorage.getItem('lgdusr')==null){
+            $.get('php/desencriptar.php','cadena='+localStorage.getItem('lgdusr'),function(data){
+                var emailUser = data;
+                $.get('php/devuelveCliente.php?usuario='+encodeURIComponent(emailUser),function(data){
+                    var jsonCliente = data;
+                    var nombreCliente=jsonCliente.nombre;
+                    $('.menu-usuario').html('<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">' +
+                        '<span class="glyphicon glyphicon-user"></span> <span class="nombre_usuario">'+nombreCliente+'</span><span class="caret"></span></a>' +
+                        '<ul class="dropdown-menu dropdown-login" role="menu">' +
+                        '<li><a class="text-center" href="html/panelCliente.html">Mi cuenta</a></li>' +
+                        '<li class="divider"></li><li class="pedidosCliente"><a class="text-center" href="#">Mis pedidos</a></li>' +
+                        '<li class="divider"></li> <li class="desconexion"><a class="text-center" href="#">Desconexión</a></li></ul>');
+                    $('.desconexion').on('click',desconectarse);
+
+                    $('.pedidosCliente').on('click',function(){
+                        accederPedidosCliente(jsonCliente);});
+                });
+            });
+        }
+
         else
-            var emailUser='emailUser='+sessionStorage.getItem('lgdusr');
-        $('.btn-identificate').addClass('dropdown menu-usuario');
-        $('.btn-identificate').removeClass('btn-identificate');
+            $.get('php/desencriptar.php','cadena='+sessionStorage.getItem('lgdusr'),function(data){
+                var emailUser =data;
+                $.get('php/devuelveCliente.php?usuario='+encodeURIComponent(emailUser),function(data){
+                    var jsonCliente = data;
+                    var nombreCliente=jsonCliente.nombre;
+                    $('.menu-usuario').html('<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">' +
+                        '<span class="glyphicon glyphicon-user"></span> <span class="nombre_usuario">'+nombreCliente+'</span><span class="caret"></span></a>' +
+                        '<ul class="dropdown-menu dropdown-login" role="menu">' +
+                        '<li><a class="text-center" href="html/panelCliente.html">Mi cuenta</a></li>' +
+                        '<li class="divider"></li><li class="pedidosCliente"><a class="text-center" href="#">Mis pedidos</a></li>' +
+                        '<li class="divider"></li> <li class="desconexion"><a class="text-center" href="#">Desconexión</a></li></ul>');
+                    $('.desconexion').on('click',desconectarse);
 
-        $.get('../php/devuelveCliente.php',emailUser,function(data){
-            var jsonCliente = JSON.parse(data);
-            var nombreCliente=jsonCliente.nombre;
-            $('.menu-usuario').html('<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">' +
-                '<span class="glyphicon glyphicon-user"></span> <span class="nombre_usuario">'+nombreCliente+'</span><span class="caret"></span></a>' +
-                '<ul class="dropdown-menu dropdown-login" role="menu">' +
-                '<li><a class="text-center" href="panelCliente.html">Mi cuenta</a></li>' +
-                '<li class="divider"></li><li class="pedidosCliente"><a class="text-center" href="#">Mis pedidos</a></li>' +
-                '<li class="divider"></li> <li class="desconexion"><a class="text-center" href="#">Desconexión</a></li></ul>');
-            $('.desconexion').on('click',desconectarse);
-
-            $('.pedidosCliente').on('click',function(){
-                accederPedidosCliente(jsonCliente);});
-        });
+                    $('.pedidosCliente').on('click',function(){
+                        accederPedidosCliente(jsonCliente);});
+                });
+            });
     }
 }
 

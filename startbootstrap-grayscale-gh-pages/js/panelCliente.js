@@ -1,9 +1,15 @@
 $(document).ready(function() {
     var email = "";
-    if (sessionStorage.getItem('lgdusr') == null)
-        email = 'emailUser=' + localStorage.getItem('lgdusr');
-    else
-        email = 'emailUser=' + sessionStorage.getItem('lgdusr');
+    if (sessionStorage.getItem('lgdusr') == null) {
+        $.get('php/desencriptar.php?cadena='+localStorage.getItem('lgdusr'),function(data){
+            email =data;
+        });
+    }
+    else{
+        $.get('php/desencriptar.php?cadena='+sessionStorage.getItem('lgdusr'),function(data){
+            email =data;
+        });
+    }
 
     if (email == 'emailUser=null') {
         $('.container').css({
@@ -121,7 +127,9 @@ $(document).ready(function() {
 
             if (error == false) {
                 mensajes.css('display', 'none');
-                sessionStorage.setItem('lgdusr', email);
+                $.get('php/encriptar.php?cadena='+email,function(data){
+                    sessionStorage.setItem('lgdusr', data);
+                });
                 if(password=="" && password2==""){
                   password=passActual;
                 }
@@ -141,7 +149,9 @@ $(document).ready(function() {
                     dataType: 'text',
                     success: function (data) {
                         if(data=='Los cambios se han guardado correctamente') {
-                            sessionStorage.setItem('lgdusr', email);
+                            $.get('php/encriptar.php?cadena='+email,function(data){
+                                sessionStorage.setItem('lgdusr', data);
+                            });
                             mensajes.addClass('notice-success');
                             mensajes.text('Los cambios se han guardado correctamente');
                             mensajes.css('display', 'block');
