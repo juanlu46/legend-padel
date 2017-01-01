@@ -7,8 +7,8 @@ function inicio(){
     addIconUsuarioMenu();
     $('.btn-cerrar-login').on('click',cerrarFormLogin);
     $(".btn-identificate").on("click",cargarFormIdent);
-    $('.btn-signin').on("click",validarLogin);
-    $('.btn-pagar').on('click',validarPago);
+    $('.btn-signin').on("click",function(event){validarLogin(event);});
+    $('form[name="form_pago"]').submit(validarPago);
     if(sessionStorage.getItem('lgdusr')!=null) {
         $.get('../php/montarResumenPedido.php?usuario='+encodeURIComponent(sessionStorage.getItem('lgdusr')) , function (sProductos) {
             $('.m-progress').css('display', 'none');
@@ -269,8 +269,11 @@ function cargarPanelPago(){
     }
 }
 
-function validarPago(){
+function validarPago(event){
     if(vistoEnvio){
+        var oCarga=$('.m-progress');
+        oCarga.css('display', 'block');
+        oCarga.css('color', 'black');
         var regNombre=new RegExp("^[a-zA-ZñÑáéíóúÁÉÍÓÚ\ ]{6,50}$");
         var regCVV=new RegExp("^[0-9]{3}$");
         var bCorrecto=true;
@@ -343,17 +346,56 @@ function validarPago(){
             }
         }
 
-
         if(bCorrecto){
-            //tpv pagar
+            var fTotal;
+            var nID;
+            var nAnno=(new Date).getFullYear();
+            var nMes=(new Date).getMonth();
+            var nombreCompleto;
+            $.ajax('../php/devulveCliente.php?ususario='+encodeURIComponent(sessionStorage.getItem('lgdusr')),{
+                async:false,
+                cache:false,
+                dataType:'json',
+                method:'GET',
+                success:function(data){
+                    nombreCompleto=data.nombre+" "+data.apellidos;
+                }
+            });
+            if(nMes.toString().length==1)
+                nMes='0'+nMes.toString();
+            if(mesCaducidad.toString().length==1)
+               mesCaducidad="0"+mesCaducidad.toString();
+            $.ajax('../php/obtenerTotal.php?ususario='+encodeURIComponent(sessionStorage.getItem('lgdusr')),{
+                async:false,
+                cache:false,
+                dataType:'json',
+                method:'GET',
+                success:function(data){
+                    fTotal=parseFloat(data.total);
+                    nID=nAnno.toString()+nMes+data.id.toString();
+                }
+            });
+            var sVariables='{"cantidad":"'+fTotal+'","id":"'+nID+'","descripcion":"Palas LEGEND PADEL","titular":"'+nombreCompleto+'","num_tarjeta":"'+numeroTarjeta+
+                '","cad_tarjeta":"'+(annoCaducidad.toString().substring(2)+mesCaducidad)+'","cvv_tarjeta":"'+cvvTarjeta+'"';
+            //Encriptar sVariables
+            $.ajax('../php/obtenerVariablePago.php?data='+encodeURIComponent(sVariables),{
+                async:false,
+                cache:false,
+                method:'GET',
+                success:function(data){
+
+                }
+            });
         }
         else{
+            oCarga.css('display', 'none');
             var oAlert=$(".mensajesUsuarios");
             oAlert.addClass("notice-success").html('<span class="glyphicon glyphicon-alert"></span> Algo va mal:<br>'+sErrores);
             oAlert.css({"display":"block","position":"fixed","top":"3em","left":"1em","font-size":"1.4em","margin":"auto","color":"black"});
             setTimeout(function() {
                 oAlert.css({"display":"none","position":"","top":"","left":"","font-size":"","margin":""});
             },iTiempo*1000);
+            event.preventDefault();
         }
     }
 }
