@@ -1,5 +1,6 @@
 <?php
-header('Content-type: text/plain');
+require_once 'Encriptacion.php';
+header('Content-type: application/json');
 header("Cache-Control: no-store, no-cache, must-revalidate");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
@@ -9,7 +10,9 @@ if ($mysqli->connect_errno) {
 }
 else{
     $mysqli->query("SET NAMES utf8");
-     $susuario = $_REQUEST['emailUser'];
+     $susuarioEncriptado = $_REQUEST['usuario'];
+    $susuario=Encriptacion::desencriptar($susuarioEncriptado);
+
 
     if($susuario!=NULL){
         $expEmail ="/^[A-Za-z]*[_a-z0-9-].(\.[_A-Z0-9-].)*@[a-z0-9-].(\.[a-z0-9-].)*(\.[a-z]{2,3})$/";

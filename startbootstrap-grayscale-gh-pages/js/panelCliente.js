@@ -1,9 +1,15 @@
 $(document).ready(function() {
     var email = "";
-    if (sessionStorage.getItem('lgdusr') == null)
-        email = 'emailUser=' + localStorage.getItem('lgdusr');
-    else
-        email = 'emailUser=' + sessionStorage.getItem('lgdusr');
+    if (sessionStorage.getItem('lgdusr') == null) {
+        $.get('php/desencriptar.php?cadena='+localStorage.getItem('lgdusr'),function(data){
+            email =data;
+        });
+    }
+    else{
+        $.get('php/desencriptar.php?cadena='+sessionStorage.getItem('lgdusr'),function(data){
+            email =data;
+        });
+    }
 
     if (email == 'emailUser=null') {
         $('.container').css({
@@ -15,7 +21,7 @@ $(document).ready(function() {
             "top": "0px",
             "filter": "blur(5px)"
         });
-        var mensajes = $('.mensajesUsuarios');
+        var mensajes = $('.mensajelogin');
         mensajes.addClass('notice-danger');
         mensajes.css({
             "display": "block",
@@ -121,39 +127,41 @@ $(document).ready(function() {
 
             if (error == false) {
                 mensajes.css('display', 'none');
-                sessionStorage.setItem('lgdusr', email);
+                $.get('php/encriptar.php?cadena='+email,function(data){
+                    sessionStorage.setItem('lgdusr', data);
+                });
                 if(password=="" && password2==""){
-                    var sJson = '{' +
-                        '"nombre":"' + nombre + '",' +
-                        '"apellidos":"' + apellidos + '",' +
-                        '"telefono":"' + telefono + '",' +
-                        '"direccion":"' + direccion + '",' +
-                        '"email":"' + email + '",' +
-                        '"dni":"' + cliente.dni + '",' +
-                        '"password":""' +
-                        '}';
-                }else {
-                    var sJson = '{' +
-                        '"nombre":"' + nombre + '",' +
-                        '"apellidos":"' + apellidos + '",' +
-                        '"telefono":"' + telefono + '",' +
-                        '"direccion":"' + direccion + '",' +
-                        '"email":"' + email + '",' +
-                        '"dni":"' + cliente.dni + '",' +
-                        '"password":"' + password + '"' +
-                        '}';
+                  password=passActual;
                 }
+                var sJson = '{' +
+                    '"nombre":"' + nombre + '",' +
+                    '"apellidos":"' + apellidos + '",' +
+                    '"telefono":"' + telefono + '",' +
+                    '"direccion":"' + direccion + '",' +
+                    '"email":"' + email + '",' +
+                    '"dni":"' + cliente.dni + '",' +
+                    '"password":"' + password + '"' +
+                    '}';
                 $.ajax({
                     url: "../php/actualizarUsuario.php",
                     type: 'POST',
                     data: "datos=" + sJson,
                     dataType: 'text',
-                    success: function () {
-                        sessionStorage.setItem('lgdusr', email);
-                        mensajes.addClass('notice-success');
-                        mensajes.text('Los cambios se han guardado correctamente');
-                        mensajes.css('display', 'block');
-                        setTimeout("redirrecionar()", 5000);
+                    success: function (data) {
+                        if(data=='Los cambios se han guardado correctamente') {
+                            $.get('php/encriptar.php?cadena='+email,function(data){
+                                sessionStorage.setItem('lgdusr', data);
+                            });
+                            mensajes.addClass('notice-success');
+                            mensajes.text('Los cambios se han guardado correctamente');
+                            mensajes.css('display', 'block');
+                            setTimeout("redirrecionar()", 5000);
+                        }
+                        else{
+                            mensajes.addClass('notice-danger');
+                            mensajes.text('Se ha producido un error al intentar actualizar los datos, revise los datos introducidos');
+                            mensajes.css('display', 'block');
+                        }
                     }
                 });
             }
