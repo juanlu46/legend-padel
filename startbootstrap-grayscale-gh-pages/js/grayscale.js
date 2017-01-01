@@ -65,16 +65,18 @@ $(document).ready(function(){
 
     cargarEventoBotonRedes();
 
-    $(".btn-identificate").on("click",cargarFormIdent);
-    $('.btn-signin').on("click",validarLogin);
-    $('.btn-cerrar-login').on('click',cerrarFormLogin);
-    /*********/
     var url=window.location.href;
     var a=url.split('?');
     if(a[1]=='login') {
-        cargarFormIdent();
-        window.location.href='http://localhost/legend-padel/index.html';
+        cargarFormIdent(a);
     }
+    $(".btn-identificate").on("click",cargarFormIdent);
+    $('.btn-signin').on("click",function() {
+        validarLogin(a);
+    });
+    $('.btn-cerrar-login').on('click',cerrarFormLogin);
+    /*********/
+
 });
 
 function cargarEventoBotonRedes(){
@@ -135,13 +137,13 @@ function cargarFormIdent(){
     if(sessionStorage.getItem('lgdusr')!=null){
         inputEmail.val(sessionStorage.getItem('lgdusr'));
     }
-    if(localstorage.getItem('lgdusr')!=null ){
+    if(localStorage.getItem('lgdusr')!=null ){
         inputEmail.val(localStorage.getItem('lgdusr'));
     }
 
 }
 
-function validarLogin() {
+function validarLogin(a) {
     var expEmail = new RegExp("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$");
     var email = $("#inputEmail").val();
     var mendaje = $(".mensaje");
@@ -193,7 +195,13 @@ function validarLogin() {
                         localStorage.setItem('lgdusr', email);
                     }
                     addIconUsuarioMenu();
-                    location.reload();
+                    if(a.legnth==1){
+                        location.reload();
+                    }
+                    else{
+                        document.location.href='http://localhost/legend-padel/index.html';
+                    }
+
                 }
             }
         });

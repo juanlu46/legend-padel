@@ -15,18 +15,19 @@ else{
     $expEmail ="/^[A-Za-z]*[_a-z0-9-]+(\.[_A-Z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/";
     if($ousuario->password!="") {
         $expPass = "/(?=.*[a-z])(?=.*[A-Z]).{6,15}$/";
-        if(preg_match($expPass, $ousuario->password))
+
+        if(!preg_match($expPass, $ousuario->password))
             $error=false;
     }
-    $expNombre="/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\ ]{4,15}$/";
-    $expApellidos="/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\ ]{4,25}$/";
-    $expTelefono="/^[9|6|7][0-9]{8}$/";
-    $expDni="/^[0-9]{8}[a-zA-ZñÑ]$/";
 
-            if(preg_match($expEmail, $ousuario->email) && $error==false && preg_match($expNombre, $ousuario->nombre) && preg_match($expApellidos, $ousuario->apellidos) && preg_match($expTelefono, $ousuario->telefono) && preg_match($expDni, $ousuario->dni)){
+    $expNombre="/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\ ]{4,15}$/i";
+    $expApellidos="/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\ ]{4,25}$/i";
+    $expTelefono="/^[9|6|7][0-9]{8}$/";
+
+            if(preg_match($expEmail, $ousuario->email) && $error==true && preg_match($expNombre, $ousuario->nombre) && preg_match($expApellidos, $ousuario->apellidos) && preg_match($expTelefono, $ousuario->telefono) ){
                 $sql = "UPDATE usuarios SET nombre='" . $ousuario->nombre . "',apellidos='" . $ousuario->apellidos . "',telefono='" . $ousuario->telefono . "',direccion='" . $ousuario->direccion . "', email='" . $ousuario->email . "', contraseña='" . $ousuario->password . "' where dni='".$ousuario->dni."'";
                 if ($mysqli->query($sql))
-                    echo "Se han actualizado los datos correctamente";
+                    echo 'Los cambios se han guardado correctamente';
                 else
                     echo "Se ha producido un error al actualizarse los datos";
             }

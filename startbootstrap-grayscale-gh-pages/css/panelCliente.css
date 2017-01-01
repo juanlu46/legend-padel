@@ -157,7 +157,7 @@ section{
 .panelCliente{
     margin-top: 2em;
 }
-.mensajesUsuarios {
+.mensajesUsuarios, .mensajelogin {
     display:none;
 }
 
