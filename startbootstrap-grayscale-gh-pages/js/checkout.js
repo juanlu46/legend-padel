@@ -93,6 +93,7 @@ function validarLogin(){
                     mensajeAlert.text(data);
                     mensajeAlert.css('display','block');
                 }else {
+                    
                     sessionStorage.setItem('lgdusr', email);
                     mensajeAlert.addClass('alert-success');
                     mensajeAlert.text(data);

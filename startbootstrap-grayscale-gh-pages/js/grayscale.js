@@ -56,7 +56,7 @@ $(document).ready(function(){
             event.preventDefault();
         });
     });
-    eliminarStorage();
+
     $('.btnContactar').on('click',abrirCaptcha);
     addIconUsuarioMenu();
     actualizarCarrito();
@@ -177,6 +177,7 @@ function validarLogin(a) {
     else {
         var arrayJson = '{"email":"' + email + '",' +
             '"password":"' + password + '"}';
+        
         var res=btoa(mcrypt.Encrypt(arrayJson,md5(md5(pal)),md5(pal),'rijndael-256','cbc'));
         $.get("php/usuarios.php?datos="+encodeURIComponent(res),function (data) {
                 var mensajeAlert = $(".mensaje");
@@ -188,9 +189,6 @@ function validarLogin(a) {
                 } else {
                     var resEmail=btoa(mcrypt.Encrypt(email,md5(md5(pal)),md5(pal),'rijndael-256','cbc'));
                         sessionStorage.setItem('lgdusr', resEmail);
-                        mensajeAlert.addClass('alert-success');
-                        mensajeAlert.text(res);
-                        mensajeAlert.css('display', 'block');
                         $('.ContentLogin').css('display', 'none');
                         $('.desenfoque').css('display', 'none');
                         if ($('#chkRecordar').prop('checked')) {
@@ -474,11 +472,4 @@ function recaptcha_callback(response){
             alert("compruebe que no es un robot");
 
         }
-}
-function eliminarStorage(){
-    if(sessionStorage.getItem('lgdusr')!=null)
-        sessionStorage.removeItem('lgdusr');
-
-    if(localStorage.getItem('lgdusr')!=null)
-        localStorage.removeItem('lgdusr');
 }

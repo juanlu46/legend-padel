@@ -442,8 +442,9 @@ function guardarCarrito(){
     }
     else {
         sCarrito = JSON.stringify(arrayProductos);
+        var res=btoa(mcrypt.Encrypt(sCarrito,md5(md5(pal)),md5(pal),'rijndael-256','cbc'));
         if (sessionStorage.getItem("lgdusr") == null) {
-            sessionStorage.setItem("nusrcrt", sCarrito);
+            sessionStorage.setItem("nusrcrt", res);
         }
         else {
             sSesion = sessionStorage.getItem("lgdusr");
