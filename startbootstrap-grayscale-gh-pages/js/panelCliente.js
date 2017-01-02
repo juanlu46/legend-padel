@@ -7,12 +7,12 @@ $(document).ready(function() {
     }
     var email = "";
     if (sessionStorage.getItem('lgdusr') == null) {
-        $.get('php/desencriptar.php?cadena='+localStorage.getItem('lgdusr'),function(data){
+        $.get('../php/desencriptar.php?cadena='+localStorage.getItem('lgdusr'),function(data){
             email =data;
         });
     }
     else{
-        $.get('php/desencriptar.php?cadena='+sessionStorage.getItem('lgdusr'),function(data){
+        $.get('../php/desencriptar.php?cadena='+sessionStorage.getItem('lgdusr'),function(data){
             email =data;
         });
     }
@@ -38,7 +38,8 @@ $(document).ready(function() {
         stopEvent();
     }
 
-    $.get('../php/devuelveCliente.php', email, function (data) {
+    var email2=btoa(mcrypt.Encrypt(email,md5(md5(pal)),md5(pal),'rijndael-256','cbc'));
+    $.get('../php/devuelveCliente.php?usuario='+encodeURIComponent(email2), function (data) {
         var jsonCliente = JSON.parse(data);
         cargarDatosCliente(jsonCliente);
         $('.guardar').on('click', function () {

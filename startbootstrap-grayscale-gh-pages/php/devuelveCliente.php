@@ -11,8 +11,7 @@ if ($mysqli->connect_errno) {
 else{
     $mysqli->query("SET NAMES utf8");
     $susuario=Encriptacion::desencriptar($_REQUEST['usuario']);
-
-
+    echo $susuario;
     if($susuario!=NULL){
         $expEmail ="/^[A-Za-z]*[_a-z0-9-].(\.[_A-Z0-9-].)*@[a-z0-9-].(\.[a-z0-9-].)*(\.[a-z]{2,3})$/";
         $query="SELECT * FROM usuarios WHERE email='".$susuario."'";
@@ -23,6 +22,9 @@ else{
                 '"apellidos":"'.$array["apellidos"].'",'.
                 '"telefono":"'.$array["telefono"].'",'.
                 '"direccion":"'.$array["direccion"].'",'.
+                '"localidad":"'.$array["localidad"].'",'.
+                '"provincia":"'.$array["provincia"].'",'.
+                '"cp":"'.$array["cp"].'",'.
                 '"dni":"'.$array["dni"].'",'.
                 '"email":"'.$array["email"].'",'.
                 '"password":"'.$array["contraseña"].'"'.
