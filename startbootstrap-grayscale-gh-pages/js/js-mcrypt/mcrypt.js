@@ -42,8 +42,12 @@
  */
  var blockCipherCalls={};
  blockCipherCalls['rijndael-128']=function(cipher,block,key,encrypt){
-	if(key.length<32)
-		key+=new Array(33-key.length).join(String.fromCharCode(0));
+	 if(key.length<16)
+		 key+=new Array(17-key.length).join(String.fromCharCode(0));
+	 else if(key.length<24 && key.length>16)
+		 key+=new Array(25-key.length).join(String.fromCharCode(0));
+	 else if(key.length<32 && key.length>24)
+		 key+=new Array(33-key.length).join(String.fromCharCode(0));
 	if(encrypt)
 		Rijndael.Encrypt(block,key);
 	else

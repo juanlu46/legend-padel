@@ -178,13 +178,7 @@ function validarLogin(a) {
         var arrayJson = '{"email":"' + email + '",' +
             '"password":"' + password + '"}';
         var res=btoa(mcrypt.Encrypt(arrayJson,md5(md5(pal)),md5(pal),'rijndael-256','cbc'));
-        
-        $.ajax({
-            url: "php/usuarios.php",
-            type: 'POST',
-            data: "datos=" + res,
-            dataType: 'text',
-            success: function (data) {
+        $.get("php/usuarios.php?datos="+encodeURIComponent(res),function (data) {
                 var mensajeAlert = $(".mensaje");
                 if (data == 'Datos incorrectos, introduzca un usuario válido') {
                     mensajeAlert.removeClass('alert-success');
@@ -210,7 +204,6 @@ function validarLogin(a) {
                             document.location.href='http://localhost/legend-padel/index.html';
                         }
                 }
-            }
         });
 
     }
