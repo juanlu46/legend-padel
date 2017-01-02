@@ -47,6 +47,15 @@ $(document).on('click', function (e) {
 
 $(window).scroll(ajustarNavBar);
 $(document).ready(function(){
+    $(function() {
+        $('a.page-scroll').bind('click', function(event) {
+            var anchor = $(this);
+            $('html, body').stop().animate({
+                scrollTop: $(anchor.attr('href')).offset().top
+            }, 1500, 'easeInOutExpo');
+            event.preventDefault();
+        });
+    });
     eliminarStorage();
     $('.btnContactar').on('click',abrirCaptcha);
     addIconUsuarioMenu();
@@ -111,17 +120,6 @@ function cargarEventoBotonRedes(){
 
 }
 
-// Controlador de scroll
-$(function() {
-    $('a.page-scroll').bind('click', function(event) {
-        var anchor = $(this);
-        $('html, body').stop().animate({
-            scrollTop: $(anchor.attr('href')).offset().top
-        }, 1500, 'easeInOutExpo');
-        event.preventDefault();
-    });
-});
-
 //Cierra los menús al hacer click
 $('.navbar-collapse ul li a').click(function() {
     $(this).closest('.collapse').collapse('toggle');
@@ -179,7 +177,6 @@ function validarLogin(a) {
     else {
         var arrayJson = '{"email":"' + email + '",' +
             '"password":"' + password + '"}';
-
         var res=btoa(mcrypt.Encrypt(arrayJson,md5(md5(pal)),md5(pal),'rijndael-256','cbc'));
         
         $.ajax({

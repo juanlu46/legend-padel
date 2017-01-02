@@ -1,21 +1,4 @@
-/*
- *  jsmcrypt version 0.1  -  Copyright 2012 F. Doering
- *
- *  This program is free software; you can redistribute it and/or
- *  modify it under the terms of the GNU General Public License as
- *  published by the Free Software Foundation; either version 2 of the
- *  License, or (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *  General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
- *  02111-1307 USA
- */
+
  
  
  //this creates a static class mcrypt that is already initialized
@@ -42,8 +25,8 @@
   "rijndael-128"	:[	16,			32],
   "rijndael-192"	:[	24,			32],
   "rijndael-256"	:[	32,			32],
-  "serpent"			:[	16,			32],
- }
+  "serpent"			:[	16,			32]
+ };
  
  /* blockCipherCalls
  * This object is keyed by the cipher names and the vaules are
@@ -60,7 +43,7 @@
  var blockCipherCalls={};
  blockCipherCalls['rijndael-128']=function(cipher,block,key,encrypt){
 	if(key.length<32)
-		key+=Array(33-key.length).join(String.fromCharCode(0));
+		key+=new Array(33-key.length).join(String.fromCharCode(0));
 	if(encrypt)
 		Rijndael.Encrypt(block,key);
 	else
@@ -116,7 +99,7 @@
 /* Crypt
  * This function can encrypt or decrypt text
  */
- 
+
 pub.Crypt=function(encrypt,text,IV,key, cipher, mode){
 	if(key) cKey=key; else key=cKey;
 	if(cipher) cCipher=cipher; else cipher=cCipher;
@@ -149,7 +132,7 @@ pub.Crypt=function(encrypt,text,IV,key, cipher, mode){
 	}
 	var chunks=Math.ceil(text.length/chunkS);
 	var orig=text.length;
-	text+=Array(chunks*chunkS-orig+1).join(String.fromCharCode(0));//zero pad the end
+	text+=new Array(chunks*chunkS-orig+1).join(String.fromCharCode(0));//zero pad the end
 	var out='';
 	switch(mode){
 		case 'ecb':
@@ -245,7 +228,7 @@ pub.get_block_size=function(cipher,mode){
 	if(!ciphers[cipher])
 		return false;
 	return ciphers[cipher][0];
-}
+};
 
 //Gets the name of the specified cipher
 pub.get_cipher_name=function(cipher){
@@ -253,7 +236,7 @@ pub.get_cipher_name=function(cipher){
 	if(!ciphers[cipher])
 		return false;
 	return cipher;
-}
+};
 
 //Returns the size of the IV belonging to a specific cipher/mode combination
 pub.get_iv_size=function(cipher,mode){
@@ -261,7 +244,7 @@ pub.get_iv_size=function(cipher,mode){
 	if(!ciphers[cipher])
 		return false;
 	return ciphers[cipher][0];
-}
+};
 
 //Gets the key size of the specified cipher
 pub.get_key_size=function(cipher,mode){
@@ -269,7 +252,7 @@ pub.get_key_size=function(cipher,mode){
 	if(!ciphers[cipher])
 		return false;
 	return ciphers[cipher][1];
-}
+};
 
 //Gets an array of all supported ciphers
 pub.list_algorithms=function(){
@@ -277,11 +260,11 @@ pub.list_algorithms=function(){
 	for(var i in ciphers)
 		ret.push(i);
 	return ret;
-}
+};
 
 pub.list_modes=function(){
 	return ['ecb','cbc','cfb','ncfb','nofb','ctr'];
-}
+};
 
 
  

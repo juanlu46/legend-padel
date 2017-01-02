@@ -1,0 +1,200 @@
+body {
+    width: 100%;
+    height: 100%;
+    font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: white;
+    background-color: #0d0d0d;
+}
+html {
+    width: 100%;
+    height: 100%;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0 0 35px;
+    text-transform: uppercase;
+    font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+.d3{
+    color: #382f30;
+    font-size: 5em;
+    font-weight: bold;
+    text-shadow: 0 1px 0 #aaa, 0 2px 0 #b9b9b9, 0 3px 0 #bbb, 0 4px 0 #c9c9c9, 0 5px 0 #ccc;
+}
+.ds {
+    color: #FFFFFF;
+    font-size: 5em;
+    font-weight: bold;
+    text-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaa;
+}
+a {
+    color: #9f0606;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+a:hover,
+a:focus {
+    text-decoration: none;
+    color: #d41414;
+}
+
+.container{
+    margin-top: 68px;
+}
+.vertical-divider{
+    margin-top: 1em;
+    margin-right: 1em;
+    border: solid 2px white;
+    height: 2em;
+
+}
+
+.logo-legend-txt{
+    width: 93px;
+    margin-top: -8px;
+    display: inline-block !important;
+}
+.logo-legend-img{
+    width: 51px;
+    float: right;
+    margin-top: -14px;
+    margin-left: -13px;
+}
+
+.navbar-custom {
+    margin-bottom: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    text-transform: uppercase;
+    font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background-color: black;
+}
+.navbar-custom .navbar-toggle {
+    color: white;
+    background-color: rgba(255, 255, 255, 0.2);
+    font-size: 12px;
+}
+.navbar-custom .navbar-toggle:focus,
+.navbar-custom .navbar-toggle:active {
+    outline: none;
+}
+.navbar-custom .navbar-brand {
+    font-weight: 700;
+}
+.navbar-custom .navbar-brand:focus {
+    outline: none;
+}
+.navbar-custom a {
+    color: white;
+}
+.navbar-custom .nav li a {
+    -webkit-transition: background 0.3s ease-in-out;
+    -moz-transition: background 0.3s ease-in-out;
+    transition: background 0.3s ease-in-out;
+}
+.navbar-custom .nav li a:hover {
+    color: rgba(255, 255, 255, 0.8);
+    outline: none;
+    background-color: transparent;
+}
+.navbar-custom .nav li a:focus,
+.navbar-custom .nav li a:active {
+    outline: none;
+    background-color: transparent;
+}
+.navbar-custom .nav li.active {
+    outline: none;
+}
+.navbar-custom .nav li.active a {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+.navbar-custom .nav li.active a:hover {
+    color: white;
+}
+
+@media (min-width: 768px) {
+    .navbar-custom {
+        padding: 20px 0;
+        border-bottom: none;
+        letter-spacing: 1px;
+        background: transparent;
+        -webkit-transition: background 0.5s ease-in-out, padding 0.5s ease-in-out;
+        -moz-transition: background 0.5s ease-in-out, padding 0.5s ease-in-out;
+        transition: background 0.5s ease-in-out, padding 0.5s ease-in-out;
+    }
+    .navbar-custom.top-nav-collapse {
+        padding: 0;
+        background: black;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    }
+}
+
+/** icon-login **/
+ul.dropdown-login{
+    min-width:250px;
+    color:black;
+}
+ul.dropdown-login img{
+    height: 5em;
+}
+ul.dropdown-login li:hover a{
+    color:black !important;
+}
+ul.dropdown-login li .item{
+    display:block;
+    padding:3px 10px;
+    margin: 3px 0;
+}
+ul.dropdown-login li .item:hover{
+    background-color:#f3f3f3;
+}
+ul.dropdown-login li .item:after{
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+ul.dropdown-login li .item-left{
+    float:left;
+}
+ul.dropdown-login li .item-left img,
+ul.dropdown-login li .item-left span.item-info{
+    float:left;
+}
+ul.dropdown-login li .item-left span.item-info{
+    margin-left:10px;
+}
+ul.dropdown-login li .item-left span.item-info span{
+    display:block;
+}
+ul.dropdown-login li .item-right{
+    float:right;
+}
+ul.dropdown-login li .item-right button{
+    margin-top:14px;
+}
+
+.thumbnail{
+    margin-right: 20px;
+}
+.thumbnail img{
+    height: 7em;
+}
+tr:hover td{
+    color:black;
+}
+.hover-color{
+    background-color: #f5f5f5;
+    color:black;
+}
+.no-hover-style{
+    background-color:rgba(0,0,0,0) !important;
+}
