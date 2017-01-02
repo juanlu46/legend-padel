@@ -1,8 +1,9 @@
 <?php
+require_once 'Encriptacion.php';
 header("Cache-Control: no-store, no-cache, must-revalidate");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
-$sEmail=$_GET['usuario'];
+$sEmail=Encriptacion::desencriptar($_GET['usuario']);
 $oProductos=json_decode($_GET['carrito']);
 $conn = new mysqli("localhost", "root", "", "legendpadel");
 $delete=$conn->query("DELETE FROM carritos WHERE usuario='".$sEmail."'");

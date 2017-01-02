@@ -1,4 +1,5 @@
 <?php
+require_once 'Encriptacion.php';
 header('Content-type: text/plain');
 header("Cache-Control: no-store, no-cache, must-revalidate");
 header("Cache-Control: post-check=0, pre-check=0", false);
@@ -10,7 +11,7 @@ if ($mysqli->connect_errno) {
 else{
     $mysqli->query("SET NAMES utf8");
     if (isset($_REQUEST['datos'])) {
-        $susuario = $_REQUEST['datos'];
+        $susuario = Encriptacion::desencriptar($_REQUEST['datos']);
     } else {
         $susuario = "";
     }

@@ -10,8 +10,7 @@ if ($mysqli->connect_errno) {
 }
 else{
     $mysqli->query("SET NAMES utf8");
-     $susuarioEncriptado = $_REQUEST['usuario'];
-    $susuario=Encriptacion::desencriptar($susuarioEncriptado);
+    $susuario=Encriptacion::desencriptar($_REQUEST['usuario']);
 
 
     if($susuario!=NULL){

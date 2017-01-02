@@ -180,10 +180,12 @@ function validarLogin(a) {
         var arrayJson = '{"email":"' + email + '",' +
             '"password":"' + password + '"}';
 
+        var res=btoa(mcrypt.Encrypt(arrayJson,md5(md5(pal)),md5(pal),'rijndael-256','cbc'));
+        
         $.ajax({
             url: "php/usuarios.php",
             type: 'POST',
-            data: "datos=" + arrayJson,
+            data: "datos=" + res,
             dataType: 'text',
             success: function (data) {
                 var mensajeAlert = $(".mensaje");
@@ -193,16 +195,15 @@ function validarLogin(a) {
                     mensajeAlert.text(data);
                     mensajeAlert.css('display', 'block');
                 } else {
-                    var res=btoa(mcrypt.Encrypt(email,md5(md5(pal)),md5(pal),'rijndael-256','cbc'));
-                        sessionStorage.setItem('lgdusr', res);
+                    var resEmail=btoa(mcrypt.Encrypt(email,md5(md5(pal)),md5(pal),'rijndael-256','cbc'));
+                        sessionStorage.setItem('lgdusr', resEmail);
                         mensajeAlert.addClass('alert-success');
                         mensajeAlert.text(res);
                         mensajeAlert.css('display', 'block');
                         $('.ContentLogin').css('display', 'none');
                         $('.desenfoque').css('display', 'none');
                         if ($('#chkRecordar').prop('checked')) {
-                            var res2=btoa(mcrypt.Encrypt(email,md5(md5(pal)),md5(pal),'rijndael-256','cbc'));
-                                localStorage.setItem('lgdusr', res2);
+                                localStorage.setItem('lgdusr', resEmail);
                         }
                         addIconUsuarioMenu();
                         if(a.legnth==1){
@@ -211,10 +212,6 @@ function validarLogin(a) {
                         else{
                             document.location.href='http://localhost/legend-padel/index.html';
                         }
-                   
-
-
-
                 }
             }
         });
@@ -245,11 +242,7 @@ function addIconUsuarioMenu() {
                         '<li class="divider"></li><li class="pedidosCliente"><a class="text-center" href="html/panelCliente.html?pedidos">Mis pedidos</a></li>' +
                         '<li class="divider"></li> <li class="desconexion"><a class="text-center" href="#">Desconexión</a></li></ul>');
                     $('.desconexion').on('click',desconectarse);
-
-                    $('.pedidosCliente').on('click',function(){
-                        accederPedidosCliente(jsonCliente);});
                 });
-           
         }
         else {
                 var emailUser =sessionStorage.getItem('lgdusr');
@@ -267,25 +260,19 @@ function addIconUsuarioMenu() {
                     $('.pedidosCliente').on('click',function(){
                         accederPedidosCliente(jsonCliente);});
                 });
-
         }
     $('.btn-identificate').addClass('dropdown menu-usuario');
     $('.btn-identificate').removeClass('btn-identificate');
-
-
     }
 }
-function accederPedidosCliente(jsonCliente) {
-
-}
 function desconectarse(){
-        if(sessionStorage.getItem('lgdusr')!=null)
-            sessionStorage.removeItem('lgdusr');
+   if(sessionStorage.getItem('lgdusr')!=null)
+       sessionStorage.removeItem('lgdusr');
 
-        if(localStorage.getItem('lgdusr')!=null)
-            localStorage.removeItem('lgdusr');
-
-    location.reload();
+   if(localStorage.getItem('lgdusr')!=null)
+       localStorage.removeItem('lgdusr');
+    
+   location.reload();
 }
 
 /* carrito */
@@ -315,9 +302,7 @@ function actualizarCarrito(){
                 cargarEventosBotonEliminarProducto();
                 actualizarNumeroCarrito();
             });
-
     }
-
 }
 
 function cargarEventosBotonEliminarProducto(){
@@ -408,12 +393,8 @@ function guardarCarrito(){
             sessionStorage.setItem('nusrcrt', res);
         }
         else {
-            $.get('php/desencriptar.php?cadena='+encodeURIComponent(sessionStorage.getItem('nusrcrt')),function(data){
-                sSesion = data;
+                sSesion = sessionStorage.getItem('nusrcrt');
                 $.get('php/guardarCarrito.php?usuario=' + encodeURIComponent(sSesion) + '&carrito=' + encodeURIComponent(sCarrito));
-            });
-
-
         }
     }
 }
