@@ -2,13 +2,13 @@ $(document).ready(inicio);
 
 
 var vistoEnvio=false;
-
+var pal='padelegend$01';
 function inicio(){
     addIconUsuarioMenu();
     $('.btn-cerrar-login').on('click',cerrarFormLogin);
     $(".btn-identificate").on("click",cargarFormIdent);
     $('.btn-signin').on("click",function(event){validarLogin(event);});
-    $('form[name="form_pago"]').submit(validarPago);
+    $('form[name="form_pago"]').submit(function(event){validarPago(event);});
     if(sessionStorage.getItem('lgdusr')!=null) {
         $.get('../php/montarResumenPedido.php?usuario='+encodeURIComponent(sessionStorage.getItem('lgdusr')) , function (sProductos) {
             $('.m-progress').css('display', 'none');
@@ -377,13 +377,16 @@ function validarPago(event){
             });
             var sVariables='{"cantidad":"'+fTotal+'","id":"'+nID+'","descripcion":"Palas LEGEND PADEL","titular":"'+nombreCompleto+'","num_tarjeta":"'+numeroTarjeta+
                 '","cad_tarjeta":"'+(annoCaducidad.toString().substring(2)+mesCaducidad)+'","cvv_tarjeta":"'+cvvTarjeta+'"';
-            //Encriptar sVariables
+            sVariables=btoa(mcrypt.Encrypt(sVariables,md5(md5(pal)),md5(pal),'rijndael-256','cbc'));
             $.ajax('../php/obtenerVariablePago.php?data='+encodeURIComponent(sVariables),{
                 async:false,
                 cache:false,
                 method:'GET',
+                dataType:'json',
                 success:function(data){
-
+                    var oPanel=$('.panel-pago');
+                    oPanel.find('input[name="Ds_MerchantParameters"]').val(data.parametros);
+                    oPanel.find('input[name="Ds_Signature"]').val(data.signature);
                 }
             });
         }
