@@ -1,3 +1,4 @@
+var pal='padelegend$01';
 $(document).ready(inicio);
 
 function inicio(){
@@ -69,10 +70,9 @@ function guardarCarrito(){
     });
     var sCarrito = JSON.stringify(arrayProductos);
     if(sessionStorage.getItem("lgdusr")==null){
+        var res=btoa(mcrypt.Encrypt(sCarrito,md5(md5(pal)),md5(pal),'rijndael-256','cbc'));
+            sessionStorage.setItem('nusrcrt', res);
 
-        $.get('php/encriptar.php?cadena='+sCarrito,function(data){
-            sessionStorage.setItem('nusrcrt', data);
-        });
     }
     else{
 
@@ -165,10 +165,8 @@ function validarLogin(){
                     mensajeAlert.text(data);
                     mensajeAlert.css('display','block');
                 }else {
-
-                    $.get('php/encriptar.php?cadena='+email,function(data){
-                        sessionStorage.setItem('lgdusr', data);
-                    });
+                    var res=btoa(mcrypt.Encrypt(email,md5(md5(pal)),md5(pal),'rijndael-256','cbc'));
+                    sessionStorage.setItem('lgdusr', res);
                     mensajeAlert.addClass('alert-success');
                     mensajeAlert.text(data);
                     mensajeAlert.css('display', 'block');
@@ -202,7 +200,7 @@ function addIconUsuarioMenu() {
                         '<span class="glyphicon glyphicon-user"></span> <span class="nombre_usuario">'+nombreCliente+'</span><span class="caret"></span></a>' +
                         '<ul class="dropdown-menu dropdown-login" role="menu">' +
                         '<li><a class="text-center" href="html/panelCliente.html">Mi cuenta</a></li>' +
-                        '<li class="divider"></li><li class="pedidosCliente"><a class="text-center" href="#">Mis pedidos</a></li>' +
+                        '<li class="divider"></li><li class="pedidosCliente"><a class="text-center" href="html/panelCliente.html?pedidos">Mis pedidos</a></li>' +
                         '<li class="divider"></li> <li class="desconexion"><a class="text-center" href="#">Desconexión</a></li></ul>');
                     $('.desconexion').on('click',desconectarse);
 
@@ -222,7 +220,7 @@ function addIconUsuarioMenu() {
                         '<span class="glyphicon glyphicon-user"></span> <span class="nombre_usuario">'+nombreCliente+'</span><span class="caret"></span></a>' +
                         '<ul class="dropdown-menu dropdown-login" role="menu">' +
                         '<li><a class="text-center" href="html/panelCliente.html">Mi cuenta</a></li>' +
-                        '<li class="divider"></li><li class="pedidosCliente"><a class="text-center" href="#">Mis pedidos</a></li>' +
+                        '<li class="divider"></li><li class="pedidosCliente"><a class="text-center" href="html/panelCliente.html?pedidos">Mis pedidos</a></li>' +
                         '<li class="divider"></li> <li class="desconexion"><a class="text-center" href="#">Desconexión</a></li></ul>');
                     $('.desconexion').on('click',desconectarse);
 
