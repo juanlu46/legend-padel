@@ -1,4 +1,10 @@
+var pal='padelegend$01';
 $(document).ready(function() {
+    var url=window.location.href;
+    var a=url.split('?');
+    if(a[1]=='pedidos') {
+        cargarPedidos(a);
+    }
     var email = "";
     if (sessionStorage.getItem('lgdusr') == null) {
         $.get('php/desencriptar.php?cadena='+localStorage.getItem('lgdusr'),function(data){
@@ -127,9 +133,9 @@ $(document).ready(function() {
 
             if (error == false) {
                 mensajes.css('display', 'none');
-                $.get('php/encriptar.php?cadena='+email,function(data){
-                    sessionStorage.setItem('lgdusr', data);
-                });
+                var res=btoa(mcrypt.Encrypt(email,md5(md5(pal)),md5(pal),'rijndael-256','cbc'));
+                 sessionStorage.setItem('lgdusr', res);
+
                 if(password=="" && password2==""){
                   password=passActual;
                 }
@@ -149,9 +155,8 @@ $(document).ready(function() {
                     dataType: 'text',
                     success: function (data) {
                         if(data=='Los cambios se han guardado correctamente') {
-                            $.get('php/encriptar.php?cadena='+email,function(data){
-                                sessionStorage.setItem('lgdusr', data);
-                            });
+                            var res=btoa(mcrypt.Encrypt(email,md5(md5(pal)),md5(pal),'rijndael-256','cbc'));
+                            sessionStorage.setItem('lgdusr', res);
                             mensajes.addClass('notice-success');
                             mensajes.text('Los cambios se han guardado correctamente');
                             mensajes.css('display', 'block');
@@ -197,7 +202,6 @@ $(document).ready(function() {
                     }
 
                     for(var i=0;i<data.length;i++) {
-
                         var titulo=data[i]['nombre'];
                         var precio=data[i]['precio'];
                         var cantidad=data[i]['cantidad'];

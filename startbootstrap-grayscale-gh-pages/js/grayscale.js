@@ -1,3 +1,4 @@
+var pal='padelegend$01';
 // Ajustar Navbar
 function ajustarNavBar() {
     if ($(".navbar").offset().top > 50) {
@@ -191,27 +192,27 @@ function validarLogin(a) {
                     mensajeAlert.text(data);
                     mensajeAlert.css('display', 'block');
                 } else {
-                    $.get('php/encriptar.php?cadena='+email,function(data){
-                        sessionStorage.setItem('lgdusr', data);
-                    });
+                    var res=btoa(mcrypt.Encrypt(email,md5(md5(pal)),md5(pal),'rijndael-256','cbc'));
+                        sessionStorage.setItem('lgdusr', res);
+                        mensajeAlert.addClass('alert-success');
+                        mensajeAlert.text(res);
+                        mensajeAlert.css('display', 'block');
+                        $('.ContentLogin').css('display', 'none');
+                        $('.desenfoque').css('display', 'none');
+                        if ($('#chkRecordar').prop('checked')) {
+                            var res2=btoa(mcrypt.Encrypt(email,md5(md5(pal)),md5(pal),'rijndael-256','cbc'));
+                                localStorage.setItem('lgdusr', res2);
+                        }
+                        addIconUsuarioMenu();
+                        if(a.legnth==1){
+                            location.reload();
+                        }
+                        else{
+                            document.location.href='http://localhost/legend-padel/index.html';
+                        }
+                   
 
-                    mensajeAlert.addClass('alert-success');
-                    mensajeAlert.text(data);
-                    mensajeAlert.css('display', 'block');
-                    $('.ContentLogin').css('display', 'none');
-                    $('.desenfoque').css('display', 'none');
-                    if ($('#chkRecordar').prop('checked')) {
-                        $.get('php/encriptar.php','cadena='+email,function(data) {
-                            localStorage.setItem('lgdusr', data);
-                        });
-                    }
-                    addIconUsuarioMenu();
-                    if(a.legnth==1){
-                        location.reload();
-                    }
-                    else{
-                        document.location.href='http://localhost/legend-padel/index.html';
-                    }
+
 
                 }
             }
@@ -240,7 +241,7 @@ function addIconUsuarioMenu() {
                         '<span class="glyphicon glyphicon-user"></span> <span class="nombre_usuario">'+nombreCliente+'</span><span class="caret"></span></a>' +
                         '<ul class="dropdown-menu dropdown-login" role="menu">' +
                         '<li><a class="text-center" href="html/panelCliente.html">Mi cuenta</a></li>' +
-                        '<li class="divider"></li><li class="pedidosCliente"><a class="text-center" href="#">Mis pedidos</a></li>' +
+                        '<li class="divider"></li><li class="pedidosCliente"><a class="text-center" href="html/panelCliente.html?pedidos">Mis pedidos</a></li>' +
                         '<li class="divider"></li> <li class="desconexion"><a class="text-center" href="#">Desconexión</a></li></ul>');
                     $('.desconexion').on('click',desconectarse);
 
@@ -258,7 +259,7 @@ function addIconUsuarioMenu() {
                         '<span class="glyphicon glyphicon-user"></span> <span class="nombre_usuario">'+nombreCliente+'</span><span class="caret"></span></a>' +
                         '<ul class="dropdown-menu dropdown-login" role="menu">' +
                         '<li><a class="text-center" href="html/panelCliente.html">Mi cuenta</a></li>' +
-                        '<li class="divider"></li><li class="pedidosCliente"><a class="text-center" href="#">Mis pedidos</a></li>' +
+                        '<li class="divider"></li><li class="pedidosCliente"><a class="text-center" href="html/panelCliente.html?pedidos">Mis pedidos</a></li>' +
                         '<li class="divider"></li> <li class="desconexion"><a class="text-center" href="#">Desconexión</a></li></ul>');
                     $('.desconexion').on('click',desconectarse);
 
@@ -402,13 +403,11 @@ function guardarCarrito(){
     else {
         sCarrito = JSON.stringify(arrayProductos);
         if (sessionStorage.getItem("lgdusr") == null) {
-            $.get('php/encriptar.php?cadena='+sCarrito,function(data){
-                sessionStorage.setItem('nusrcrt', data);
-            });
-
+            var res=btoa(mcrypt.Encrypt(sCarrito,md5(md5(pal)),md5(pal),'rijndael-256','cbc'));
+            sessionStorage.setItem('nusrcrt', res);
         }
         else {
-            $.get('php/desencriptar.php?cadena='+sessionStorage.getItem('nusrcrt'),function(data){
+            $.get('php/desencriptar.php?cadena='+encodeURIComponent(sessionStorage.getItem('nusrcrt')),function(data){
                 sSesion = data;
                 $.get('php/guardarCarrito.php?usuario=' + encodeURIComponent(sSesion) + '&carrito=' + encodeURIComponent(sCarrito));
             });
