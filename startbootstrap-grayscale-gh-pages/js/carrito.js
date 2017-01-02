@@ -14,15 +14,13 @@ function inicio(){
     });
     if(sessionStorage.getItem("lgdusr")==null){
         if(sessionStorage.getItem("nusrcrt")!=null){
-
-            $.get('php/desencriptar.php?cadena='+sessionStorage.getItem('nusrcrt'),function(data){
-                sCarrito=data;
+                sCarrito=sessionStorage.getItem('nusrcrt');
                 $.get("../php/montarCarrito.php?carrito="+encodeURIComponent(sCarrito),function(oProductos){
                     $('#productos').find('tr').first().before(oProductos);
                     aplicarManejadoresBoton();
                     calcularTotales();
                 },'html');
-            });
+          
         }
         else{
             noProductos();

@@ -47,6 +47,7 @@ $(document).on('click', function (e) {
 
 $(window).scroll(ajustarNavBar);
 $(document).ready(function(){
+    eliminarStorage();
     $('.btnContactar').on('click',abrirCaptcha);
     addIconUsuarioMenu();
     actualizarCarrito();
@@ -502,6 +503,11 @@ function recaptcha_callback(response){
             alert("compruebe que no es un robot");
 
         }
+}
+function eliminarStorage(){
+    if(sessionStorage.getItem('lgdusr')!=null)
+        sessionStorage.removeItem('lgdusr');
 
-    
+    if(localStorage.getItem('lgdusr')!=null)
+        localStorage.removeItem('lgdusr');
 }
