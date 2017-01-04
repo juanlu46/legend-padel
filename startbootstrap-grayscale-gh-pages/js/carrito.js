@@ -186,7 +186,7 @@ function addIconUsuarioMenu() {
     if(sessionStorage.getItem('lgdusr')!=null || localStorage.getItem('lgdusr')!=null){
         if(sessionStorage.getItem('lgdusr')==null){
                 var emailUser = localStorage.getItem('lgdusr');
-                $.get('php/devuelveCliente.php?usuario='+encodeURIComponent(emailUser),function(data){
+                $.get('../php/devuelveCliente.php?usuario='+encodeURIComponent(emailUser),function(data){
                     var jsonCliente = data;
                     var nombreCliente=jsonCliente.nombre;
                     $('.menu-usuario').html('<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">' +
@@ -196,15 +196,12 @@ function addIconUsuarioMenu() {
                         '<li class="divider"></li><li class="pedidosCliente"><a class="text-center" href="html/panelCliente.html?pedidos">Mis pedidos</a></li>' +
                         '<li class="divider"></li> <li class="desconexion"><a class="text-center" href="#">Desconexión</a></li></ul>');
                     $('.desconexion').on('click',desconectarse);
-
-                    $('.pedidosCliente').on('click',function(){
-                        accederPedidosCliente(jsonCliente);});
                 });
 
         }
         else {
             var emailUser = sessionStorage.getItem('lgdusr');
-            $.get('php/devuelveCliente.php?usuario=' + encodeURIComponent(emailUser), function (data) {
+            $.get('../php/devuelveCliente.php?usuario=' + encodeURIComponent(emailUser), function (data) {
                 var jsonCliente = data;
                 var nombreCliente = jsonCliente.nombre;
                 $('.menu-usuario').html('<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">' +
@@ -214,13 +211,10 @@ function addIconUsuarioMenu() {
                     '<li class="divider"></li><li class="pedidosCliente"><a class="text-center" href="html/panelCliente.html?pedidos">Mis pedidos</a></li>' +
                     '<li class="divider"></li> <li class="desconexion"><a class="text-center" href="#">Desconexión</a></li></ul>');
                 $('.desconexion').on('click', desconectarse);
-
-                $('.pedidosCliente').on('click', function () {
-                    accederPedidosCliente(jsonCliente);
-                });
             });
         }
     }
+    //location.href="http://localhost/legend-padel/html/carrito.html";
 }
 
 function desconectarse(){

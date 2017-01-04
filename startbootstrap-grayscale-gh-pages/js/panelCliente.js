@@ -37,20 +37,21 @@ $(document).ready(function() {
         mensajes.html('<h3>Debe iniciar sesión</h3>Para iniciar sesión pulse <a class="iniciarSesion" href="../index.html?login">aquí</a>');
         stopEvent();
     }
-
-    var email2=btoa(mcrypt.Encrypt(email,md5(md5(pal)),md5(pal),'rijndael-256','cbc'));
-    $.get('../php/devuelveCliente.php?usuario='+encodeURIComponent(email2), function (data) {
-        var jsonCliente = JSON.parse(data);
-        cargarDatosCliente(jsonCliente);
-        $('.guardar').on('click', function () {
-            guardarCambios(jsonCliente);
+    else {
+        var email2 = sessionStorage.getItem('lgdusr');
+        $.get('../php/devuelveCliente.php?usuario=' + encodeURIComponent(email2), function (data) {
+            var jsonCliente = data;
+            cargarDatosCliente(jsonCliente);
+            $('.guardar').on('click', function () {
+                guardarCambios(jsonCliente);
+            });
         });
-    });
-    $('.limpiarForm').on('click', limpiarForm);
+        $('.limpiarForm').on('click', limpiarForm);
 
-    $('.btn-MisPedidos').on('click',function(){
-        cargarPedidos(email);
-    });
+        $('.btn-MisPedidos').on('click', function () {
+            cargarPedidos(email);
+        });
+    }
 });
     function cargarDatosCliente(cliente) {
         var legend = $('legend');
@@ -158,15 +159,24 @@ $(document).ready(function() {
                         if(data=='Los cambios se han guardado correctamente') {
                             var res=btoa(mcrypt.Encrypt(email,md5(md5(pal)),md5(pal),'rijndael-256','cbc'));
                             sessionStorage.setItem('lgdusr', res);
+                            mensajes.removeClass('notice-danger');
                             mensajes.addClass('notice-success');
                             mensajes.text('Los cambios se han guardado correctamente');
+                            setTimeout(function(){
+                                mensajes.addClass("animated fadeOut");
+                            },3000);
                             mensajes.css('display', 'block');
                             setTimeout("redirrecionar()", 5000);
                         }
                         else{
+                            mensajes.removeClass('notice-success');
                             mensajes.addClass('notice-danger');
                             mensajes.text('Se ha producido un error al intentar actualizar los datos, revise los datos introducidos');
                             mensajes.css('display', 'block');
+                            setTimeout(function(){
+                                mensajes.addClass("animated fadeOut");
+                            },3000);
+
                         }
                     }
                 });
@@ -175,6 +185,9 @@ $(document).ready(function() {
         else {
             mensajes.addClass('notice-danger');
             mensajes.append('Contraseña actual Incorrecta');
+            setTimeout(function(){
+                mensajes.addClass("animated fadeOut");
+            },3000);
             mensajes.css('display', 'block');
         }
     }
@@ -193,13 +206,17 @@ $(document).ready(function() {
         $('.form-Edicion').css('display', 'none');
         $('.misPedidos').css('display', 'block');
 
-        $.get('../php/devuelveCliente.php',email,function(data){
-            var jsonCliente = JSON.parse(data);
-            var dni='usuario='+jsonCliente.dni;
-            $.get('../php/devolverPedidos.php',dni,function(data){
+        $.get('../php/devuelveCliente.php?usuario='+sessionStorage.getItem('lgdusr'),function(data){
+            var codificar=data.dni;
+            var dni=btoa(mcrypt.Encrypt(codificar,md5(md5(pal)),md5(pal),'rijndael-256','cbc'));
+            $.get('../php/devolverPedidos.php?usuario='+encodeURIComponent(dni),function(data){
                 if(data!="" ){
                     if($('.item-defecto').length>0){
                         $('.item-defecto').remove();
+                    }
+                    if($('.pedido').length>0){
+                        $('.pedido').remove();
+                        $('.divider').remove();
                     }
 
                     for(var i=0;i<data.length;i++) {
@@ -232,7 +249,7 @@ $(document).ready(function() {
                                 break;
                         }
 
-                        var nuevoItem='<i href="#" class="list-group-item active" style="height:25em;font-size:14px;"><div class="media col-md-3"><figure style="margin-top: 4em;" class="pull-left">' +
+                        var nuevoItem='<i href="#" class="list-group-item active pedido" style="height:25em;font-size:14px;"><div class="media col-md-3"><figure style="margin-top: 4em;" class="pull-left">' +
                             '<img class="media-object img-rounded img-responsive" src='+img+' alt="Producto"></figure></div><div class="col-md-6">' +
                             '<h3 class="list-group-item-heading">'+titulo+'</h3><p class=" text-center">' +
                             'Su pedido se enviará a la siguiente dirección:</p><p class="text-center"><strong>Dirrección: </strong>'+direccion+'</p>' +
