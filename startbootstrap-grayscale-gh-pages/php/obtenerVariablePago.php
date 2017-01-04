@@ -7,8 +7,8 @@ require_once 'apiRedsys.php';
 require_once 'Encriptacion.php';
 $oParametros=Encriptacion::desencriptar($_GET['data']);
 $urlNoti=""; //url de notificacion de pago
-$urlOk=""; //Url de legendpadel.com para pago OK
-$urlKo=""; //Url de legendpadel.com para fallo de pago (ko)
+$urlOk="http://localhost/legend-padel/html/resultado_pago.html?ok=true&id=".$oParametros['id']; //Url de legendpadel.com para pago OK
+$urlKo="http://localhost/legend-padel/html/resultado_pago.html?ok=false"; //Url de legendpadel.com para fallo de pago (ko)
 $clave="sq7HjrUOBfKmC576ILgskD5srU870gJ7";
 $merchantCode=126590918;
 $currency=978;
