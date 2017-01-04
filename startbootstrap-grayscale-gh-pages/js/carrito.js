@@ -211,6 +211,7 @@ function addIconUsuarioMenu() {
                     '<li class="divider"></li><li class="pedidosCliente"><a class="text-center" href="html/panelCliente.html?pedidos">Mis pedidos</a></li>' +
                     '<li class="divider"></li> <li class="desconexion"><a class="text-center" href="#">Desconexión</a></li></ul>');
                 $('.desconexion').on('click', desconectarse);
+
             });
         }
     }
