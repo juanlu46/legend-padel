@@ -83,14 +83,17 @@ function calcularTotales(){
     });
     $(".subtotal_carrito").text(fSubTotal.toFixed(2)+" €");
     $(".total_carrito").text((fSubTotal+6).toFixed(2)+" €");
+   // guardarCarrito();
 }
 
 function calcularTotalProductos(){
-    $('.producto').each(function(){
-        var cantidad=$(this).find('.cantidad_producto').val();
-        var precioUnitario=parseFloat($(this).find('.precio').text().replace(' €',''));
-        $(this).find('.total_producto').text((cantidad*precioUnitario).toFixed(2));
-    });
+    $('.producto').each(function() {
+        var cantidad = $(this).find('.cantidad_producto').val();
+        var precioUnitario = parseFloat($(this).find('.precio').text().replace(' €', ''));
+        $(this).find('.total_producto').text((cantidad * precioUnitario).toFixed(2));
+        });
+
+
     calcularTotales();
 }
 

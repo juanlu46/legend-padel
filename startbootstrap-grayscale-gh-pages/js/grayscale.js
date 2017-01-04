@@ -379,7 +379,7 @@ function guardarCarrito(){
             sessionStorage.setItem('nusrcrt', res);
         }
         else {
-                sSesion = sessionStorage.getItem('nusrcrt');
+                sSesion = sessionStorage.getItem('lgdusr');
                 $.get('php/guardarCarrito.php?usuario=' + encodeURIComponent(sSesion) + '&carrito=' + encodeURIComponent(sCarrito));
         }
     }
