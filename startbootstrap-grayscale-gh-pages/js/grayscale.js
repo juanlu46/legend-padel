@@ -189,11 +189,11 @@ function validarLogin(a) {
                 } else {
                     var resEmail=btoa(mcrypt.Encrypt(email,md5(md5(pal)),md5(pal),'rijndael-256','cbc'));
                         sessionStorage.setItem('lgdusr', resEmail);
+                    if ($('#chkRecordar').prop('checked')) {
+                        localStorage.setItem('lgdusr', resEmail);
+                    }
                         $('.ContentLogin').css('display', 'none');
                         $('.desenfoque').css('display', 'none');
-                        if ($('#chkRecordar').prop('checked')) {
-                                localStorage.setItem('lgdusr', resEmail);
-                        }
                         addIconUsuarioMenu();
                         if(a.legnth==1){
                             location.reload();
