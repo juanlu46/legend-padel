@@ -93,28 +93,7 @@ function calcularTotalProductos(){
     calcularTotales();
 }
 
-function cargarFormIdent(){
-    $('.btn-cerrar-login').on('click',function(){
-        return false;
-    });
-    var inputEmail=$("#inputEmail");
-    inputEmail.val("");
-    $("#inputPassword").val("");
-    $('.ContentLogin').css('display','block');
-    $('.desenfoque').css('display','block');
-    if(sessionStorage.getItem('lgdusr')!=null){
-        $.get('php/desencriptar.php?cadena='+sessionStorage.getItem('lgdusr'),function(data){
-            inputEmail.val(data);
-        });
-    }
-    if(localStorage.getItem('lgdusr')!=null ){
-        $.get('php/desencriptar.php?cadena='+localStorage.getItem('lgdusr'),function(data){
-            inputEmail.val(data);
-        });
 
-    }
-
-}
 /* JS DE LOGIN */
 function validarLogin(){
     var expEmail = new RegExp("^[A-Za-z]*[_a-z0-9-]+(\.[_A-Z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$");
@@ -186,7 +165,7 @@ function addIconUsuarioMenu() {
     if(sessionStorage.getItem('lgdusr')!=null || localStorage.getItem('lgdusr')!=null){
         if(sessionStorage.getItem('lgdusr')==null){
                 var emailUser = localStorage.getItem('lgdusr');
-                $.get('php/devuelveCliente.php?usuario='+encodeURIComponent(emailUser),function(data){
+                $.get('../php/devuelveCliente.php?usuario='+encodeURIComponent(emailUser),function(data){
                     var jsonCliente = data;
                     var nombreCliente=jsonCliente.nombre;
                     $('.menu-usuario').html('<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">' +
@@ -196,15 +175,12 @@ function addIconUsuarioMenu() {
                         '<li class="divider"></li><li class="pedidosCliente"><a class="text-center" href="html/panelCliente.html?pedidos">Mis pedidos</a></li>' +
                         '<li class="divider"></li> <li class="desconexion"><a class="text-center" href="#">Desconexión</a></li></ul>');
                     $('.desconexion').on('click',desconectarse);
-
-                    $('.pedidosCliente').on('click',function(){
-                        accederPedidosCliente(jsonCliente);});
                 });
 
         }
         else {
             var emailUser = sessionStorage.getItem('lgdusr');
-            $.get('php/devuelveCliente.php?usuario=' + encodeURIComponent(emailUser), function (data) {
+            $.get('../php/devuelveCliente.php?usuario=' + encodeURIComponent(emailUser), function (data) {
                 var jsonCliente = data;
                 var nombreCliente = jsonCliente.nombre;
                 $('.menu-usuario').html('<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">' +
@@ -215,9 +191,6 @@ function addIconUsuarioMenu() {
                     '<li class="divider"></li> <li class="desconexion"><a class="text-center" href="#">Desconexión</a></li></ul>');
                 $('.desconexion').on('click', desconectarse);
 
-                $('.pedidosCliente').on('click', function () {
-                    accederPedidosCliente(jsonCliente);
-                });
             });
         }
     }
