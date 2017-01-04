@@ -20,7 +20,7 @@ while($res=$select->fetch_assoc()) {
     }
     $fTotal=$res['precio']*$res['cantidad'];
     ?>
-    <tr class="producto" data-id="idproducto" data-precio="<?php $res['precio']; ?>">
+    <tr class="producto" data-id="<?php echo $res['id']; ?>" data-precio="<?php $res['precio']; ?>">
         <td class="col-sm-8 col-md-6">
             <div class="media">
                 <a class="thumbnail pull-left" href="#"> <img class="media-object" src="../img/imgProduct/<?php echo $res['id']; ?>.jpg" alt="icono producto"> </a>
