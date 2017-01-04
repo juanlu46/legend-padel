@@ -9,12 +9,15 @@ function inicio(){
     var parametros=url.split('?')[1].split('&');
     if(parametros[0].split('=')[1]=="true"){
         $('.titulo-mensaje').html('<span class="glyphicon glyphicon-ok"></span> PAGO REALIZADO CON ÉXITO');
-        $('.mensaje').html('Tu número de pedido: '+parametros[1].split('=')[1]+'<br>Ya puedes cerrar la ventana o seguir navegando con la barra superior.<br>Gracias y esperamos que no sea la última ;)');
+        $('.mensaje').html('Tu número de pedido: <strong>'+parametros[1].split('=')[1]+'</strong><br>Tienes todos los detalles en tu correo electrónico.<br>Ya puedes cerrar la ventana o seguir navegando con la barra superior.<br><strong>Gracias y esperamos que no sea la última ;)</strong>');
     }
     else{
         $('.titulo-mensaje').html('<span class="glyphicon glyphicon-remove"></span> HA OCURRIDO UN ERROR EN EL PAGO');
-        $('.mensaje').html('Lo sentimos, pero no ha sido posible realizar el pago. Intentelo de nuevo más tarde o compruebe que su tarjeta no está caducada o que su banco no está autorizadno el pago.<br>'+
-        'Disculpe las molestias :(');
+        $('.mensaje').html('Lo sentimos, pero no ha sido posible realizar el pago. Posibles motivos: '+
+            '<br><span class="glyphicon glyphicon-chevron-right"></span> Problemas con el servicio de pago, intentelo de nuevo más tarde.<br>'+
+            '<span class="glyphicon glyphicon-chevron-right"></span> Compruebe que ha introducido bien el CVV2 de su tarjeta.<br>'+
+            '<span class="glyphicon glyphicon-chevron-right"></span> Su banco no está autorizando el pago.<br>'+
+        '<strong>Disculpe las molestias :(</strong>');
     }
 }
 

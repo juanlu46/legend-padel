@@ -36,7 +36,7 @@ if($nProductos>0) {
                         <h4 class="media-heading"><a href="" class="nombre_producto"><?php echo $res['nombre']; ?></a>
                         </h4>
                         <h5 class="media-heading"> by <a href="#" class="marca">Legend Padel</a></h5>
-                        <span>Stock: </span><span><strong class="<?php echo $sStock; ?>"</strong></span>
+                        <span>Stock: </span><span><strong class="<?php echo $sStock; ?></strong></span>
                 </div>
             </div>
         </td>
