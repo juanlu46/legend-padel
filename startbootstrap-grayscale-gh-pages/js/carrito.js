@@ -30,6 +30,7 @@ function inicio(){
             sSesion=sessionStorage.getItem('lgdusr');
             $.get('../php/montarCarritoUsuario.php?usuario='+encodeURIComponent(sSesion),function(sProductos){
                 $('#productos').find('tr').first().before(sProductos);
+                aplicarManejadoresBoton();
                 calcularTotales();
             });
 
