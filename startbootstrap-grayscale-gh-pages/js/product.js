@@ -4,6 +4,7 @@ var curPic = -1;
 var imgO = [];
 
 $(document).ready(function() {
+    addIconUsuarioMenu();
     actualizarCarrito();
     cargarEventosBotonCarrito();
     $(".btn-identificate").on("click",cargarFormIdent);
@@ -297,12 +298,11 @@ function addIconUsuarioMenu() {
                     '<span class="glyphicon glyphicon-user"></span> <span class="nombre_usuario">'+nombreCliente+'</span><span class="caret"></span></a>' +
                     '<ul class="dropdown-menu dropdown-login" role="menu">' +
                     '<li><a class="text-center" href="html/panelCliente.html">Mi cuenta</a></li>' +
-                    '<li class="divider"></li><li class="pedidosCliente"><a class="text-center" href="html/panelCliente.html?pedidos">Mis pedidos</a></li>' +
+                    '<li class="divider"></li><li class="pedidosCliente"><a class="text-center" href="http://legendpadel.com/html/panelCliente.html?pedidos">Mis pedidos</a></li>' +
                     '<li class="divider"></li> <li class="desconexion"><a class="text-center" href="#">Desconexión</a></li></ul>');
                 $('.desconexion').on('click',desconectarse);
 
-                $('.pedidosCliente').on('click',function(){
-                    accederPedidosCliente(jsonCliente);});
+               
             });
 
         }
@@ -315,7 +315,7 @@ function addIconUsuarioMenu() {
                     '<span class="glyphicon glyphicon-user"></span> <span class="nombre_usuario">'+nombreCliente+'</span><span class="caret"></span></a>' +
                     '<ul class="dropdown-menu dropdown-login" role="menu">' +
                     '<li><a class="text-center" href="html/panelCliente.html">Mi cuenta</a></li>' +
-                    '<li class="divider"></li><li class="pedidosCliente"><a class="text-center" href="html/panelCliente.html?pedidos">Mis pedidos</a></li>' +
+                    '<li class="divider"></li><li class="pedidosCliente"><a class="text-center" href="http://legendpadel.com/html/panelCliente.html?pedidos">Mis pedidos</a></li>' +
                     '<li class="divider"></li> <li class="desconexion"><a class="text-center" href="#">Desconexión</a></li></ul>');
                 $('.desconexion').on('click',desconectarse);
             });

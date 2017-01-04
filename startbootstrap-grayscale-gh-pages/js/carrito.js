@@ -83,14 +83,17 @@ function calcularTotales(){
     });
     $(".subtotal_carrito").text(fSubTotal.toFixed(2)+" €");
     $(".total_carrito").text((fSubTotal+6).toFixed(2)+" €");
+   // guardarCarrito();
 }
 
 function calcularTotalProductos(){
-    $('.producto').each(function(){
-        var cantidad=$(this).find('.cantidad_producto').val();
-        var precioUnitario=parseFloat($(this).find('.precio').text().replace(' €',''));
-        $(this).find('.total_producto').text((cantidad*precioUnitario).toFixed(2));
-    });
+    $('.producto').each(function() {
+        var cantidad = $(this).find('.cantidad_producto').val();
+        var precioUnitario = parseFloat($(this).find('.precio').text().replace(' €', ''));
+        $(this).find('.total_producto').text((cantidad * precioUnitario).toFixed(2));
+        });
+
+
     calcularTotales();
 }
 
@@ -171,7 +174,6 @@ function validarLogin(){
                         localStorage.setItem('lgdusr',res);
                     }
                     addIconUsuarioMenu();
-                    location.href="http://localhost/legend-padel/index.html";
                 }
             }
         });
@@ -194,7 +196,7 @@ function addIconUsuarioMenu() {
                         '<span class="glyphicon glyphicon-user"></span> <span class="nombre_usuario">'+nombreCliente+'</span><span class="caret"></span></a>' +
                         '<ul class="dropdown-menu dropdown-login" role="menu">' +
                         '<li><a class="text-center" href="html/panelCliente.html">Mi cuenta</a></li>' +
-                        '<li class="divider"></li><li class="pedidosCliente"><a class="text-center" href="html/panelCliente.html?pedidos">Mis pedidos</a></li>' +
+                        '<li class="divider"></li><li class="pedidosCliente"><a class="text-center" href="http://legendpadel.com/html/panelCliente.html?pedidos">Mis pedidos</a></li>' +
                         '<li class="divider"></li> <li class="desconexion"><a class="text-center" href="#">Desconexión</a></li></ul>');
                     $('.desconexion').on('click',desconectarse);
                 });
@@ -209,14 +211,16 @@ function addIconUsuarioMenu() {
                     '<span class="glyphicon glyphicon-user"></span> <span class="nombre_usuario">' + nombreCliente + '</span><span class="caret"></span></a>' +
                     '<ul class="dropdown-menu dropdown-login" role="menu">' +
                     '<li><a class="text-center" href="html/panelCliente.html">Mi cuenta</a></li>' +
-                    '<li class="divider"></li><li class="pedidosCliente"><a class="text-center" href="html/panelCliente.html?pedidos">Mis pedidos</a></li>' +
+                    '<li class="divider"></li><li class="pedidosCliente"><a class="text-center" href="http://legendpadel.com/html/panelCliente.html?pedidos">Mis pedidos</a></li>' +
                     '<li class="divider"></li> <li class="desconexion"><a class="text-center" href="#">Desconexión</a></li></ul>');
                 $('.desconexion').on('click', desconectarse);
 
             });
+            $('.btn-identificate').addClass('dropdown menu-usuario');
+            $('.btn-identificate').removeClass('btn-identificate');
         }
     }
-    //location.href="http://localhost/legend-padel/html/carrito.html";
+
 }
 
 function desconectarse(){

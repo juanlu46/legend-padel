@@ -125,6 +125,5 @@ function limpiarCampos(){
     $('input').val('');
 }
 function redirrecionar(){
-        window.location="http://localhost/legend-padel/";
-    // window.location="http://www.legendpadel.com";
+        window.location="http://www.legendpadel.com";
 }
