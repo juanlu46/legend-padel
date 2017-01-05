@@ -367,6 +367,7 @@ function validarPago(event){
                 }
             });
             if(nMes.toString().length==1)
+                nMes=nMes+1;
                 nMes='0'+nMes.toString();
             if(mesCaducidad.toString().length==1)
                mesCaducidad="0"+mesCaducidad.toString();
