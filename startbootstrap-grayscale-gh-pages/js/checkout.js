@@ -357,7 +357,7 @@ function validarPago(event){
             var nAnno=(new Date).getFullYear();
             var nMes=(new Date).getMonth();
             var nombreCompleto;
-            $.ajax('../php/devuelveCliente.php?ususario='+encodeURIComponent(sessionStorage.getItem('lgdusr')),{
+            $.ajax('../php/devuelveCliente.php?usuario='+encodeURIComponent(sessionStorage.getItem('lgdusr')),{
                 async:false,
                 cache:false,
                 dataType:'json',
