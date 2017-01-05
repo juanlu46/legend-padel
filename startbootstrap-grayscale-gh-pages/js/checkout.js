@@ -370,7 +370,7 @@ function validarPago(event){
                 nMes='0'+nMes.toString();
             if(mesCaducidad.toString().length==1)
                mesCaducidad="0"+mesCaducidad.toString();
-            $.ajax('../php/obtenerTotal.php?ususario='+encodeURIComponent(sessionStorage.getItem('lgdusr')),{
+            $.ajax('../php/obtenerTotal.php?usuario='+encodeURIComponent(sessionStorage.getItem('lgdusr')),{
                 async:false,
                 cache:false,
                 dataType:'json',
