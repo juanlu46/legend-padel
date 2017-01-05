@@ -322,7 +322,7 @@ ul.dropdown-login li .item-right button{
     border-left: 16px solid #fff;
     border-top: 16px solid transparent;
     border-bottom: 16px solid transparent;
-    z-index: 1008;
+    z-index: 2;
     position: absolute;
     left: 99px;
     top: 1px
@@ -336,7 +336,7 @@ ul.dropdown-login li .item-right button{
     border-left: 20px solid #f7f7f7;
     border-top: 20px solid transparent;
     border-bottom: 20px solid transparent;
-    z-index: 1006;
+    z-index: 2;
     position: absolute;
     left: 99px;
     top: -3px
