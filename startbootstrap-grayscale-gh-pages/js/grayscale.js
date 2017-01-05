@@ -144,7 +144,7 @@ function cargarFormIdent(){
         $.get('php/desencriptar.php?cadena='+localStorage.getItem('lgdusr'),function(data){
             inputEmail.val(data);
         });
-
+ 
     }
 
 }
