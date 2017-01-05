@@ -123,13 +123,15 @@ function cerrarFormLogin(){
 function addIconUsuarioMenu() {
     if(sessionStorage.getItem('lgdusr')!=null || localStorage.getItem('lgdusr')!=null){
         if(sessionStorage.getItem('lgdusr')==null)
-            var emailUser='emailUser='+localStorage.getItem('lgdusr');
+            var emailUser=localStorage.getItem('lgdusr');
         else
-            var emailUser='emailUser='+sessionStorage.getItem('lgdusr');
-       
+            var emailUser=sessionStorage.getItem('lgdusr');
 
-        $.get('../php/devuelveCliente.php',emailUser,function(data){
-            var jsonCliente = JSON.parse(data);
+        $('.btn-identificate').addClass('dropdown menu-usuario');
+        $('.btn-identificate').removeClass('btn-identificate');
+        
+        $.get('../php/devuelveCliente.php?usuario='+encodeURIComponent(emailUser),function(data){
+            var jsonCliente = data;
             var nombreCliente=jsonCliente.nombre;
             $('.menu-usuario').html('<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">' +
                 '<span class="glyphicon glyphicon-user"></span> <span class="nombre_usuario">'+nombreCliente+'</span><span class="caret"></span></a>' +
@@ -139,8 +141,7 @@ function addIconUsuarioMenu() {
                 '<li class="divider"></li> <li class="desconexion"><a class="text-center" href="#">Desconexión</a></li></ul>');
             $('.desconexion').on('click',desconectarse);
 
-            $('.btn-identificate').addClass('dropdown menu-usuario');
-            $('.btn-identificate').removeClass('btn-identificate');
+
         });
     }
 }

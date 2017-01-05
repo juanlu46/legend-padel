@@ -83,7 +83,7 @@ function calcularTotales(){
     });
     $(".subtotal_carrito").text(fSubTotal.toFixed(2)+" €");
     $(".total_carrito").text((fSubTotal+6).toFixed(2)+" €");
-   // guardarCarrito();
+    guardarCarrito();
 }
 
 function calcularTotalProductos(){

@@ -6,6 +6,17 @@ header("Pragma: no-cache");
 header('Content-Type: application/json');
 $sEmail=Encriptacion::desencriptar($_GET['usuario']);
 $conn=new mysqli("localhost","root","","legendpadel");
+$mysqli->query("SET NAMES utf8");
 $select=$conn->query("SELECT direccion, localidad, provincia, cp, telefono FROM usuarios WHERE email='".$sEmail."'");
-echo json_encode($select->fetch_assoc());
+
+while($array=$select->fetch_assoc()){
+    $usuario='{'.
+        '"direccion":"'.$array["direccion"].'",'.
+        '"localidad":"'.$array["localidad"].'",'.
+        '"provincia":"'.$array["provincia"].'",'.
+        '"cp":"'.$array["cp"].'",'.
+        '"telefono":"'.$array["telefono"].'"'.
+        '}';
+}
+echo $usuario;
 $conn->close();
