@@ -221,7 +221,9 @@ function cargarFormIdent(){
         inputEmail.val(sessionStorage.getItem('lgdusr'));
     }
     if(localStorage.getItem('lgdusr')!=null ){
-        inputEmail.val(localStorage.getItem('lgdusr'));
+        $.get('php/desencriptar.php?cadena='+localStorage.getItem('lgdusr'),function(data){
+            inputEmail.val(data);
+        });
     }
 
 }
