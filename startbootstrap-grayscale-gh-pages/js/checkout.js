@@ -259,7 +259,7 @@ function validarFormDireccion(){
             oAlert.css({"display":"none","position":"","top":"","left":"","font-size":"","margin":""});
         },iTiempo*1000);
     }
-}
+} 
 
 function cargarPanelPago(){
     vistoEnvio=true;
