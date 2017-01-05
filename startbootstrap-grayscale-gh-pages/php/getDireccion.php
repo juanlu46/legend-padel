@@ -6,7 +6,7 @@ header("Pragma: no-cache");
 header('Content-Type: application/json');
 $sEmail=Encriptacion::desencriptar($_GET['usuario']);
 $conn=new mysqli("localhost","root","","legendpadel");
-$mysqli->query("SET NAMES utf8");
+$conn->query("SET NAMES utf8");
 $select=$conn->query("SELECT direccion, localidad, provincia, cp, telefono FROM usuarios WHERE email='".$sEmail."'");
 
 while($array=$select->fetch_assoc()){
