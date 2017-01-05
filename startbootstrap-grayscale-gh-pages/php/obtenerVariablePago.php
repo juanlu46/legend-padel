@@ -6,7 +6,7 @@ header("Content-type: application/json");
 require_once 'apiRedsys.php';
 require_once 'Encriptacion.php';
 $oParametros=Encriptacion::desencriptar($_GET['data']);
-$urlNoti=""; //url de notificacion de pago
+$urlNoti="http://localhost/legend-padel/php/notificacionPago.php"; //url de notificacion de pago
 $urlOk="http://localhost/legend-padel/html/resultado_pago.html?ok=true&id=".$oParametros['id']; //Url de legendpadel.com para pago OK
 $urlKo="http://localhost/legend-padel/html/resultado_pago.html?ok=false"; //Url de legendpadel.com para fallo de pago (ko)
 $clave="sq7HjrUOBfKmC576ILgskD5srU870gJ7";
