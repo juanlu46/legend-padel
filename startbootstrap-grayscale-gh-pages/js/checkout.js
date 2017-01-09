@@ -356,16 +356,7 @@ function validarPago(event){
             var nID;
             var nAnno=(new Date).getFullYear();
             var nMes=(new Date).getMonth();
-            var nombreCompleto;
-            $.ajax('../php/devuelveCliente.php?usuario='+encodeURIComponent(sessionStorage.getItem('lgdusr')),{
-                async:false,
-                cache:false,
-                dataType:'json',
-                method:'GET',
-                success:function(data){
-                    nombreCompleto=data.nombre+" "+data.apellidos;
-                }
-            });
+
             if(nMes.toString().length==1)
                 nMes=nMes+1;
                 nMes='0'+nMes.toString();
@@ -381,7 +372,7 @@ function validarPago(event){
                     nID=nAnno.toString()+nMes+data.id.toString();
                 }
             });
-            var sVariables='{"cantidad":"'+fTotal+'","id":"'+nID+'","descripcion":"Palas LEGEND PADEL","titular":"'+nombreCompleto+'","num_tarjeta":"'+numeroTarjeta+
+            var sVariables='{"cantidad":"'+fTotal+'","id":"'+nID+'","descripcion":"Palas LEGEND PADEL","titular":"'+titularTarjeta+'","num_tarjeta":"'+numeroTarjeta+
                 '","cad_tarjeta":"'+(annoCaducidad.toString().substring(2)+mesCaducidad)+'","cvv_tarjeta":"'+cvvTarjeta+'"';
             sVariables=btoa(mcrypt.Encrypt(sVariables,md5(md5(pal)),md5(pal),'rijndael-256','cbc'));
             $.ajax('../php/obtenerVariablePago.php?data='+encodeURIComponent(sVariables),{
