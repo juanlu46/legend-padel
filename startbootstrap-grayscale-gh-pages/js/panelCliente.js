@@ -17,7 +17,7 @@ $(document).ready(function() {
         });
     }
 
-    if (email == 'emailUser=null') {
+    if (email == '') {
         $('.container').css({
             "width": "100%",
             "height": "100%",
