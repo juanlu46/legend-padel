@@ -368,18 +368,20 @@ function validarPago(event){
                 }
             });
             var sVariables='{"cantidad":"'+fTotal+'","id":"'+nID+'","descripcion":"Palas LEGEND PADEL","titular":"'+titularTarjeta+'","num_tarjeta":"'+numeroTarjeta+
-                '","cad_tarjeta":"'+(annoCaducidad.toString().substring(2)+mesCaducidad)+'","cvv_tarjeta":"'+cvvTarjeta+'"';
+                '","cad_tarjeta":"'+(annoCaducidad.toString().substring(2)+mesCaducidad)+'","cvv_tarjeta":"'+cvvTarjeta+'"}';
             sVariables=btoa(mcrypt.Encrypt(sVariables,md5(md5(pal)),md5(pal),'rijndael-256','cbc'));
             $.ajax('../php/obtenerVariablePago.php?data='+encodeURIComponent(sVariables),{
                 async:false,
                 cache:false,
                 method:'GET',
-                dataType:'json',
                 success:function(data){
                     var oPanel=$('.panel-pago');
                     oPanel.find('input[name="Ds_MerchantParameters"]').val(data.parametros);
                     oPanel.find('input[name="Ds_Signature"]').val(data.signature);
-                }
+                },
+                error:function(err,status,errThrow){
+                    alert(status+" - "+errThrow);
+                 }
             });
         }
         else{
