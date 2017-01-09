@@ -111,23 +111,7 @@ function cerrarFormLogin(){
 }
 /*Añadir opciones usuario ya logueado en elmenu*/
 function addIconUsuarioMenu() {
-    if(sessionStorage.getItem('lgdusr')!=null || localStorage.getItem('lgdusr')!=null){
-        if(sessionStorage.getItem('lgdusr')==null){
-            var emailUser = localStorage.getItem('lgdusr');
-            $.get('../php/devuelveCliente.php?usuario='+encodeURIComponent(emailUser),function(data){
-                var jsonCliente = data;
-                var nombreCliente=jsonCliente.nombre;
-                $('.menu-usuario').html('<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">' +
-                    '<span class="glyphicon glyphicon-user"></span> <span class="nombre_usuario">'+nombreCliente+'</span><span class="caret"></span></a>' +
-                    '<ul class="dropdown-menu dropdown-login" role="menu">' +
-                    '<li><a class="text-center" href="html/panelCliente.html">Mi cuenta</a></li>' +
-                    '<li class="divider"></li><li class="pedidosCliente"><a class="text-center" href="http://legendpadel.com/html/panelCliente.html?pedidos">Mis pedidos</a></li>' +
-                    '<li class="divider"></li> <li class="desconexion"><a class="text-center" href="#">Desconexión</a></li></ul>');
-                $('.desconexion').on('click',desconectarse);
-            });
-
-        }
-        else {
+        if(sessionStorage.getItem('lgdusr')!=null){
             var emailUser = sessionStorage.getItem('lgdusr');
             $.get('../php/devuelveCliente.php?usuario=' + encodeURIComponent(emailUser), function (data) {
                 var jsonCliente = data;
@@ -144,7 +128,6 @@ function addIconUsuarioMenu() {
         }
         $('.btn-identificate').addClass('dropdown menu-usuario');
         $('.btn-identificate').removeClass('btn-identificate');
-    }
 }
 
 function desconectarse(){

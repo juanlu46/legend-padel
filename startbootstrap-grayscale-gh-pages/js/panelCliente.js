@@ -6,12 +6,7 @@ $(document).ready(function() {
         cargarPedidos(a);
     }
     var email = "";
-    if (sessionStorage.getItem('lgdusr') == null) {
-        $.get('../php/desencriptar.php?cadena='+localStorage.getItem('lgdusr'),function(data){
-            email =data;
-        });
-    }
-    else{
+    if (sessionStorage.getItem('lgdusr') != null) {
         $.get('../php/desencriptar.php?cadena='+sessionStorage.getItem('lgdusr'),function(data){
             email =data;
         });
