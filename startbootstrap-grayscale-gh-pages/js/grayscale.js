@@ -57,7 +57,7 @@ $(document).ready(function(){
         });
     });
 
-    $('.btnContactar').on('click',abrirCaptcha);
+    $('.btnContactar').on('click',validarFormContacto);
     addIconUsuarioMenu();
     actualizarCarrito();
     ajustarNavBar();
@@ -383,21 +383,23 @@ function validarFormContacto(){
     var textError="";
 
     if(!expNombre.test(nombre)) {
-        alert.addClass('notice-danger');
         textError='Nombre Incorrecto<br/>';
-        alert.css('color','black');
         error=true;
     }
     if(!expApellidos.test(apellidos)) {
-        alert.addClass('notice-danger');
         textError+='Apellidos Incorrecto<br/>';
-        alert.css('color','black');
         error=true;
     }
     if(!expEmail.test(email)) {
-        alert.addClass('notice-danger');
         textError+='Email Incorrecto<br/>';
-        alert.css('color','black');
+        error=true;
+    }
+    if(asunto==""){
+        textError+='El asunto no puede estar vacío<br/>';
+        error=true;
+    }
+    if(mensaje==""){
+        textError+='El mensaje no puede estar vacío<br/>';
         error=true;
     }
     if(error==false){
@@ -430,6 +432,7 @@ function validarFormContacto(){
         });
     }
     else{
+        alert.addClass('notice-danger');
         alert.html(textError);
         alert.css({"display":"block","position":"fixed","top":"3em","left":"1em","font-size":"1.4em","margin":"auto","color":"black"});
         setTimeout(function() {
@@ -440,6 +443,7 @@ function validarFormContacto(){
 
 }
 function abrirCaptcha(){
+
     $('.g-recaptcha').css('display','block');
 
 }

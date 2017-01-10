@@ -1,17 +1,12 @@
+var pal='padelegend$01';
 var producto='';
 var arrayFotos=[];
 var curPic = -1;
 var imgO = [];
+var colorActual='';
 
 $(document).ready(function() {
-    addIconUsuarioMenu();
-    actualizarCarrito();
-    cargarEventosBotonCarrito();
-    $(".btn-identificate").on("click",cargarFormIdent);
-    $('.btn-signin').on("click",validarLogin);
-    $('.btn-cerrar-login').on('click',cerrarFormLogin);
-
-    var url= window.location.href;
+     var url= window.location.href;
     producto=url.split('?')[1].replace('#','');
     imgCont = $('#item-display');
     productTitleH2=$('.product-title h2');
@@ -31,31 +26,33 @@ $(document).ready(function() {
             document.title='Invictus 2.0';
             imgCont.attr('src','img/imgProduct/invictus2.jpg');
             productTitleH2.text('INVICTUS 2.0');
-            productPrice.html('<p>Precio: <del>239,00 €</del></p><br><p>Oferta: <div class="descuentoAnimado">191.20 €</div>  <span>20% DESCUENTO<span> </P>');
+            productPrice.html('<p>Precio: <del>239,00 €</del></p><br><p>Oferta: <div class="descuentoAnimado">191,20 €</div>  <span>20% DESCUENTO<span> </P>');
             tituloProduct.text('INVICTUS 2.0');
             cargarFotosDefecto();
             $('.descripcionProduct').html(' <h4 class="textoDescripcion">Descripción</h4><p>Pala en forma redonda con un grosor de 38 milímetros. Es la evolución tecnológica más puntera de nuestra marca en el que se dedicado más de un año en su desarrollo, utilizando los materiales de mayor calidad del mercado además de introduciendo una nueva tecnología revolucionaria como es el “<i>Diaxagonal solid Frame</i>”, un doble tubular macizo que estructuralmente hace prácticamente irrompible a la pala en la zonas más críticas, esto unido al núcleo de EVA de alta densidad especialmente desarrollado para conjugar lo más certeramente los materiales utilizados en toda la estructura del pala hacen que la pala no genere ningún tipo de vibración que pudiera ocasionar lesiones asi como hacernos gozar y aprovechar todas las capacidades de lo que seguramente sea la mejor pala del mercado.</p><p>Una de sus características más singulares es su sonido en el golpeo, su manejabilidad con un control de bola exquisito con una potencia precisa, todo proporcionado en gran parte es su peso perfectamente  equilibrado que oscila de 360 gr a 375gr.</p><h4 class="textoDescripcion">Características técnicas</h4> <dl class="textoDescripcion"><dt>Plano</dt><dd>Carbón Extreme  + fiberglass</dd><dt>Nucleo</dt><dd>HIPER SOFT EVA alta densidad Legend</dd><dt>Tubular</dt><dd>Diaxagonal Solid frame</dd><dt>Taladros</dt><dd>Control holes + ativibration system</dd></dl><h4 class="textoDescripcion">Diseño</h4><p>Diseñada por uno de los estudios de diseño mas importantes en la industria del deporte, su espectacularidad visual hace atractiva a la pala en el primer abrir y cerrar de ojos, integrando el diseño en perfecta armonía cromática con  el carbono visto</p>');
             if($('.masProductosInvictus').length > 0 ){
                 $('.masProductosInvictus').remove();
             }
+            $('.btn-comprar').attr('data-id','invictus2');
             break;
         case 'redskin':
             document.title='Red Skin';
             imgCont.attr('src','img/imgProduct/redskin.jpg');
             productTitleH2.text('RED SKIN');
-            productPrice.html('<p>Precio:<del> 219,00 €</del></p><br><p>Oferta: 175.20 €  <span>20% DESCUENTO<span> </P>');
+            productPrice.html('<p>Precio:<del> 219,00 €</del></p><br><p>Oferta: <div class="descuentoAnimado">175,20 € </div> <span>20% DESCUENTO<span> </P>');
             tituloProduct.text('RED SKIN');
             cargarFotosDefecto();
             $('.descripcionProduct').html('<h4 class="textoDescripcion descripcionCompleta">Descripción</h4><p class="textoDescripcion">Pala en forma redonda con un grosor de 38 milímetros. Su paricularidad reside en un doble tubular 100% de Kevlar, tejido de alta tecnología utilizado en la industria aeronáutica y sobre todo militar, los planos de la pala están compuesto de carbono 3k con un núcleo EVA media de alta densidad, esta combinación de materiales evita cualquier tipo  de vibración que pudiera ocasionar lesiones asi como hacernos gozar y aprovechar todas las capacidades de lo que seguramente se una de la mejores palas del mercado.</p> <p class="textoDescripcion">Este modelo nos brinda un juego de control de bola exquisito con una potencia precisa, todo proporcionado en gran parte es su peso perfectamente  equilibrado que oscila de 360 gr a 375gr. </p><H4 class="textoDescripcion caracteristicastecnicas">Características técnicas</H4><dl class="textoDescripcion"> <dt>Plano</dt> <dd>Carbón Extreme  + fiberglass</dd> <dt>Nucleo</dt> <dd>EVA HIPER Soft  Legend</dd> <dt>Tubular</dt> <dd>Kevlar frame  tech</dd><dt>Taladros</dt><dd>Control holes + ativibration system</dd></dl><H4 class="textoDescripcion diseño">Diseño</H4><p class="textoDescripcion">Diseñada por uno estudio de diseño más importantes en la industria del deporte, su espectacularidad visual hace atractiva a la pala en el primer abrir y cerrar de ojos, integrando el diseño en perfecta armonía con los colores y el carbono visto en la parte central del logo de nuestra marca.</p>');
             if($('.masProductosRedSkin').length > 0 ){
                 $('.masProductosRedSkin').remove();
             }
+            $('.btn-comprar').attr('data-id','redskin');
             break;
         case 'sniper':
             document.title='Sniper';
             imgCont.attr('src','img/imgProduct/sniper.jpg');
             productTitleH2.text('SNIPER');
-            productPrice.html('<p>Precio:<del> 169,00 €</del></p><br><p>Oferta: 135.20 €  <span>20% DESCUENTO<span> </P>');
+            productPrice.html('<p>Precio:<del> 169,00 €</del></p><br><p>Oferta: <div class="descuentoAnimado">135,20 € </div>  <span>20% DESCUENTO<span> </P>');
             tituloProduct.text('SNIPER');
             cargarFotosDefecto();
             $('.descripcionProduct').html('  <H4 class="textoDescripcion">Descripción</H4><p>Pala en forma redonda con un grosor de 38 milímetros. Este pala cuanta con unas hendiduras que rodean a su corazón triangular, estas hendiduras no solo embellecen estéticamente a la pala sino que también son importantes a nivel estructural, la composición de la  pala es de fibra de vidrio con refuerzos de carbono en sus puntos más críticos, pala muy equilibrada para jugadores principiantes con un núcleo de FOAM. </p> <p> Su peso oscila de 355 gr a 365 gr. </p> <H4 class="textoDescripcion">Características técnicas</H4> <dl class="textoDescripcion"> <dt>Plano</dt> <dd>100% ECO-fiberglass</dd> <dt>Nucleo</dt> <dd>FOAM EXPLOSSION</dd> <dt>Tubular</dt> <dd>Tubular de fibra reforzado</dd> <dt>Taladros</dt> <dd>Control holes + ativibration system</dd> </dl> <H4 class="textoDescripcion">Diseño</H4><p>Diseñada por uno estudio de diseño más importantes en la industria del deporte, este modelo está concebido para principiantes, su color dorado unto con un diseño con líneas muy sencillas y elegantes hacen de ella una pala muy elegante en cualquier pista.</p>');
@@ -64,15 +61,18 @@ $(document).ready(function() {
             }
             if($('#item-5').length > 0 )
                 $('#item-5').remove();
+
+            $('.btn-comprar').attr('data-id','sniper');
             break;
 
         case 'target':
+            colorActual='negra';
             cargarFotosDefecto();
             producto='TargetBlack';
             document.title='Target 1.0';
             imgCont.attr('src','img/imgProduct/target1negra.jpg');
             productTitleH2.text('TARGET 1.0');
-            productPrice.html('<p>Precio: 189,00 €</p><br><p>Oferta: 151.20 €  <span>20% DESCUENTO<span> </P>');
+            productPrice.html('<p>Precio: 189,00 €</p><br><p>Oferta: <div class="descuentoAnimado">151,20 € </div>  <span>20% DESCUENTO<span> </P>');
             tituloProduct.text('TARGET 1.0');
             $('.product-color').append('<div class="row"><div class="col-lg-offset-1 col-md-offset-1 col-xs-offset-1 col-md-3 col-xs-3 col-lg-3 textColor"><span  class="middle">Color</span> </div><div class="col-md-4 col-xs-4 col-lg-4 divColor"><div class="caja" id="negro"><div class="negro colores"></div><span class="info">Negro</span></div><div class="caja" id="blanco"><div class="blanco colores" ></div><span class="info">Blanco</span></div></div></div>');
             $('.descripcionProduct').html(' <H4 class="textoDescripcion">Descripción</H4> <p>Pala en forma redonda con un grosor de 38 milímetros. Pala de fibra de vidrio que incorpora nuestra tecnología revolucionaria como es el “Diaxagonal solid Frame”, un doble tubular macizo que estructuralmente hace prácticamente irrompible a la pala en la zonas más críticas, su núcleo compuesto de FOAM de baja densidad de alta densidad unido a la mayor flexión de la fibra de vidrio  nos proporciona  un juego de ataque con una gran salida de bola sin perder el control de bola, muchos jugadores aseguran que las palas de fibra son las mejores dentro del mercado nosotros dejamos que eso lo decidáis vosotros una vez probéis esta hermosa y grandiosa pala. Este modelo lo podemos encontrar en dos combinaciones de colores, una en blanco perlado y otra con un negro brillo.</p><p>Su peso oscila de 355 gr a 365 gr.</p> <H4 class="textoDescripcion">Características técnicas</H4><dl class="textoDescripcion"> <dt>Plano</dt> <dd>100% fiberglass</dd><dt>Nucleo</dt><dd>FOAM EXPLOSSION</dd> <dt>Tubular</dt> <dd>Diaxagonal Solid frame</dd> <dt>Taladros</dt><dd>Control holes + ativibration system</dd></dl><H4 class="textoDescripcion">Diseño</H4><p>Diseñada por uno estudio de diseño más importantes en la industria del deporte, este modelo lo podemos encontrar en dos combinaciones de colores a cual más espectacular, una con una base en blanco perlado y otra con una base de negro metálico, ambas con un rosa fluor como como color referente.</p>');
@@ -85,6 +85,7 @@ $(document).ready(function() {
             $('#negro').on('click',function(){
                 cambiarColor('negro');
             });
+            $('.btn-comprar').attr('data-id','target1');
             break;
     }
     $('.descuentoAnimado').hover(function(){
@@ -94,6 +95,12 @@ $(document).ready(function() {
             $(this).removeClass('animated pulse');
         });
 
+    addIconUsuarioMenu();
+    cargarEventosBotonCarrito();
+    actualizarCarrito();
+    $(".btn-identificate").on("click",cargarFormIdent);
+    $('.btn-signin').on("click",validarLogin);
+    $('.btn-cerrar-login').on('click',cerrarFormLogin);
 
 
 });
@@ -180,6 +187,7 @@ function cargarFotosDefecto(){
 function cambiarColor(color) {
     clearTimeout(intervalo);
     if(color=='negro'){
+        colorActual='negra';
         producto='TargetBlack';
         imgCont.attr('src','img/imgProduct/target1negra.jpg');
         $('#item-1 img').attr('src','img/imgProduct/target1negra.jpg');
@@ -194,6 +202,7 @@ function cambiarColor(color) {
         }
 
     }else{
+        colorActual='blanca';
         producto='targetwhite';
         document.title='Target White';
         imgCont.attr('src','img/imgProduct/target1blanca.jpg');
@@ -351,35 +360,39 @@ function cargarEventosBotonEliminarProducto(){
 
 function cargarEventosBotonCarrito(){
     var oProducto;
-    $(".item").each(function(){
-        var item =$(this);
-        oBoton=item.find('.item-pie button');
-        oBoton.on('click',function(){
+        $('.btn-comprar').on('click',function(){
             var boton=$(this);
             oProducto=$('<li class="item_carrito" data-id=""><span class="item"><span class="item-left"><img src="" alt="articulo_carrito"/><span class="item-info"><span class="item_cantidad">1x</span><span class="item_name"></span><span class="item_precio"></span></span></span><span class="item-right"><button class="btn btn-xs btn-danger pull-right">x</button></span></span></li>');
             var bEncontrado=false;
             var oItemCarrito;
             var oCarrito=$('.dropdown-cart');
             oCarrito.find('.item_carrito').each(function(){
-                if($(this).find('img').attr('src')==item.find('.hovereffect img').first().attr('src')) {
+                if($(this).find('img').attr('src')==$('.fotoPrincipal').attr('src')) {
                     bEncontrado = true;
                     oItemCarrito=$(this);
                 }
             });
             if(bEncontrado){
-                var oItemCantidad=oItemCarrito.find('.item_cantidad');
+                var oItemCantidad=oItemCarrito.find('.input-cant');
                 oItemCantidad.text((parseInt(oItemCantidad.text().replace('x',''))+1)+"x");
                 var oItemPrecio=oItemCarrito.find('.item_precio');
                 oItemPrecio.text((parseFloat(oItemPrecio.text().replace(',','.').replace(' €',''))+parseFloat(item.find('.precio').text().replace(',','.').replace(' €',''))).toFixed(2)+" €");
             }
             else{
-                oProducto.find('.item_name').text(item.find('.item-pie a').first().text());
-                oProducto.find('.item_precio').text(item.find('.precio').text());
-                oProducto.find('img').attr('src',item.find('.hovereffect img').first().attr('src'));
-                var oColor=item.find('.btn-select .selected');
+                var nombre=$('.product-title h2').text();
+                if(nombre=='TARGET 1.0'){
+                    nombre+=' '+colorActual.toUpperCase();
+                }
+                oProducto.find('.item_name').text(nombre);
+                var oPrecio=$('.descuentoAnimado').text();
+                var oItemPrecio=oProducto.find('.item_precio');
+                oItemPrecio.text((parseFloat(oPrecio.replace(',','.').replace(' €',''))).toFixed(1));
+                oProducto.find('.item_precio').text(oItemPrecio.text());
+                oProducto.find('img').attr('src',$('.fotoPrincipal').attr('src'));
+
                 var sID=boton.data('id');
-                if(oColor.length>0){
-                    sID+=oColor.text().toLowerCase();
+                if(colorActual!=''){
+                    sID+=colorActual.toUpperCase();
                 }
                 oProducto.data('id',sID);
                 oProducto.find(".item-right button").on('click',function(){
@@ -399,7 +412,6 @@ function cargarEventosBotonCarrito(){
             actualizarNumeroCarrito();
             guardarCarrito();
         });
-    });
 }
 
 function actualizarNumeroCarrito(){
@@ -431,4 +443,13 @@ function guardarCarrito(){
             $.get('php/guardarCarrito.php?usuario=' + encodeURIComponent(sSesion) + '&carrito=' + encodeURIComponent(sCarrito));
         }
     }
+}
+function desconectarse(){
+    if(sessionStorage.getItem('lgdusr')!=null)
+        sessionStorage.removeItem('lgdusr');
+
+    if(localStorage.getItem('lgdusr')!=null)
+        localStorage.removeItem('lgdusr');
+
+    location.reload();
 }
