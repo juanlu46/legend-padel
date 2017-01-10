@@ -97,8 +97,8 @@ function validarLogin(){
                     mensajeAlert.text(data);
                     mensajeAlert.css('display','block');
                 }else {
-                    
-                    sessionStorage.setItem('lgdusr', email);
+                    var resEmail=btoa(mcrypt.Encrypt(email,md5(md5(pal)),md5(pal),'rijndael-256','cbc'));
+                    sessionStorage.setItem('lgdusr', resEmail);
                     mensajeAlert.addClass('alert-success');
                     mensajeAlert.text(data);
                     mensajeAlert.css('display', 'block');
@@ -108,7 +108,7 @@ function validarLogin(){
                         localStorage.setItem('lgdusr',email);
                     }
                     addIconUsuarioMenu();
-                    location.href="http://localhost/legend-padel/index.html";
+                    location.reload();
                 }
             }
         });
