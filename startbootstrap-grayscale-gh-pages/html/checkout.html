@@ -151,12 +151,14 @@
                 </div>
                 <!--SHIPPING METHOD END-->
                 <!--CREDIT CART PAYMENT-->
-                <form name="form_pago" method="POST" action="https://sis-t.redsys.es:25443/sis/realizarPago">
-                    <input type="hidden" name="Ds_SignatureVersion" value="HMAC_SHA256_V1"/>
-                    <input type="hidden" name="Ds_MerchantParameters" value=""/>
-                    <input type="hidden" name="Ds_Signature" value=""/>
+
                     <div class="panel panel-info panel-pago">
                         <div class="panel-heading"><h4 class="ds text-center"><span><i class="glyphicon glyphicon-lock"></i></span> Pago seguro</h4></div>
+                        <form name="form_pago" method="POST" id="form_pago" action="https://sis-t.redsys.es:25443/sis/realizarPago">
+                            <input type="hidden" name="Ds_SignatureVersion" value="HMAC_SHA256_V1"/>
+                            <input type="hidden" name="Ds_MerchantParameters" value=""/>
+                            <input type="hidden" name="Ds_Signature" value=""/>
+
                         <div class="panel-body">
                             <div class="form-group">
                                 <div class="col-md-12"><strong>Tipo de tarjeta:</strong></div>
@@ -221,9 +223,10 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-success btn-group-justified btn-pagar">Pagar</button>
+                        </form>
+                        <button type="button" class="btn btn-success btn-group-justified btn-pagar">Pagar</button>
                     </div>
-                </form>
+
                 <!--CREDIT CART PAYMENT END-->
             </div>
 
@@ -271,6 +274,6 @@
 <script src="../js/js-mcrypt/rijndael.js"></script>
 <script src="../js/js-mcrypt/mcrypt.js"></script>
 <script src="../js/md5.js"></script>
-<script src="../js/checkout.js?v=023"></script>
+<script src="../js/checkout.js?v=027"></script>
 </body>
 </html>

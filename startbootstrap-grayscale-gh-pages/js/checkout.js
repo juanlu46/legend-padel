@@ -8,7 +8,7 @@ function inicio(){
     $('.btn-cerrar-login').on('click',cerrarFormLogin);
     $(".btn-identificate").on("click",cargarFormIdent);
     $('.btn-signin').on("click",function(event){validarLogin(event);});
-    $('form[name="form_pago"]').submit(function(event){validarPago(event);});
+    $('.btn-pagar').on('click',function(event){validarPago(event);});
     if(sessionStorage.getItem('lgdusr')!=null) {
         $.get('../php/montarResumenPedido.php?usuario='+encodeURIComponent(sessionStorage.getItem('lgdusr')) , function (sProductos) {
             $('.m-progress').css('display', 'none');
@@ -270,6 +270,8 @@ function cargarPanelPago(){
 }
 
 function validarPago(event){
+    event.preventDefault();
+    event.stopPropagation();
     if(vistoEnvio){
         var oCarga=$('.m-progress');
         oCarga.css('display', 'block');
@@ -373,15 +375,14 @@ function validarPago(event){
             $.ajax('../php/obtenerVariablePago.php?data='+encodeURIComponent(sVariables),{
                 async:false,
                 cache:false,
+                dataType:'json',
                 method:'GET',
                 success:function(data){
                     var oPanel=$('.panel-pago');
                     oPanel.find('input[name="Ds_MerchantParameters"]').val(data.parametros);
                     oPanel.find('input[name="Ds_Signature"]').val(data.signature);
-                },
-                error:function(err,status,errThrow){
-                    alert(status+" - "+errThrow);
-                 }
+                    $('#form_pago').submit();
+                }
             });
         }
         else{
@@ -392,7 +393,6 @@ function validarPago(event){
             setTimeout(function() {
                 oAlert.css({"display":"none","position":"","top":"","left":"","font-size":"","margin":""});
             },iTiempo*1000);
-            event.preventDefault();
         }
     }
 }

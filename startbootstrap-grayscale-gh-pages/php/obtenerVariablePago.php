@@ -1,10 +1,10 @@
 <?php
+require_once 'apiRedsys.php';
+require_once 'Encriptacion.php';
+header("Content-type: application/json");
 header("Cache-Control: no-store, no-cache, must-revalidate");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
-header("Content-type: application/json");
-require_once 'apiRedsys.php';
-require_once 'Encriptacion.php';
 $oParametros=Encriptacion::desencriptar($_GET['data']);
 $oParametros=json_decode($oParametros);
 $urlNoti="http://localhost/legend-padel/php/notificacionPago.php"; //url de notificacion de pago
