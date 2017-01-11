@@ -69,7 +69,7 @@ $(document).ready(function() {
             colorActual='negra';
             cargarFotosDefecto();
             producto='TargetBlack';
-            document.title='Target 1.0';
+            document.title='Target1';
             imgCont.attr('src','img/imgProduct/target1negra.jpg');
             productTitleH2.text('TARGET 1.0');
             productPrice.html('<p>Precio: 189,00 €</p><br><p>Oferta: <div class="descuentoAnimado">151,20 € </div>  <span>20% DESCUENTO<span> </P>');
@@ -341,6 +341,9 @@ function actualizarCarrito(){
         sSesion=sessionStorage.getItem("lgdusr");
         $.get('php/montarNavCarritoUsuario.php?usuario='+encodeURIComponent(sSesion),function(sProductos){
             $('.dropdown-cart').find('.divider').after(sProductos);
+            var precio=$('.item_precio').text();
+            precio=precio+' €';
+            $('.item_precio').text(precio);
             cargarEventosBotonEliminarProducto();
             actualizarNumeroCarrito();
         });
@@ -373,26 +376,23 @@ function cargarEventosBotonCarrito(){
                 }
             });
             if(bEncontrado){
-                var oItemCantidad=oItemCarrito.find('.input-cant');
+                var oItemCantidad=oItemCarrito.find('.item_cantidad');
                 oItemCantidad.text((parseInt(oItemCantidad.text().replace('x',''))+1)+"x");
                 var oItemPrecio=oItemCarrito.find('.item_precio');
-                oItemPrecio.text((parseFloat(oItemPrecio.text().replace(',','.').replace(' €',''))+parseFloat(item.find('.precio').text().replace(',','.').replace(' €',''))).toFixed(2)+" €");
+                var oPrecio=$('.descuentoAnimado').text();
+                oItemPrecio.text((parseFloat(oItemPrecio.text().replace(',','.').replace(' €',''))+parseFloat(oPrecio.replace(',','.').replace(' €',''))).toFixed(2)+" €");
             }
             else{
-                var nombre=$('.product-title h2').text();
-                if(nombre=='TARGET 1.0'){
-                    nombre+=' '+colorActual.toUpperCase();
-                }
-                oProducto.find('.item_name').text(nombre);
+                oProducto.find('.item_name').text($('.product-title h2').text());
                 var oPrecio=$('.descuentoAnimado').text();
                 var oItemPrecio=oProducto.find('.item_precio');
-                oItemPrecio.text((parseFloat(oPrecio.replace(',','.').replace(' €',''))).toFixed(1));
+                oItemPrecio.text((parseFloat(oPrecio.replace(',','.').replace(' €',''))).toFixed(2)+" €");
                 oProducto.find('.item_precio').text(oItemPrecio.text());
                 oProducto.find('img').attr('src',$('.fotoPrincipal').attr('src'));
 
                 var sID=boton.data('id');
                 if(colorActual!=''){
-                    sID+=colorActual.toUpperCase();
+                    sID+=colorActual;
                 }
                 oProducto.data('id',sID);
                 oProducto.find(".item-right button").on('click',function(){
