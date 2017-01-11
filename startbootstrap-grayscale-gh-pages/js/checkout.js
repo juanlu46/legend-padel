@@ -382,8 +382,6 @@ function validarPago(event){
                     var oPanel=$('.panel-pago');
                     oPanel.find('input[name="Ds_MerchantParameters"]').val(data.parametros);
                     oPanel.find('input[name="Ds_Signature"]').val(data.signature);
-                    oPanel.find('input[name="Ds_Merchant_ExpiryDate"]').value(annoCaducidad.toString().substring(2)+mesCaducidad);
-                    oPanel.find('input[name="m-caducidad"],input[name="a-caducidad"],input[name="tipo_tarjeta"]').attr('disabled','disabled');
                     $('#form_pago').submit();
                 }
             });
