@@ -27,7 +27,7 @@ $tpv->setParameter("DS_MERCHANT_PRODUCTDESCRIPTION",$oParametros->descripcion);
 $tpv->setParameter("DS_MERCHANT_TITULAR",$oParametros->titular);
 $tpv->setParameter("DS_MERCHANT_URLOK",$urlOk);
 $tpv->setParameter("DS_MERCHANT_URLKO",$urlKo);
-$tpv->setParameter("DS_MERCHANT_MERCHANTNAME","LEGEND PADEL");
+$tpv->setParameter("DS_MERCHANT_MERCHANTNAME","LEGEND Padel");
 $tpv->setParameter("DS_MERCHANT_PAN",$oParametros->num_tarjeta);
 $tpv->setParameter("DS_MERCHANT_EXPIRYDATE",$oParametros->cad_tarjeta);
 $tpv->setParameter("DS_MERCHANT_CVV2", $oParametros->cvv_tarjeta);

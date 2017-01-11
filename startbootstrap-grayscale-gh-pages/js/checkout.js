@@ -283,9 +283,9 @@ function validarPago(event){
         var iTiempo=2;
         var tipoTarjeta=$('#tipo_tarjeta').val();
         var oPanelPago=$('.panel-pago');
-        var numeroTarjeta=oPanelPago.find('input[name="num_tarjeta"]').val();
-        var cvvTarjeta=oPanelPago.find('input[name="cvv_tarjeta"]').val();
-        var titularTarjeta=oPanelPago.find('input[name="tit_tarjeta"]').val();
+        var numeroTarjeta=oPanelPago.find('input[name="Ds_Merchant_Pan"]').val();
+        var cvvTarjeta=oPanelPago.find('input[name="Ds_Merchant_Cvv2"]').val();
+        var titularTarjeta=oPanelPago.find('input[name="Ds_Merchant_Titular"]').val();
         var mesCaducidad=oPanelPago.find('select[name="m-caducidad"]').val();
         var annoCaducidad=oPanelPago.find('select[name="a-caducidad"]').val();
         switch(tipoTarjeta){
@@ -354,9 +354,10 @@ function validarPago(event){
             var nAnno=(new Date).getFullYear();
             var nMes=(new Date).getMonth();
 
-            if(nMes.toString().length==1)
-                nMes=nMes+1;
-                nMes='0'+nMes.toString();
+            if(nMes.toString().length==1) {
+                nMes = nMes + 1;
+                nMes = '0' + nMes.toString();
+            }
             if(mesCaducidad.toString().length==1)
                mesCaducidad="0"+mesCaducidad.toString();
             $.ajax('../php/obtenerTotal.php?usuario='+encodeURIComponent(sessionStorage.getItem('lgdusr')),{
@@ -381,6 +382,8 @@ function validarPago(event){
                     var oPanel=$('.panel-pago');
                     oPanel.find('input[name="Ds_MerchantParameters"]').val(data.parametros);
                     oPanel.find('input[name="Ds_Signature"]').val(data.signature);
+                    oPanel.find('input[name="Ds_Merchant_ExpiryDate"]').value(annoCaducidad.toString().substring(2)+mesCaducidad);
+                    oPanel.find('input[name="m-caducidad"],input[name="a-caducidad"],input[name="tipo_tarjeta"]').attr('disabled','disabled');
                     $('#form_pago').submit();
                 }
             });

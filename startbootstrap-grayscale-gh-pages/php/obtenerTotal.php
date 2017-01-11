@@ -16,9 +16,17 @@ $select2=$conn->query("SELECT MAX(id_lote) AS lote FROM pedidos");
 $maxLote=$select2->fetch_assoc()['lote'];
 $cad="";
 if($maxLote==0){
-    $maxLote=2016011;
+    $maxLote=199001000001;
 }
 
 $idLote=substr($maxLote,6);
+while(strlen($idLote)<6){
+    $idLote="0".$idLote;
+}
 $fTotal=round($fTotal,2);
+$fTotal="$fTotal";
+$oTotal=explode(".",$fTotal);
+if(strlen($oTotal[1])<2)
+    $oTotal[1]=$oTotal[1]."0";
+$fTotal=$oTotal[0].$oTotal[1];
 echo json_encode(array("total"=>$fTotal,"id"=>$idLote));

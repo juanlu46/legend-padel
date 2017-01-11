@@ -172,15 +172,16 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-md-12"><strong>Titular:</strong></div>
-                                <div class="col-md-12"><input type="text" class="form-control" name="tit_tarjeta" maxlength="60" value="" /></div>
+                                <div class="col-md-12"><input type="text" class="form-control" name="Ds_Merchant_Titular" maxlength="60" value="" /></div>
                             </div>
                             <div class="form-group">
                                 <div class="col-md-12"><strong>Nº tarjeta:</strong></div>
-                                <div class="col-md-12"><input type="text" class="form-control" name="num_tarjeta" maxlength="16" value="" /></div>
+                                <div class="col-md-12"><input type="text" class="form-control" name="Ds_Merchant_Pan" maxlength="16" value=""/></div>
                             </div>
                             <div class="form-group">
                                 <div class="col-md-12"><strong>Código seguro CVV:</strong></div>
-                                <div class="col-md-12"><input type="text" class="form-control" name="cvv_tarjeta" maxlength="3" value="" /></div>
+                                <div class="col-md-12"><input type="text" class="form-control" name="Ds_Merchant_Cvv2" maxlength="3" value=""/></div>
+                                <input type="hidden" name="Ds_Merchant_ExpiryDate"/>
                             </div>
                             <div class="form-group">
                                 <div class="col-md-12">
@@ -274,6 +275,6 @@
 <script src="../js/js-mcrypt/rijndael.js"></script>
 <script src="../js/js-mcrypt/mcrypt.js"></script>
 <script src="../js/md5.js"></script>
-<script src="../js/checkout.js?v=027"></script>
+<script src="../js/checkout.js?v=028"></script>
 </body>
 </html>
