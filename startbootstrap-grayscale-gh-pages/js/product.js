@@ -331,6 +331,9 @@ function actualizarCarrito(){
                 $(".carrito_n_productos").text(nElementos);
                 $.get('php/montarNavCarrito.php?carrito='+encodeURIComponent(sessionStorage.getItem('nusrcrt')),function(sProductos){
                     $('.dropdown-cart').find('.divider').after(sProductos);
+                    var precio=$('.item_precio').text();
+                    precio=precio+' €';
+                    $('.item_precio').text(precio);
                     cargarEventosBotonEliminarProducto();
                     actualizarNumeroCarrito();
                 });
@@ -377,7 +380,8 @@ function cargarEventosBotonCarrito(){
             });
             if(bEncontrado){
                 var oItemCantidad=oItemCarrito.find('.item_cantidad');
-                oItemCantidad.text((parseInt(oItemCantidad.text().replace('x',''))+1)+"x");
+                var iCantidadSeleccionada=parseFloat($('.input-cant').val());
+                oItemCantidad.text((parseInt(oItemCantidad.text().replace('x',''))+iCantidadSeleccionada)+"x");
                 var oItemPrecio=oItemCarrito.find('.item_precio');
                 var oPrecio=$('.descuentoAnimado').text();
                 oItemPrecio.text((parseFloat(oItemPrecio.text().replace(',','.').replace(' €',''))+parseFloat(oPrecio.replace(',','.').replace(' €',''))).toFixed(2)+" €");

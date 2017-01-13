@@ -4,7 +4,7 @@ header("Content-type: text/html");
 header("Cache-Control: no-store, no-cache, must-revalidate");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
-$oProductos=Encriptacion::desencriptar(json_decode($_GET['carrito']));
+$oProductos=json_decode(Encriptacion::desencriptar($_GET['carrito']));
 $conn=new mysqli("localhost","root","","legendpadel");
 $nProductos=count($oProductos);
 if($nProductos>0) {
