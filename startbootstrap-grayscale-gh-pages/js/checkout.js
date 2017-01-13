@@ -8,7 +8,6 @@ function inicio(){
     $('.btn-cerrar-login').on('click',cerrarFormLogin);
     $(".btn-identificate").on("click",cargarFormIdent);
     $('.btn-signin').on("click",function(event){validarLogin(event);});
-    $('.btn-pagar').on('click',function(event){validarPago(event);});
     if(sessionStorage.getItem('lgdusr')!=null) {
         $.get('../php/montarResumenPedido.php?usuario='+encodeURIComponent(sessionStorage.getItem('lgdusr')) , function (sProductos) {
             $('.m-progress').css('display', 'none');
@@ -244,7 +243,7 @@ function validarFormDireccion(){
     }
 
     if(bCorrecto){
-        cargarPanelPago();
+        validarPago();
     }
     else{
         var oAlert=$(".mensajesUsuarios");
@@ -256,7 +255,7 @@ function validarFormDireccion(){
     }
 } 
 
-function cargarPanelPago(){
+/*function cargarPanelPago(){
     vistoEnvio=true;
     $('.panel-envio').css('display','none');
     $('.step_pago, .step_pago .step_flecha').addClass('step_complete');
@@ -268,132 +267,46 @@ function cargarPanelPago(){
         selectAnnoCaducidad.append('<option value="'+(annoActual+i)+'">'+(annoActual+i)+'</option>');
     }
 }
-
-function validarPago(event){
-    event.preventDefault();
-    event.stopPropagation();
-    if(vistoEnvio){
-        var oCarga=$('.m-progress');
-        oCarga.css('display', 'block');
-        oCarga.css('color', 'black');
-        var regNombre=new RegExp("^[a-zA-ZñÑáéíóúÁÉÍÓÚ\ ]{6,50}$");
-        var regCVV=new RegExp("^[0-9]{3}$");
-        var bCorrecto=true;
-        var sErrores="";
-        var iTiempo=2;
-        var tipoTarjeta=$('#tipo_tarjeta').val();
-        var oPanelPago=$('.panel-pago');
-        var numeroTarjeta=oPanelPago.find('input[name="Ds_Merchant_Pan"]').val();
-        var cvvTarjeta=oPanelPago.find('input[name="Ds_Merchant_Cvv2"]').val();
-        var titularTarjeta=oPanelPago.find('input[name="Ds_Merchant_Titular"]').val();
-        var mesCaducidad=oPanelPago.find('select[name="m-caducidad"]').val();
-        var annoCaducidad=oPanelPago.find('select[name="a-caducidad"]').val();
-        switch(tipoTarjeta){
-            case 't':
-                sErrores+="- Debe seleccionar un tipo de tarjeta<br>";
-                bCorrecto=false;
-                iTiempo+=3;
-                break;
-
-            case 'v':
-                if(!/^4\d{3}\d{4}\d{4}\d{4}$/.test(numeroTarjeta)){
-                    sErrores+="- Nº de tarjeta no válido<br>";
-                    bCorrecto=false;
-                    iTiempo+=3;
-                }
-                break;
-
-            case 'm':
-                if(!/^5[1-5]\d{2}\d{4}\d{4}\d{4}$/.test(numeroTarjeta)){
-                    sErrores+="- Nº de tarjeta no válido<br>";
-                    iTiempo+=3;
-                    bCorrecto=false;
-                }
-                break;
-
-            default:
-                sErrores+="- Ha ocurrido un error inesperado<br>";
-                iTiempo+=3;
-                bCorrecto=false;
-                break;
+*/
+function validarPago(){
+    var fTotal;
+    var nID;
+    var nAnno=(new Date).getFullYear();
+    var nMes=(new Date).getMonth();
+    if(nMes.toString().length==1) {
+        nMes = nMes + 1;
+        nMes = '0' + nMes.toString();
+    }
+    $.ajax('../php/obtenerTotal.php?usuario='+encodeURIComponent(sessionStorage.getItem('lgdusr')),{
+        async:false,
+        cache:false,
+        dataType:'json',
+        method:'GET',
+        success:function(data){
+            fTotal=parseFloat(data.total);
+            nID=nAnno.toString()+nMes+data.id.toString();
         }
-
-        if(!regNombre.test(titularTarjeta)){
-            sErrores+="- Nombre de titular vacío o no válido<br>";
-            bCorrecto=false;
-            iTiempo+=3;
-        }
-        if(!regCVV.test(cvvTarjeta)){
-            sErrores+="- El código CVV no es válido<br>";
-            bCorrecto=false;
-            iTiempo+=3;
-        }
-        if(annoCaducidad=="" || mesCaducidad==""){
-            sErrores+="- La fecha de caducidad no puede estar vacia<br>";
-            bCorrecto=false;
-            iTiempo+=3;
-        }
-        else{
-            if(parseInt(annoCaducidad)>=(new Date).getFullYear()){
-                if(parseInt(annoCaducidad)==(new Date).getFullYear() && parseInt(mesCaducidad)<((new Date).getMonth()+1)){
-                    sErrores+="- La tarjeta está caducada<br>";
-                    bCorrecto=false;
-                    iTiempo+=3;
-                }
-            }
-            else{
-                sErrores+="- La tarjeta está caducada<br>";
-                bCorrecto=false;
-                iTiempo+=3;
-            }
-        }
-
-        if(bCorrecto){
-            var fTotal;
-            var nID;
-            var nAnno=(new Date).getFullYear();
-            var nMes=(new Date).getMonth();
-
-            if(nMes.toString().length==1) {
-                nMes = nMes + 1;
-                nMes = '0' + nMes.toString();
-            }
-            if(mesCaducidad.toString().length==1)
-               mesCaducidad="0"+mesCaducidad.toString();
-            $.ajax('../php/obtenerTotal.php?usuario='+encodeURIComponent(sessionStorage.getItem('lgdusr')),{
-                async:false,
-                cache:false,
-                dataType:'json',
-                method:'GET',
-                success:function(data){
-                    fTotal=parseFloat(data.total);
-                    nID=nAnno.toString()+nMes+data.id.toString();
-                }
-            });
-            var sVariables='{"cantidad":"'+fTotal+'","id":"'+nID+'","descripcion":"Palas LEGEND PADEL","titular":"'+titularTarjeta+'","num_tarjeta":"'+numeroTarjeta+
-                '","cad_tarjeta":"'+(annoCaducidad.toString().substring(2)+mesCaducidad)+'","cvv_tarjeta":"'+cvvTarjeta+'"}';
-            sVariables=btoa(mcrypt.Encrypt(sVariables,md5(md5(pal)),md5(pal),'rijndael-256','cbc'));
-            $.ajax('../php/obtenerVariablePago.php?data='+encodeURIComponent(sVariables),{
-                async:false,
-                cache:false,
-                dataType:'json',
-                method:'GET',
-                success:function(data){
-                    var oPanel=$('.panel-pago');
-                    oPanel.find('input[name="Ds_MerchantParameters"]').val(data.parametros);
-                    oPanel.find('input[name="Ds_Signature"]').val(data.signature);
-                    $('#form_pago').submit();
-                }
-            });
-        }
-        else{
-            oCarga.css('display', 'none');
+    });
+    var sVariables='{"cantidad":"'+fTotal+'","id":"'+nID+'","descripcion":"Palas LEGEND PADEL"}';
+    sVariables=btoa(mcrypt.Encrypt(sVariables,md5(md5(pal)),md5(pal),'rijndael-256','cbc'));
+    $.ajax('../php/obtenerVariablePago.php?data='+encodeURIComponent(sVariables),{
+        async:false,
+        cache:false,
+        dataType:'json',
+        method:'GET',
+        success:function(data){
+            var oPanel=$('.panel-pago');
+            oPanel.find('input[name="Ds_MerchantParameters"]').val(data.parametros);
+            oPanel.find('input[name="Ds_Signature"]').val(data.signature);
+            $('#form_pago').submit();
+        },
+        error:function(){
             var oAlert=$(".mensajesUsuarios");
-            oAlert.addClass("notice-success").html('<span class="glyphicon glyphicon-alert"></span> Algo va mal:<br>'+sErrores);
+            oAlert.addClass("notice-success").html('<span class="glyphicon glyphicon-alert"></span> Lo sentimos :( <br>Ha ocurrido un error con el servidor, intentelo de nuevo más tarde.');
             oAlert.css({"display":"block","position":"fixed","top":"3em","left":"1em","font-size":"1.4em","margin":"auto","color":"black"});
             setTimeout(function() {
                 oAlert.css({"display":"none","position":"","top":"","left":"","font-size":"","margin":""});
-            },iTiempo*1000);
+            },8000);
         }
-    }
+    });
 }

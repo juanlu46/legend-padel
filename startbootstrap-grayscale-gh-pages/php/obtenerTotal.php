@@ -12,21 +12,31 @@ $select=$conn->query("SELECT (C.cantidad*P.precio) AS suma FROM carritos C, prod
 while($res=$select->fetch_assoc()){
     $fTotal+=$res['suma'];
 }
-$select2=$conn->query("SELECT MAX(id_lote) AS lote FROM pedidos");
-$maxLote=$select2->fetch_assoc()['lote'];
-$cad="";
-if($maxLote==0){
-    $maxLote=199001000001;
-}
-
-$idLote=substr($maxLote,6);
-while(strlen($idLote)<6){
-    $idLote="0".$idLote;
-}
 $fTotal=round($fTotal,2);
 $fTotal="$fTotal";
 $oTotal=explode(".",$fTotal);
 if(strlen($oTotal[1])<2)
     $oTotal[1]=$oTotal[1]."0";
 $fTotal=$oTotal[0].$oTotal[1];
+
+$maxLote=mt_rand(0,999999);
+$idLote="$maxLote";
+while(strlen($idLote)<6){
+    $idLote="0".$idLote;
+}
+$query=$conn->query("select count(*) conteo from pedidos where id_lote like '%".$idLote."'");
+$res=$query->fetch_assoc()['conteo'];
+while($res!=0){
+    $maxLote=mt_rand(0,999999);
+    $idLote="$maxLote";
+    while(strlen($idLote)<6){
+        $idLote="0".$idLote;
+    }
+    $query=$conn->query("select count(*) conteo from pedidos where id_lote like '%".$idLote."'");
+    $res=$query->fetch_assoc()['conteo'];
+}
+
+
+
+
 echo json_encode(array("total"=>$fTotal,"id"=>$idLote));
