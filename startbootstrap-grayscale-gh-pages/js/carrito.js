@@ -13,8 +13,8 @@ function inicio(){
         }
     });
     if(sessionStorage.getItem("lgdusr")==null){
-        if(sessionStorage.getItem("nusrcrt")!=null){
-                sCarrito=sessionStorage.getItem('nusrcrt');
+        if(localStorage.getItem("nusrcrt")!=null){
+                sCarrito=localStorage.getItem('nusrcrt');
                 $.get("../php/montarCarrito.php?carrito="+encodeURIComponent(sCarrito),function(oProductos){
                     $('#productos').find('tr').first().before(oProductos);
                     aplicarManejadoresBoton();
@@ -68,7 +68,7 @@ function guardarCarrito(){
     var sCarrito = JSON.stringify(arrayProductos);
     if(sessionStorage.getItem("lgdusr")==null){
         var res=btoa(mcrypt.Encrypt(sCarrito,md5(md5(pal)),md5(pal),'rijndael-256','cbc'));
-            sessionStorage.setItem('nusrcrt', res);
+        localStorage.setItem('nusrcrt', res);
     }
     else{
             sSesion=sessionStorage.getItem('lgdusr');
