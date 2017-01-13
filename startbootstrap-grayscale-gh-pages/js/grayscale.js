@@ -136,12 +136,12 @@ function cargarFormIdent(){
     $('.desenfoque').css('display','block');
 
     if(sessionStorage.getItem('lgdusr')!=null){
-        $.get('php/desencriptar.php?cadena'+sessionStorage.getItem('lgdusr'),function(data){
+        $.get('php/desencriptar.php?cadena'+encodeURIComponent(sessionStorage.getItem('lgdusr')),function(data){
             inputEmail.val(data);
         });
     }
     if(localStorage.getItem('lgdusr')!=null ){
-        $.get('php/desencriptar.php?cadena='+localStorage.getItem('lgdusr'),function(data){
+        $.get('php/desencriptar.php?cadena='+encodeURIComponent(localStorage.getItem('lgdusr')),function(data){
             inputEmail.val(data);
         });
  
@@ -248,8 +248,8 @@ function desconectarse(){
 /* carrito */
 function actualizarCarrito(){
     if(sessionStorage.getItem("lgdusr")==null){
-        if(sessionStorage.getItem("nusrcrt")!=null){
-            $.get('php/desencriptar.php','cadena='+sessionStorage.getItem('nusrcrt'),function(data){
+        if(localStorage.getItem("nusrcrt")!=null){
+            $.get('php/desencriptar.php','cadena='+localStorage.getItem('nusrcrt'),function(data){
                 sCarrito=data;
                 oCarrito=JSON.parse(sCarrito);
                 var nElementos=0;
@@ -257,8 +257,13 @@ function actualizarCarrito(){
                     nElementos+=parseInt(oCarrito[i][1]);
                 }
                 $(".carrito_n_productos").text(nElementos);
-                $.get('php/montarNavCarrito.php?carrito='+encodeURIComponent(sessionStorage.getItem('nusrcrt')),function(sProductos){
+                $.get('php/montarNavCarrito.php?carrito='+encodeURIComponent(localStorage.getItem('nusrcrt')),function(sProductos){
                     $('.dropdown-cart').find('.divider').after(sProductos);
+                    $('.item_carrito').each(function(){
+                        var preciosinE=$(this).find('.item_precio').text();
+                        $(this).find('.item_precio').text(preciosinE +' €');
+                    });
+
                     cargarEventosBotonEliminarProducto();
                     actualizarNumeroCarrito();
                 });
@@ -313,7 +318,7 @@ function cargarEventosBotonCarrito(){
             }
             else{
                 oProducto.find('.item_name').text(item.find('.item-pie a').first().text());
-                oProducto.find('.item_precio').text(item.find('.precio').text().replace(',','.').replace(' €',''));
+                oProducto.find('.item_precio').text(item.find('.precio').text().replace(',','.'));
                 oProducto.find('img').attr('src',item.find('.hovereffect img').first().attr('src'));
                 var oColor=item.find('.btn-select .selected');
                 var sID=boton.data('id');
@@ -357,13 +362,13 @@ function guardarCarrito(){
         arrayProductos.push([id,cantidad]);
     });
     if(arrayProductos.length==0){
-        sessionStorage.removeItem("nusrcrt");
+        localStorage.removeItem("nusrcrt");
     }
     else {
         sCarrito = JSON.stringify(arrayProductos);
         if (sessionStorage.getItem("lgdusr") == null) {
             var res=btoa(mcrypt.Encrypt(sCarrito,md5(md5(pal)),md5(pal),'rijndael-256','cbc'));
-            sessionStorage.setItem('nusrcrt', res);
+            localStorage.setItem('nusrcrt', res);
         }
         else {
                 sSesion = sessionStorage.getItem('lgdusr');

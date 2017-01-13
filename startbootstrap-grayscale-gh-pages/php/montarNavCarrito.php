@@ -1,10 +1,12 @@
 <?php
+require_once 'Encriptacion.php';
 header("Content-type: text/html");
 header("Cache-Control: no-store, no-cache, must-revalidate");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
-$oProductosEncriptados=json_decode($_GET['carrito']);
+$oProductosEncriptados=$_GET['carrito'];
 $oProductos=Encriptacion::desencriptar($oProductosEncriptados);
+$oProductos=json_decode($oProductos);
 $conn=new mysqli("localhost","root","","legendpadel");
 if(count($oProductos)>0) {
     $sInClause = "'" . $oProductos[0][0] . "'";

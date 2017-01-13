@@ -320,8 +320,8 @@ function addIconUsuarioMenu() {
 function actualizarCarrito(){
 
     if(sessionStorage.getItem("lgdusr")==null){
-        if(sessionStorage.getItem("nusrcrt")!=null){
-            $.get('php/desencriptar.php','cadena='+sessionStorage.getItem('nusrcrt'),function(data){
+        if(localStorage.getItem("nusrcrt")!=null){
+            $.get('php/desencriptar.php','cadena='+encodeURIComponent(localStorage.getItem('nusrcrt')),function(data){
                 sCarrito=data;
                 oCarrito=JSON.parse(sCarrito);
                 var nElementos=0;
@@ -329,8 +329,15 @@ function actualizarCarrito(){
                     nElementos+=parseInt(oCarrito[i][1]);
                 }
                 $(".carrito_n_productos").text(nElementos);
-                $.get('php/montarNavCarrito.php?carrito='+encodeURIComponent(sessionStorage.getItem('nusrcrt')),function(sProductos){
+                $.get('php/montarNavCarrito.php?carrito='+encodeURIComponent(localStorage.getItem('nusrcrt')),function(sProductos){
                     $('.dropdown-cart').find('.divider').after(sProductos);
+
+                    $('.item_carrito').each(function(){
+                        var precio=$(this).find('.item_precio').text()+' €';
+                        $(this).find('.item_precio').text(precio);
+                        alert(precio);
+
+                    });
                     cargarEventosBotonEliminarProducto();
                     actualizarNumeroCarrito();
                 });
@@ -377,7 +384,8 @@ function cargarEventosBotonCarrito(){
             });
             if(bEncontrado){
                 var oItemCantidad=oItemCarrito.find('.item_cantidad');
-                oItemCantidad.text((parseInt(oItemCantidad.text().replace('x',''))+1)+"x");
+                var iCantidadSeleccionada=parseFloat($('#input-cant').val());
+                oItemCantidad.text((parseInt(oItemCantidad.text().replace('x',''))+iCantidadSeleccionada)+"x");
                 var oItemPrecio=oItemCarrito.find('.item_precio');
                 var oPrecio=$('.descuentoAnimado').text();
                 oItemPrecio.text((parseFloat(oItemPrecio.text().replace(',','.').replace(' €',''))+parseFloat(oPrecio.replace(',','.').replace(' €',''))).toFixed(2)+" €");
@@ -430,13 +438,13 @@ function guardarCarrito(){
         arrayProductos.push([id,cantidad]);
     });
     if(arrayProductos.length==0){
-        sessionStorage.removeItem("nusrcrt");
+        localStorage.removeItem("nusrcrt");
     }
     else {
         sCarrito = JSON.stringify(arrayProductos);
         var res=btoa(mcrypt.Encrypt(sCarrito,md5(md5(pal)),md5(pal),'rijndael-256','cbc'));
         if (sessionStorage.getItem("lgdusr") == null) {
-            sessionStorage.setItem("nusrcrt", res);
+            localStorage.setItem("nusrcrt", res);
         }
         else {
             sSesion = sessionStorage.getItem("lgdusr");
