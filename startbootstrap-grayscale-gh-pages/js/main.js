@@ -200,7 +200,7 @@ function validarLogin(a) {
                             location.reload();
                         }
                         else{
-                            document.location.href='http://localhost/legend-padel/index.html';
+                            document.location.href='http://www.legendpadel.com/index.html';
                         }
                 }
         });
@@ -226,7 +226,7 @@ function addIconUsuarioMenu() {
                         '<span class="glyphicon glyphicon-user"></span> <span class="nombre_usuario">'+nombreCliente+'</span><span class="caret"></span></a>' +
                         '<ul class="dropdown-menu dropdown-login" role="menu">' +
                         '<li><a class="text-center" href="html/panelCliente.html">Mi cuenta</a></li>' +
-                        '<li class="divider"></li><li class="pedidosCliente"><a class="text-center" href="http://legendpadel.com/html/panelCliente.html?pedidos">Mis pedidos</a></li>' +
+                        '<li class="divider"></li><li class="pedidosCliente"><a class="text-center" href="http://www.legendpadel.com/html/panelCliente.html?pedidos">Mis pedidos</a></li>' +
                         '<li class="divider"></li> <li class="desconexion"><a class="text-center" href="#">Desconexión</a></li></ul>');
                     $('.desconexion').on('click',desconectarse);
                 });

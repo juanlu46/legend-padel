@@ -5,7 +5,7 @@ header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 header('Content-Type: application/json');
 $sEmail=Encriptacion::desencriptar($_GET['usuario']);
-$conn=new mysqli("localhost","root","","legendpadel");
+$conn=new mysqli("localhost","mylegendpa","5nm6D092","legendpadel");
 $conn->query("SET NAMES utf8");
 $select=$conn->query("SELECT direccion, localidad, provincia, cp, telefono FROM usuarios WHERE email='".$sEmail."'");
 
