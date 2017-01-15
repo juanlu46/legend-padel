@@ -249,7 +249,7 @@ function desconectarse(){
 function actualizarCarrito(){
     if(sessionStorage.getItem("lgdusr")==null){
         if(localStorage.getItem("nusrcrt")!=null){
-            $.get('php/desencriptar.php','cadena='+localStorage.getItem('nusrcrt'),function(data){
+            $.get('php/desencriptar.php','cadena='+encodeURIComponent(localStorage.getItem('nusrcrt')),function(data){
                 sCarrito=data;
                 oCarrito=JSON.parse(sCarrito);
                 var nElementos=0;
