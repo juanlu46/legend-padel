@@ -271,20 +271,21 @@ function validarFormDireccion(){
 function validarPago(){
     var fTotal;
     var nID;
-    var nAnno=(new Date).getFullYear();
-    var nMes=(new Date).getMonth();
-    if(nMes.toString().length==1) {
-        nMes = nMes + 1;
-        nMes = '0' + nMes.toString();
-    }
-    $.ajax('../php/obtenerTotal.php?usuario='+encodeURIComponent(sessionStorage.getItem('lgdusr')),{
+    var oPanelEnvio=$('.panel-envio');
+    var sDireccion=oPanelEnvio.find('input[name="direccion"]').val();
+    var sLocalidad=oPanelEnvio.find('input[name="localidad"]').val();
+    var sProvincia=oPanelEnvio.find('input[name="provincia"]').val();
+    var sCP=oPanelEnvio.find('input[name="cp"]').val();
+    var sTelefono=oPanelEnvio.find('input[name="telefono"]').val();
+    $.ajax('../php/obtenerTotal.php?usuario='+encodeURIComponent(sessionStorage.getItem('lgdusr'))+'&direccion='+encodeURIComponent(sDireccion)+'&localidad='+encodeURIComponent(sLocalidad)+
+        '&provincia='+encodeURIComponent(sProvincia)+'&cp='+encodeURIComponent(sCP)+'&telefono='+encodeURIComponent(sTelefono),{
         async:false,
         cache:false,
         dataType:'json',
         method:'GET',
         success:function(data){
             fTotal=parseFloat(data.total);
-            nID=nAnno.toString()+nMes+data.id.toString();
+            nID=data.id.toString();
         }
     });
     var sVariables='{"cantidad":"'+fTotal+'","id":"'+nID+'","descripcion":"Palas LEGEND PADEL"}';
