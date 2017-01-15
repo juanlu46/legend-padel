@@ -7,9 +7,9 @@ header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 $oParametros=Encriptacion::desencriptar($_GET['data']);
 $oParametros=json_decode($oParametros);
-$urlNoti="http://localhost/legend-padel/php/notificacionPago.php"; //url de notificacion de pago
-$urlOk="http://localhost/legend-padel/html/resultado_pago.html?ok=true&id=".$oParametros->id; //Url de legendpadel.com para pago OK
-$urlKo="http://localhost/legend-padel/html/resultado_pago.html?ok=false"; //Url de legendpadel.com para fallo de pago (ko)
+$urlNoti="http://www.legendpadel.com/php/notificacionPago.php"; //url de notificacion de pago
+$urlOk="http://www.legendpadel.com/html/resultado_pago.html?ok=true&id=".$oParametros->id; //Url de legendpadel.com para pago OK
+$urlKo="http://www.legendpadel.com/html/resultado_pago.html?ok=false"; //Url de legendpadel.com para fallo de pago (ko)
 $clave="sq7HjrUOBfKmC576ILgskD5srU870gJ7";
 $merchantCode=126590918;
 $currency=978;
