@@ -5,7 +5,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 $oProductos=json_decode(Encriptacion::desencriptar($_GET['carrito']));
-$conn=new mysqli("localhost","mylegendpa","5nm6D092","legendpadel");
+$conn=new mysqli("localhost","root","","legendpadel");
 $nProductos=count($oProductos);
 if($nProductos>0) {
     $sInClause = "'" . $oProductos[0][0] . "'";

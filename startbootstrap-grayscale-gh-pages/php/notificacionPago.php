@@ -12,7 +12,7 @@ $signatureRecibida=$_POST["Ds_Signature"];
 $paramDeco=$tpv->decodeMerchantParameters($parametros);
 $signatureCalculada=$tpv->createMerchantSignatureNotif($clave,$parametros);
 if($signatureCalculada===$signatureRecibida){
-    $conn=new mysqli("localhost","mylegendpa","5nm6D092","legendpadel");
+    $conn=new mysqli("localhost","root","","legendpadel");
     $codResp=$tpv->getParameter("Ds_Response");
     $codResp=(int)$codResp;
     $codPedido=$tpv->getParameter("Ds_Order");

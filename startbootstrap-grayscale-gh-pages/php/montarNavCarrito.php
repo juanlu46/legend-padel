@@ -7,7 +7,7 @@ header("Pragma: no-cache");
 $oProductosEncriptados=$_GET['carrito'];
 $oProductos=Encriptacion::desencriptar($oProductosEncriptados);
 $oProductos=json_decode($oProductos);
-$conn=new mysqli("localhost","mylegendpa","5nm6D092","legendpadel");
+$conn=new mysqli("localhost","root","","legendpadel");
 if(count($oProductos)>0) {
     $sInClause = "'" . $oProductos[0][0] . "'";
     $oCantidades[$oProductos[0][0]] = $oProductos[0][1];

@@ -5,7 +5,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 $usuario=Encriptacion::desencriptar($_GET['usuario']);
-$conn=new mysqli("localhost","mylegendpa","5nm6D092","legendpadel");
+$conn=new mysqli("localhost","root","","legendpadel");
 $fTotal=0.0;
 $select=$conn->query("SELECT (C.cantidad*P.precio) AS suma FROM carritos C, productos P WHERE C.id=P.id AND C.usuario='".$usuario."'");
 

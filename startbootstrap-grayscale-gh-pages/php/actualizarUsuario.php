@@ -3,7 +3,7 @@ header('Content-type: text/plain');
 header("Cache-Control: no-store, no-cache, must-revalidate");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
-$mysqli = new mysqli("localhost","mylegendpa","5nm6D092","legendpadel")
+$mysqli = new mysqli("localhost","root","","legendpadel");
 if ($mysqli->connect_errno) {
     echo "Fallo al conectar a la Base de datos: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
 }

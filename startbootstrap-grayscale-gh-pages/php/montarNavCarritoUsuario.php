@@ -6,7 +6,7 @@ header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 $sEmailEncriptado=$_GET['usuario'];
 $sEmail=Encriptacion::desencriptar($sEmailEncriptado);
-$conn=new mysqli("localhost","mylegendpa","5nm6D092","legendpadel");
+$conn=new mysqli("localhost","root","","legendpadel");
 $select=$conn->query("SELECT nombre,p.id id,precio,cantidad FROM productos p, carritos c WHERE p.id=c.id AND usuario='".$sEmail."'");
 while($res=$select->fetch_assoc()) {
     $fTotal=$res['precio']*$res['cantidad'];
