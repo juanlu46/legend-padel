@@ -1,24 +1,53 @@
 <?php
 require_once 'Encriptacion.php';
-header('Content-type: application/json');
+header('Content-type: text/html');
 header("Cache-Control: no-store, no-cache, must-revalidate");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
-$mysqli = new mysqli("localhost","mylegendpa","5nm6D092","legendpadel")
+$mysqli = new mysqli("localhost","mylegendpa","5nm6D092","legendpadel");
 if ($mysqli->connect_errno) {
     echo "Fallo al conectar a la Base de datos: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
 }
 else{
     $mysqli->query("SET NAMES utf8");
     $susuario =Encriptacion::desencriptar($_REQUEST['usuario']);
-    $query="SELECT p.nombre,p.precio,l.cantidad,pe.total,di.direccion,di.localidad,.di.provincia,di.cp,di.telefono,l.id_producto FROM productos p,pedidos pe,direcciones_envio di,lote l WHERE di.dni_usuario=pe.dni_usuario and p.id=l.id_producto and pe.id_envio=di.id and l.id=pe.id_lote and pe.dni_usuario='".$susuario."'";
-    $result = $mysqli->query($query);
-    $res=array();
-    while($array=$result->fetch_assoc()){
-          $res[]=$array;
-    }
-    echo json_encode($res);
-    
+
+    $queryPedidos="SELECT * FROM pedidos where dni_usuario='".$susuario."'";
+    $result = $mysqli->query($queryPedidos);
+    while($array=$result->fetch_assoc()) {
+        ?><i href="#" class="list-group-item active pedido<?php echo $array['id_lote'];?>" style="overflow: auto;font-size:14px;margin-top:30px;">
+        <div class="col-xs-12 col-md-6 col-lg-6">
+            <p><h2 style="font-weight: bold;font-family: 'Roboto Condensed';">Productos</h2></p>
+            <ul style="list-style: none;font-size: 20px;">
+                <?php
+                $querylotes="SELECT * FROM lote where id='".$array['id_lote']."'";
+                $result2 = $mysqli->query($querylotes);
+                while($array2=$result2->fetch_assoc()) {
+                    $selectProductos="SELECT nombre from PRODUCTOS WHERE ID='".$array2['id_producto']."'";
+                    $result3 = $mysqli->query($selectProductos);
+                    $array3=$result3->fetch_assoc();?>
+                        <li><h3 class="list-group-item-heading" style="font-size: 17px;"><?php echo $array2['cantidad'].'x '.$array3['nombre'];?></h3></li>
+                    <?php
+                } ?>
+            </ul>
+        </div>
+        <div class="col-xs-12 col-md-6 col-lg-6">
+        <?php
+        $queryDireccion="select direccion,localidad,provincia,cp,telefono from direcciones_envio where dni_usuario='".$susuario."'";
+        $result4 = $mysqli->query($queryDireccion);
+        $direccion=$result4->fetch_assoc();?>
+
+            <p class="text-left" style="font-weight: bold;font-size: 16px;">Su pedido se enviará a la siguiente dirección:</p>
+            <p class="text-left"><strong>Dirrección: </strong><?php echo $direccion['direccion'];?> </p>
+            <p class="text-left"><strong>Provincia: </strong> <?php echo $direccion['provincia'];?> </p>
+            <p class="text-left"><strong>Localidad: </strong><?php echo $direccion['localidad'];?> </p>
+            <p class="text-left"><strong>Código postal: </strong> <?php echo  $direccion['cp'];?> </p>
+            <p class="text-left"><strong>Teléfono: </strong><?php echo $direccion['telefono'];?></p>
+            <p class="text-left"><strong>Total del pedido: </strong><?php echo $array['total'];?></p>
+        </div>
+        </i>
+    <?php }
 }
+
 $mysqli->close();
 ?>

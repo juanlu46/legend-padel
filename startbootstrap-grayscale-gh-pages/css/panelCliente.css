@@ -199,7 +199,9 @@ i.list-group-item.active small {
     margin:20px auto 1px;
 }
 .well{
-    background-color: #4C4C4C;
+    background-color: transparent;
+    border: 0px solid #e3e3e3;
+    border-radius: 0px;
 }
 .misPedidos{
     display: none;

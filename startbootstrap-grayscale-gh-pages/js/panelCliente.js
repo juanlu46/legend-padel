@@ -7,46 +7,47 @@ $(document).ready(function() {
     }
     var email = "";
     if (sessionStorage.getItem('lgdusr') != null) {
-        $.get('../php/desencriptar.php?cadena='+sessionStorage.getItem('lgdusr'),function(data){
+        $.get('../php/desencriptar.php?cadena='+encodeURIComponent(sessionStorage.getItem('lgdusr')),function(data){
             email =data;
+            if (email == '') {
+                $('.container').css({
+                    "width": "100%",
+                    "height": "100%",
+                    "background": "#070303",
+                    "opacity": "0.8",
+                    "position": "fixed",
+                    "top": "0px",
+                    "filter": "blur(5px)"
+                });
+                var mensajes = $('.mensajelogin');
+                mensajes.addClass('notice-danger');
+                mensajes.css({
+                    "display": "block",
+                    "color": "black",
+                    "filter": "blur(0px)"
+                });
+                mensajes.html('<h3>Debe iniciar sesión</h3>Para iniciar sesión pulse <a class="iniciarSesion" href="../index.html?login">aquí</a>');
+                stopEvent();
+            }
+            else {
+                var email2 = sessionStorage.getItem('lgdusr');
+                $.get('../php/devuelveCliente.php?usuario=' + encodeURIComponent(email2), function (data) {
+                    var jsonCliente = data;
+                    cargarDatosCliente(jsonCliente);
+                    $('.guardar').on('click', function () {
+                        guardarCambios(jsonCliente);
+                    });
+                });
+                $('.limpiarForm').on('click', limpiarForm);
+
+                $('.btn-MisPedidos').on('click', function () {
+                    cargarPedidos(email);
+                });
+            }
         });
     }
 
-    if (email == '') {
-        $('.container').css({
-            "width": "100%",
-            "height": "100%",
-            "background": "#070303",
-            "opacity": "0.8",
-            "position": "fixed",
-            "top": "0px",
-            "filter": "blur(5px)"
-        });
-        var mensajes = $('.mensajelogin');
-        mensajes.addClass('notice-danger');
-        mensajes.css({
-            "display": "block",
-            "color": "black",
-            "filter": "blur(0px)"
-        });
-        mensajes.html('<h3>Debe iniciar sesión</h3>Para iniciar sesión pulse <a class="iniciarSesion" href="../index.html?login">aquí</a>');
-        stopEvent();
-    }
-    else {
-        var email2 = sessionStorage.getItem('lgdusr');
-        $.get('../php/devuelveCliente.php?usuario=' + encodeURIComponent(email2), function (data) {
-            var jsonCliente = data;
-            cargarDatosCliente(jsonCliente);
-            $('.guardar').on('click', function () {
-                guardarCambios(jsonCliente);
-            });
-        });
-        $('.limpiarForm').on('click', limpiarForm);
 
-        $('.btn-MisPedidos').on('click', function () {
-            cargarPedidos(email);
-        });
-    }
 });
     function cargarDatosCliente(cliente) {
         var legend = $('legend');
@@ -201,67 +202,24 @@ $(document).ready(function() {
         $('.form-Edicion').css('display', 'none');
         $('.misPedidos').css('display', 'block');
 
-        $.get('../php/devuelveCliente.php?usuario='+sessionStorage.getItem('lgdusr'),function(data){
+        $.get('../php/devuelveCliente.php?usuario='+encodeURIComponent(sessionStorage.getItem('lgdusr')),function(data){
             var codificar=data.dni;
             var dni=btoa(mcrypt.Encrypt(codificar,md5(md5(pal)),md5(pal),'rijndael-256','cbc'));
             $.get('../php/devolverPedidos.php?usuario='+encodeURIComponent(dni),function(data){
-                if(data!="" ){
-                    if($('.item-defecto').length>0){
+                if(data!="" ) {
+                    if ($('.item-defecto').length > 0) {
                         $('.item-defecto').remove();
                     }
-                    if($('.pedido').length>0){
+                    if ($('.pedido').length > 0) {
                         $('.pedido').remove();
                         $('.divider').remove();
                     }
 
-                    for(var i=0;i<data.length;i++) {
-                        var titulo=data[i]['nombre'];
-                        var precio=data[i]['precio'];
-                        var cantidad=data[i]['cantidad'];
-                        var total=data[i]['total'];
-                        var direccion=data[i]['direccion'];
-                        var localidad=data[i]['localidad'];
-                        var provincia=data[i]['provincia'];
-                        var cp=data[i]['cp'];
-                        var telefono=data[i]['telefono'];
-
-                        var img='';
-                        switch (data[i]['id_producto']){
-                            case 'invictus2':
-                                img='../img/imgProduct/invictus2.jpg';
-                                break;
-                            case 'redskin':
-                                img='../img/imgProduct/redskin.jpg';
-                                break;
-                            case 'target1negra':
-                                img='../img/imgProduct/target1negra.jpg';
-                                break;
-                            case 'target1blanca':
-                                img='../img/imgProduct/target1blanca.jpg';
-                                break;
-                            case 'sniper':
-                                img='../img/imgProduct/sniper.jpg';
-                                break;
-                        }
-
-                        var nuevoItem='<i href="#" class="list-group-item active pedido" style="height:25em;font-size:14px;"><div class="media col-md-3"><figure style="margin-top: 4em;" class="pull-left">' +
-                            '<img class="media-object img-rounded img-responsive" src='+img+' alt="Producto"></figure></div><div class="col-md-6">' +
-                            '<h3 class="list-group-item-heading">'+titulo+'</h3><p class=" text-center">' +
-                            'Su pedido se enviará a la siguiente dirección:</p><p class="text-center"><strong>Dirrección: </strong>'+direccion+'</p>' +
-                            '<p class="text-center"><strong>Provincia: </strong>'+provincia+'</p><p class="text-center"><strong>Localidad: </strong>'+localidad+'</p>' +
-                            '<p class="text-center"><strong>Código postal: </strong>'+cp+'</p><p class="text-center"><strong>Teléfono: </strong>'+telefono+'</p>' +
-                            '<p class="text-center"><strong>Precio del artículo: </strong>'+precio+'</p>' +
-                            '<p class="text-center"><strong>Cantidad de artículos comprados: </strong>'+cantidad+'</p>' +
-                            '<p class="text-right"  style="margin-right: -40%"><strong>Total del pedido: </strong>'+total+'</p></div></i><div class="divider" style="background-color: whitesmoke;height: 3px;"></div>';
+                    $('.list-group').append(data);
 
 
-                        $('.list-group').append(nuevoItem);
 
-
-                    }
                 }
-                
-
             });
         });
         $('.navbar-dark').css('height','100%');
