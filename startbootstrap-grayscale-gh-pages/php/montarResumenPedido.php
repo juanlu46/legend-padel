@@ -5,7 +5,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 $sEmail=Encriptacion::desencriptar($_GET['usuario']);
-$conn=new mysqli("localhost","root","","legendpadel");
+$conn=new mysqli("localhost","mylegendpa","5nm6D092","legendpadel");
 $select=$conn->query("SELECT c.id, c.cantidad, p.nombre, p.precio FROM carritos c, productos p WHERE p.id=c.id AND c.usuario='".$sEmail."'");
 $subtotal=0;
 $resultados=false;
