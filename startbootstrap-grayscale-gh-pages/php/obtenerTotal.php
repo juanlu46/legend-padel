@@ -39,6 +39,7 @@ while($res!=0 || $res2!=0){
     $query2=$conn->query("select count(*) conteo from pedidos_temp where id_lote like '%".$idLote."'");
     $res2=$query2->fetch_assoc()['conteo'];
 }
+
 $hoy=getdate();
 $anno=$hoy['year'];
 $anno="$anno";
