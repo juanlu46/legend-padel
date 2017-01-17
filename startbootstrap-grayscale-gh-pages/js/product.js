@@ -198,9 +198,9 @@ function cambiarColor(color) {
         $('#item-4 img').attr('src','img/imgProduct/targetBlack4.jpg');
         $('#item-5').css('display','block');
         if($('#item-5 img').length > 0 )
-            $('#item-5 img').attr('src','img/imgProduct/targetblack5.jpg');
+            $('#item-5 img').attr('src','img/imgProduct/targetBlack5.jpg');
         else{
-            $('#item-5').prepend(' <img src="img/imgProduct/targetblack5.jpg" alt="miniatura5"></img>');
+            $('#item-5').prepend(' <img src="img/imgProduct/targetBlack5.jpg" alt="miniatura5"></img>');
         }
 
     }else{
