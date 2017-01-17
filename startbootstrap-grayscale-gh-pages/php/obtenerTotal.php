@@ -51,7 +51,7 @@ $query_cliente=$conn->query("select dni from usuarios where email='".$usuario."'
 $dni_usuario=$query_cliente->fetch_assoc()['dni'];
 $maxIDDirecccion=$conn->query("select max(id)+1 maximo from direcciones_envio")->fetch_assoc()['maximo'];
 $insert=$conn->query("insert into direcciones_envio(id,direccion,localidad,provincia,cp,telefono,dni_usuario) values(".$maxIDDirecccion.",'".$_GET['direccion']."','".$_GET['localidad'].
-    "','".$_GET['provincia']."','".$_GET['cp']."','".$_GET['telefono']."','".$dni_usuario."')");
+    "','".$_GET['provincia']."',".$_GET['cp'].",".$_GET['telefono'].",'".$dni_usuario."')");
 $insert2=$conn->query("insert into pedidos_temp values(".$idLote.",".$maxIDDirecccion.",'".$usuario."')");
 
 $conn->close();
